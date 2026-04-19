@@ -56,9 +56,9 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
     completionDate: '2027-03-01',
     developer: {
       name: 'MiddlePark Sales Team',
-      email: 'sales@middleparkng.com',
-      phone: '+2349012345678',
-      whatsapp: '+2349012345678',
+      email: 'info@middleparkproperties.com',
+      phone: '08055269579',
+      whatsapp: '08055269579',
     },
     gallery: [
       '/images/dev-dakibiyu-1.jpg',

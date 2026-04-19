@@ -73,7 +73,7 @@ export function PublicNavbar() {
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="/contact"
+              href="/login"
               id="navbar-client-portal"
               className="border border-charcoal text-charcoal px-5 py-2.5 rounded-full text-nav font-medium transition-colors duration-200 hover:bg-cream-dark"
             >
@@ -171,11 +171,11 @@ export function PublicNavbar() {
               CLIENT PORTAL
             </Link>
             <a
-              href="tel:+2349012345678"
+              href="tel:08055269579"
               className="flex items-center justify-center gap-2 text-charcoal-light text-sm mt-2"
             >
               <Phone size={14} />
-              +234 901 234 5678
+              0805 526 9579
             </a>
           </div>
         </div>

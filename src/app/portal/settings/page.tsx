@@ -32,8 +32,8 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState({
     firstName: 'Aisha',
     lastName: 'Bello',
-    email: 'demo@middleparkng.com',
-    phone: '+234 901 234 5678',
+    email: 'info@middleparkproperties.com',
+    phone: '0805 526 9579',
   })
 
   const [notifications, setNotifications] = useState({

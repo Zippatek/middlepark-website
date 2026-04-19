@@ -10,14 +10,14 @@
     --font-cormorant: 'Cormorant Garamond', Georgia, serif;
     --font-dm-sans: 'DM Sans', system-ui, sans-serif;
 
-    /* Brand Colors — Understated Palette */
-    --green: #286B38;
-    --green-dark: #1E5429;
-    --green-light: #3A8A4D;
-    --green-tint: #F0F4F1;
-    --green-muted: #C8D9CC;
+    /* Brand Colors — MiddlePark Red Primary */
+    --green: #ED1B24;
+    --green-dark: #C41720;
+    --green-light: #F04950;
+    --green-tint: #FDF2F2;
+    --green-muted: #F5C6C8;
 
-    /* Accent — Red (logo icon only) */
+    /* Accent — Red (primary brand) */
     --red: #ED1B24;
     --red-accent: #ED1B24;
 
@@ -187,9 +187,9 @@
 }
 
 @layer utilities {
-  /* ─── TEXT GRADIENT — GREEN ─────────────────── */
+  /* ─── TEXT GRADIENT — RED ─────────────────── */
   .text-gradient-green {
-    background: linear-gradient(135deg, #286B38, #3A8A4D);
+    background: linear-gradient(135deg, #ED1B24, #F04950);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

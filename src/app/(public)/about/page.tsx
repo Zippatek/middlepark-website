@@ -80,9 +80,9 @@ const values = [
 const teamMembers: TeamMember[] = [
   {
     id: '1',
-    name: 'Engr. Adamu Yusuf',
+    name: 'Aminu S Muhammad',
     title: 'Managing Director',
-    bio: 'Over 18 years of experience in real estate development across Nigeria. Adamu founded MiddlePark with a single vision: build homes that keep their promises.',
+    bio: 'Founder and Managing Director of MiddlePark Properties. Under his leadership, MiddlePark has delivered over 800 units across 12 developments in Abuja.',
     avatar: '/images/team-member-1.jpg',
     linkedin: 'https://linkedin.com',
   },

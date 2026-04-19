@@ -10,17 +10,17 @@ const config: Config = {
     extend: {
       // ─── MIDDLEPARK COLOR SYSTEM — V3 UNDERSTATED LUXURY ──────────
       colors: {
-        // Primary Brand — Forest Green (restrained, CTAs only)
+        // Primary Brand — MiddlePark Red (CTAs, overlines, active states)
         green: {
-          DEFAULT: '#286B38',       // Forest Green — CTAs, overlines, active states
-          dark: '#1E5429',          // Deep green — hover/pressed states
-          light: '#3A8A4D',         // Lighter green — secondary actions
-          tint: '#F0F4F1',          // Mint tint — subtle hover fills
-          muted: '#C8D9CC',         // Muted green — borders, dividers
+          DEFAULT: '#ED1B24',       // MiddlePark Red — primary CTAs, overlines, active states
+          dark: '#C41720',          // Deep red — hover/pressed states
+          light: '#F04950',         // Lighter red — secondary actions
+          tint: '#FDF2F2',          // Red tint — subtle hover fills
+          muted: '#F5C6C8',         // Muted red — borders, dividers
         },
-        // Accent — Red (near-invisible, logo icon only)
+        // Alias (for explicit usage)
         red: {
-          DEFAULT: '#ED1B24',       // Logo icon accent ONLY
+          DEFAULT: '#ED1B24',
           dark: '#C41720',
           light: '#F04950',
           tint: '#FDF2F2',
@@ -111,8 +111,8 @@ const config: Config = {
         'charcoal-gradient': 'linear-gradient(135deg, #3A3A3C 0%, #1C1C1E 100%)',
         // Subtle canvas gradient
         'cream-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)',
-        // Green gradient (CTA only)
-        'green-gradient': 'linear-gradient(135deg, #286B38 0%, #1E5429 100%)',
+        // Red gradient (CTA only)
+        'green-gradient': 'linear-gradient(135deg, #ED1B24 0%, #C41720 100%)',
       },
 
       // ─── TRANSITIONS ─────────────────────────────────────────────

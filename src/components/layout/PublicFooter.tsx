@@ -48,22 +48,29 @@ export function PublicFooter() {
             {/* Contact Info */}
             <div className="space-y-3">
               <a
-                href="tel:+2349012345678"
+                href="tel:08055269579"
                 className="flex items-center gap-2 text-white/50 text-sm hover:text-white/80 transition-colors duration-200"
               >
                 <Phone size={14} strokeWidth={1.5} />
-                +234 901 234 5678
+                0805 526 9579
               </a>
               <a
-                href="mailto:hello@middleparkproperties.com"
+                href="tel:08182888885"
+                className="flex items-center gap-2 text-white/50 text-sm hover:text-white/80 transition-colors duration-200"
+              >
+                <Phone size={14} strokeWidth={1.5} />
+                0818 288 8885
+              </a>
+              <a
+                href="mailto:info@middleparkproperties.com"
                 className="flex items-center gap-2 text-white/50 text-sm hover:text-white/80 transition-colors duration-200"
               >
                 <Mail size={14} strokeWidth={1.5} />
-                hello@middleparkproperties.com
+                info@middleparkproperties.com
               </a>
               <div className="flex items-start gap-2 text-white/50 text-sm">
                 <MapPin size={14} strokeWidth={1.5} className="shrink-0 mt-0.5" />
-                <span>Plot 1234, Wuse II, Abuja, Nigeria</span>
+                <span>No. 72 Ahmadu Bello Way,<br />Central Business District, Abuja</span>
               </div>
             </div>
           </div>

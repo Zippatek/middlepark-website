@@ -32,7 +32,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
   {
     id: 'MP-ABJ-0015',
@@ -58,7 +58,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2025-09-15',
     completionDate: '2028-06-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
   {
     id: 'MP-ABJ-0018',
@@ -84,7 +84,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2025-03-01',
     completionDate: '2026-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
   {
     id: 'MP-ABJ-0020',
@@ -110,7 +110,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2024-01-15',
     completionDate: '2025-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
   {
     id: 'MP-ABJ-0022',
@@ -136,7 +136,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2023-06-01',
     completionDate: '2025-06-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
   {
     id: 'MP-ABJ-0025',
@@ -162,7 +162,7 @@ const allDevelopments: Development[] = [
     certifications: ['AGIS Title Verified', 'FCDA Approved'],
     createdAt: '2026-01-01',
     completionDate: '2028-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'sales@middleparkng.com', phone: '+2349012345678' },
+    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
   },
 ]
 
@@ -213,7 +213,7 @@ export default function DevelopmentsPage() {
     <>
       {/* Page Hero */}
       <section className="bg-charcoal-dark pt-navbar">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -235,7 +235,7 @@ export default function DevelopmentsPage() {
 
       {/* Filter Bar */}
       <section className="bg-white border-b border-cream-divider sticky top-navbar z-30">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8 py-4">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
             {/* Search */}
             <div className="relative flex-1 max-w-[400px]">

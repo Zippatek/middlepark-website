@@ -81,8 +81,8 @@ export default function MyUnitPage() {
                 boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
               }}
             >
-              <Award size={14} style={{ color: '#286B38' }} strokeWidth={2} />
-              <span style={{ fontSize: '11px', fontWeight: 600, color: '#5A5B5F' }}>
+              <Award size={14} style={{ color: '#ED1B24' }} strokeWidth={2} />
+              <span style={{ fontSize: '11px', fontWeight: 600, color: '#3A3A3C' }}>
                 MiddlePark Certified
               </span>
             </div>
@@ -102,16 +102,16 @@ export default function MyUnitPage() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                <Bed size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
+                <Bed size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
                 {unitData.bedrooms} Bedrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                <Bath size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
+                <Bath size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
                 {unitData.bathrooms} Bathrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
+                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
                 {unitData.size}
               </span>
             </div>

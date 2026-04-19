@@ -79,7 +79,7 @@ export function PortalSidebar() {
                   'flex items-center gap-3 py-3 transition-all duration-150',
                   collapsed ? 'justify-center px-2 rounded-lg' : 'px-4 rounded-r-lg',
                   isActive
-                    ? 'bg-[#F0F4F1] border-l-[3px] border-green text-charcoal'
+                    ? 'bg-[#FDF2F2] border-l-[3px] border-green text-charcoal'
                     : 'text-charcoal-light hover:bg-cream-dark hover:text-charcoal'
                 )}
               >
@@ -128,7 +128,7 @@ export function PortalSidebar() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-charcoal text-sm font-medium truncate">Aisha Bello</p>
-                <p className="text-charcoal-light text-[11px] truncate">demo@middleparkproperties.com</p>
+                <p className="text-charcoal-light text-[11px] truncate">info@middleparkproperties.com</p>
               </div>
               <button
                 className="p-1.5 rounded-sm text-charcoal-light hover:text-charcoal transition-colors"

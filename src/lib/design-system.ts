@@ -6,25 +6,25 @@
  * Use Tailwind CSS classes wherever possible.
  * 
  * Brand: MiddlePark Properties Limited
- * Palette: Forest Green, Grey, White (Understated Luxury)
- * Version: 3.0 | Zippatek Digital Ltd | April 2026
+ * Palette: MiddlePark Red, Grey, White (Corporate)
+ * Version: 4.0 | Zippatek Digital Ltd | April 2026
  */
 
 export const colors = {
   // ─── PRIMARY BRAND PALETTE ────────────────────────────────────
   green: {
-    DEFAULT: '#286B38',           // Forest Green — CTAs, overlines, active states
-    dark: '#1E5429',              // Deep green — hover/pressed
-    light: '#3A8A4D',             // Lighter green — secondary
-    tint: '#F0F4F1',              // Mint tint — subtle hover fills
-    muted: '#C8D9CC',             // Muted — borders, accent borders
-    alpha10: 'rgba(40, 107, 56, 0.10)',
-    alpha20: 'rgba(40, 107, 56, 0.20)',
+    DEFAULT: '#ED1B24',           // MiddlePark Red — CTAs, overlines, active states
+    dark: '#C41720',              // Deep red — hover/pressed
+    light: '#F04950',             // Lighter red — secondary
+    tint: '#FDF2F2',              // Red tint — subtle hover fills
+    muted: '#F5C6C8',             // Muted — borders, accent borders
+    alpha10: 'rgba(237, 27, 36, 0.10)',
+    alpha20: 'rgba(237, 27, 36, 0.20)',
   },
 
-  // ─── ACCENT — RED (logo icon only, near-invisible) ────────────
+  // ─── ALIAS — RED ──────────────────────────────────────────────
   red: {
-    DEFAULT: '#ED1B24',           // Logo icon accent ONLY. Never backgrounds.
+    DEFAULT: '#ED1B24',
     dark: '#C41720',
     accent: '#ED1B24',
   },
