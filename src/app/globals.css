@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── MIDDLEPARK PROPERTIES — GLOBAL STYLES ─────────────────────────────── */
+
+@layer base {
+  /* Root CSS Variables */
+  :root {
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-dm-sans: 'DM Sans', system-ui, sans-serif;
+
+    /* Brand Colors as CSS custom properties */
+    --red: #ED1B24;
+    --red-dark: #C41720;
+    --red-light: #F04950;
+    --red-tint: #FDF2F2;
+    --red-muted: #F5C6C8;
+    --charcoal: #5A5B5F;
+    --charcoal-dark: #3A3B3F;
+    --charcoal-light: #8A8B8F;
+    --cream: #F8F7F3;
+    --cream-dark: #EEE9E0;
+    --cream-border: #D6D3C8;
+    --cream-divider: #E8E4DC;
+    --white: #FFFFFF;
+
+    /* Legacy aliases — map green vars to red for compat */
+    --green: #ED1B24;
+    --green-dark: #C41720;
+    --green-light: #F04950;
+    --green-tint: #FDF2F2;
+    --green-muted: #F5C6C8;
+    --red-accent: #ED1B24;
+  }
+
+  /* Base Resets */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-dm-sans);
+    color: var(--charcoal);
+    background-color: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Typography defaults */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant);
+    color: var(--charcoal-dark);
+    line-height: 1.1;
+  }
+  
+  /* Capped Breakpoints */
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: 56px !important;
+    }
+    h2 {
+      font-size: 40px !important;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Remove default button styles */
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  /* Focus indicators */
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ─── OVERLINE TEXT ───────────────────────────── */
+  .overline {
+    font-family: var(--font-dm-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION SPACING ───────────────────────── */
+  .section-padding {
+    @apply py-20 px-8 lg:py-26 lg:px-16;
+  }
+
+  .section-padding-sm {
+    @apply py-12 px-8 lg:py-16 lg:px-16;
+  }
+
+  /* ─── CONTAINER ─────────────────────────────── */
+  .middlepark-container {
+    @apply max-w-site mx-auto;
+  }
+
+  /* ─── CARD STYLES ───────────────────────────── */
+  .mp-card {
+    @apply bg-white rounded-card shadow-card transition-shadow duration-200;
+  }
+
+  .mp-card:hover {
+    @apply shadow-card-hover;
+  }
+
+  /* ─── FORM INPUT STYLES ────────────────────── */
+  .mp-input {
+    @apply w-full px-4 py-3.5 rounded-sm border border-cream-border bg-white text-charcoal placeholder-charcoal-light
+           focus:outline-none focus:ring-2 focus:ring-red focus:border-transparent text-sm transition-all duration-150;
+  }
+
+  .mp-label {
+    @apply block text-sm font-medium text-charcoal mb-1.5;
+  }
+
+  /* ─── BADGE / PILL ────────────────────────────  */
+  .mp-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-badge text-badge font-semibold uppercase tracking-badge;
+  }
+
+  /* ─── SCROLLBAR ────────────────────────────── */
+  .mp-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .mp-scrollbar::-webkit-scrollbar-track {
+    background: var(--cream);
+  }
+  .mp-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--red-muted);
+    border-radius: 3px;
+  }
+  .mp-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--red);
+  }
+}
+
+@layer utilities {
+  /* ─── TEXT GRADIENT ────────────────────────── */
+  .text-gradient-red {
+    background: linear-gradient(135deg, #ED1B24, #F04950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Legacy alias */
+  .text-gradient-green {
+    background: linear-gradient(135deg, #ED1B24, #F04950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── ANIMATION UTILITIES ─────────────────── */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ─── GLASSMORPHISM ─────────────────────────── */
+  .glass {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+  }
+}
