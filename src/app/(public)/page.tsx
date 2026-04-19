@@ -412,7 +412,7 @@ function HeroImageElement({
 
   return (
     <motion.div
-      className="relative w-full h-[500px] pointer-events-none hidden lg:block"
+      className="relative w-full h-[600px] pointer-events-none hidden lg:block"
       style={{
         perspective: '1500px',
         rotateX: springRotateX,
@@ -420,8 +420,8 @@ function HeroImageElement({
       }}
     >
       <div className="relative w-full h-full">
-        {/* Decorative Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-green/20 blur-[100px] rounded-full" />
+        {/* Decorative Glow — positioned below the image */}
+        <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[60%] h-[30%] bg-green/20 blur-[100px] rounded-full" />
         
         {/* Floating Image Card */}
         <motion.div
@@ -451,8 +451,8 @@ function HeroImageElement({
           transition={{ duration: 1, delay: 1.5 }}
           style={{ transform: 'translateZ(60px)' }}
         >
-          <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center">
-            <span className="text-white font-bold font-cormorant text-xl">MP</span>
+          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+            <img src="/logos/middlepark-icon.png" alt="MP" className="w-7 h-7 object-contain" />
           </div>
           <div>
             <p className="text-white text-sm font-medium">MiddlePark Certified</p>
@@ -695,30 +695,66 @@ export default function HomePage() {
             {/* Right — Interactive Abstract depth (desktop only) */}
             <HeroImageElement mouseX={mouseX} mouseY={mouseY} />
 
-            {/* Mobile — Animated trust strip */}
+            {/* Mobile — Stacked estate preview cards */}
             <motion.div
-              className="lg:hidden mt-10 pt-8 border-t border-white/8"
+              className="lg:hidden mt-10 relative"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 2.2 }}
+              transition={{ duration: 1, delay: 2 }}
             >
-              <div className="flex items-center justify-between gap-4">
-                {[
-                  { icon: '✓', text: 'AGIS Title Verified' },
-                  { icon: '✓', text: 'FCDA Approved' },
-                  { icon: '✓', text: 'Quality Certified' },
-                ].map((item, i) => (
+              {/* Stacked image cards — fanned out */}
+              <div className="relative h-[200px] w-full max-w-[300px] mx-auto">
+                {/* Back card */}
+                <motion.div
+                  className="absolute top-2 left-4 right-4 h-[160px] rounded-[16px] overflow-hidden border border-white/5"
+                  initial={{ opacity: 0, rotate: -3, y: 20 }}
+                  animate={{ opacity: 0.5, rotate: -3, y: 0 }}
+                  transition={{ delay: 2.3, duration: 0.8 }}
+                  style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}
+                >
+                  <Image src="/images/dev-dakibiyu-1.jpg" alt="Estate" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/40" />
+                </motion.div>
+
+                {/* Middle card */}
+                <motion.div
+                  className="absolute top-0 left-2 right-2 h-[160px] rounded-[16px] overflow-hidden border border-white/8"
+                  initial={{ opacity: 0, rotate: 2, y: 20 }}
+                  animate={{ opacity: 0.7, rotate: 2, y: 0 }}
+                  transition={{ delay: 2.5, duration: 0.8 }}
+                  style={{ boxShadow: '0 15px 40px rgba(0,0,0,0.35)' }}
+                >
+                  <Image src="/images/dev-katampe-1.jpg" alt="Estate" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/30" />
+                </motion.div>
+
+                {/* Front card — focal */}
+                <motion.div
+                  className="absolute top-1 left-0 right-0 h-[170px] rounded-[18px] overflow-hidden border border-white/15"
+                  initial={{ opacity: 0, scale: 0.95, y: 25 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 2.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
+                >
+                  <Image src="/images/dev-dakibiyu-2.jpg" alt="MiddlePark Estate" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  
+                  {/* Glassmorphic badge */}
                   <motion.div
-                    key={item.text}
-                    className="flex items-center gap-1.5"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.5 + i * 0.2, duration: 0.5 }}
+                    className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+                    style={{
+                      background: 'rgba(255,255,255,0.12)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 3.2, duration: 0.5 }}
                   >
-                    <span className="text-green text-[11px] font-bold">{item.icon}</span>
-                    <span className="text-white/40 text-[10px] font-medium tracking-wide">{item.text}</span>
+                    <Award size={10} className="text-white" strokeWidth={2} />
+                    <span className="text-white text-[9px] font-medium">MiddlePark Certified</span>
                   </motion.div>
-                ))}
+                </motion.div>
               </div>
             </motion.div>
           </div>
