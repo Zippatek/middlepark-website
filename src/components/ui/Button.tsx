@@ -39,7 +39,7 @@ export function Button({
   href,
 }: ButtonProps) {
   const baseStyles = cn(
-    'inline-flex items-center justify-center gap-2 font-medium rounded-full',
+    'inline-flex items-center justify-center gap-2 font-medium rounded-sm',
     'transition-all duration-300 ease-in-out',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2',
     'uppercase tracking-nav',

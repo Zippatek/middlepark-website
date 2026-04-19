@@ -189,9 +189,9 @@
 }
 
 @layer utilities {
-  /* ─── TEXT GRADIENT — RED ─────────────────── */
+  /* ─── TEXT GRADIENT — GREEN ─────────────────── */
   .text-gradient-green {
-    background: linear-gradient(135deg, #ED1B24, #F04950);
+    background: linear-gradient(135deg, #286B38, #358A49);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
