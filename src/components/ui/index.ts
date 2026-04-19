@@ -12,4 +12,4 @@ export { SectionHeader } from './SectionHeader'
 export { DevelopmentCard } from './DevelopmentCard'
 export { StatCard } from './StatCard'
 export { EmptyState } from './EmptyState'
-export { default as InteractiveMap } from './InteractiveMap'
+// InteractiveMap must be dynamically imported and omitted from barrel to avoid SSR crash
