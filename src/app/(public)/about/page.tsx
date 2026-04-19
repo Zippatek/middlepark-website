@@ -81,10 +81,10 @@ const teamMembers: TeamMember[] = [
   {
     id: '1',
     name: 'Aminu S Muhammad',
-    title: 'Managing Director',
-    bio: 'Founder and Managing Director of MiddlePark Properties. Under his leadership, MiddlePark has delivered over 800 units across 12 developments in Abuja.',
-    avatar: '/images/team-member-1.jpg',
-    linkedin: 'https://linkedin.com',
+    title: 'Managing Director & CEO',
+    bio: 'Managing Director of MiddlePark Properties. Aminu brings extensive experience in real estate development, overseeing the careful crafting of modern estates across Abuja.',
+    avatar: '/images/aminu.jpg',
+    linkedin: 'https://www.linkedin.com/in/aminu-s-muhammad',
   },
   {
     id: '2',
