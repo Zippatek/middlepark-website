@@ -48,7 +48,7 @@ export function PublicNavbar() {
         <nav className="max-w-[1200px] mx-auto h-navbar flex items-center justify-between px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" id="navbar-logo">
-            <img src="/logos/Primary Logo + Tagline.png" alt="MiddlePark Properties" className="h-7 lg:h-8 w-auto" />
+            <img src="/logos/primary-logo.png" alt="MiddlePark Properties" className="h-7 lg:h-8 w-auto" />
           </Link>
 
           {/* Desktop Nav Links */}
