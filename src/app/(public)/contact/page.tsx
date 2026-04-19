@@ -14,7 +14,21 @@ import {
   CheckCircle2,
   Building2,
 } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import { Button, SectionHeader } from '@/components/ui'
+
+// Dynamically import map to avoid SSR issues with Leaflet
+const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), { 
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full bg-[#F2F2F7] flex items-center justify-center rounded-card border border-[#E5E5EA]">
+      <div className="text-center">
+        <div className="w-8 h-8 border-2 border-green border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-charcoal-light text-xs">Loading map...</p>
+      </div>
+    </div>
+  )
+})
 
 // ─── ANIMATION VARIANTS ─────────────────────────────────────────────────────
 const staggerContainer = {
@@ -287,13 +301,19 @@ export default function ContactPage() {
               transition={{ duration: 0.7, delay: 0.1 }}
             >
               <div className="sticky top-[120px]">
-                {/* Map Placeholder */}
-                <div className="h-[400px] lg:h-[500px] rounded-card bg-[#F2F2F7] flex items-center justify-center border border-[#E5E5EA] mb-6">
-                  <div className="text-center">
-                    <MapPin size={48} className="text-charcoal-light/30 mx-auto mb-3" />
-                    <p className="text-charcoal text-sm font-medium">Interactive Map</p>
-                    <p className="text-charcoal-light text-xs mt-1">Coming soon — Wuse II, Abuja</p>
-                  </div>
+                {/* Interactive Map */}
+                <div className="h-[400px] lg:h-[500px] mb-6 relative">
+                  <InteractiveMap 
+                    center={[9.0578, 7.4950]} 
+                    zoom={15}
+                    markers={[
+                      {
+                        position: [9.0578, 7.4950],
+                        title: 'MiddlePark Head Office',
+                        address: 'No. 72 Ahmadu Bello Way, CBD, Abuja'
+                      }
+                    ]}
+                  />
                 </div>
 
                 {/* WhatsApp CTA */}

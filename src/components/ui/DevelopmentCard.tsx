@@ -10,10 +10,10 @@ import type { DevelopmentCardProps } from '@/types'
 import type { DevelopmentStatus } from '@/types'
 
 const statusConfig: Record<DevelopmentStatus, { bg: string; text: string; label: string }> = {
-  'for-sale': { bg: 'bg-[#ED1B24]', text: 'text-white', label: 'FOR SALE' },
+  'for-sale': { bg: 'bg-[#286B38]', text: 'text-white', label: 'FOR SALE' },
   'off-plan': { bg: 'bg-[#3A3A3C]', text: 'text-white', label: 'OFF-PLAN' },
   'completed': { bg: 'bg-[#1C1C1E]', text: 'text-white', label: 'COMPLETED' },
-  'sold-out': { bg: 'bg-[#8E8E93]', text: 'text-white', label: 'SOLD OUT' },
+  'sold-out': { bg: 'bg-[#ED1B24]', text: 'text-white', label: 'SOLD OUT' },
 }
 
 export function DevelopmentCard({ development, compact = false }: DevelopmentCardProps) {

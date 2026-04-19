@@ -78,10 +78,10 @@ export default function MyUnitPage() {
                 border: '1px solid rgba(255,255,255,0.65)',
                 borderRadius: '20px',
                 padding: '6px 14px',
-                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
+                boxShadow: '0 2px 12px rgba(40, 107, 56, 0.16)',
               }}
             >
-              <Award size={14} style={{ color: '#ED1B24' }} strokeWidth={2} />
+              <Award size={14} style={{ color: '#286B38' }} strokeWidth={2} />
               <span style={{ fontSize: '11px', fontWeight: 600, color: '#3A3A3C' }}>
                 MiddlePark Certified
               </span>
@@ -102,16 +102,16 @@ export default function MyUnitPage() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Bed size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Bed size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.bedrooms} Bedrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Bath size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Bath size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.bathrooms} Bathrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.size}
               </span>
             </div>
@@ -217,7 +217,7 @@ export default function MyUnitPage() {
           <div className="text-center">
             <Building2 size={40} className="text-green-muted mx-auto mb-2" />
             <p className="text-charcoal text-sm font-medium">Interactive Site Plan</p>
-            <p className="text-charcoal-light text-xs mt-1">Coming soon — your unit highlighted in red</p>
+            <p className="text-charcoal-light text-xs mt-1">Coming soon — your unit highlighted in green</p>
           </div>
         </div>
       </motion.div>

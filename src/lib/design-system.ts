@@ -13,18 +13,18 @@
 export const colors = {
   // ─── PRIMARY BRAND PALETTE ────────────────────────────────────
   green: {
-    DEFAULT: '#ED1B24',           // MiddlePark Red — CTAs, overlines, active states
-    dark: '#C41720',              // Deep red — hover/pressed
-    light: '#F04950',             // Lighter red — secondary
-    tint: '#FDF2F2',              // Red tint — subtle hover fills
-    muted: '#F5C6C8',             // Muted — borders, accent borders
-    alpha10: 'rgba(237, 27, 36, 0.10)',
-    alpha20: 'rgba(237, 27, 36, 0.20)',
+    DEFAULT: '#286B38',           // Forest Green — Primary brand, CTAs, active states
+    dark: '#1E522A',              // Deeper green — hover states
+    light: '#358A49',             // Brighter green — secondary
+    tint: '#F0F4F1',              // Mint tint — hover states, inactive sidebar
+    muted: '#C8D9CC',             // Muted green — borders, inactive tabs
+    alpha10: 'rgba(40, 107, 56, 0.10)',
+    alpha20: 'rgba(40, 107, 56, 0.20)',
   },
 
-  // ─── ALIAS — RED ──────────────────────────────────────────────
+  // ─── ACCENT — RED ─────────────────────────────────────────────
   red: {
-    DEFAULT: '#ED1B24',
+    DEFAULT: '#ED1B24',           // MiddlePark Red — Accent ONLY (sold out, danger)
     dark: '#C41720',
     accent: '#ED1B24',
   },

@@ -270,6 +270,73 @@ const staggerItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
 }
 
+// ─── HERO INTERACTIVE ELEMENT ───────────────────────────────────────────────
+function HeroAbstractElement({ mouseX, mouseY }: { mouseX: any; mouseY: any }) {
+  const features = [
+    { icon: Shield, label: 'Title Verified', top: '15%', left: '20%', delay: 0 },
+    { icon: FileCheck, label: 'FCDA Approved', top: '25%', right: '15%', delay: 0.2 },
+    { icon: Building2, label: 'Quality Built', bottom: '20%', left: '10%', delay: 0.4 },
+    { icon: Award, label: 'Certified', bottom: '25%', right: '10%', delay: 0.6 },
+    { icon: Users, label: '800+ Families', top: '50%', left: '45%', delay: 0.8 },
+  ]
+
+  return (
+    <div className="hidden lg:block relative h-[500px] w-full" style={{ perspective: '1200px' }}>
+      {features.map((item, i) => {
+        const factor = 1 - i * 0.1
+        const x = useTransform(mouseX, [-0.5, 0.5], [-30 * factor, 30 * factor])
+        const y = useTransform(mouseY, [-0.5, 0.5], [-30 * factor, 30 * factor])
+        const springX = useSpring(x, { stiffness: 100, damping: 30 })
+        const springY = useSpring(y, { stiffness: 100, damping: 30 })
+
+        return (
+          <motion.div
+            key={i}
+            className="absolute flex flex-col items-center gap-2 group"
+            style={{ 
+              top: item.top, 
+              left: item.left, 
+              right: item.right, 
+              bottom: item.bottom,
+              x: springX,
+              y: springY,
+              transformStyle: 'preserve-3d'
+            }}
+            initial={{ opacity: 0, scale: 0.8, translateZ: -100 }}
+            animate={{ opacity: 1, scale: 1, translateZ: 0 }}
+            transition={{ duration: 1, delay: item.delay, ease: 'easeOut' }}
+          >
+            <div className="w-16 h-16 rounded-full bg-white/[0.03] backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-green/10 group-hover:border-green/30 group-hover:shadow-[0_0_30px_rgba(40,107,56,0.2)]">
+              <item.icon className="text-white/40 group-hover:text-green transition-colors" size={24} />
+            </div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-sans font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              {item.label}
+            </p>
+          </motion.div>
+        )
+      })}
+
+      {/* Centerpiece core — Glowing MiddlePark Seal */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48"
+        style={{
+          x: useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 80, damping: 20 }),
+          y: useSpring(useTransform(mouseY, [-0.5, 0.5], [-15, 15]), { stiffness: 80, damping: 20 }),
+        }}
+      >
+        <div className="w-full h-full rounded-full bg-green/5 border border-green/20 backdrop-blur-md flex items-center justify-center relative">
+          <motion.div 
+            className="absolute inset-0 rounded-full border border-green/30"
+            animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.1, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <Award className="text-green opacity-40" size={64} strokeWidth={1} />
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 // ─── COMPARISON ACCORDION ───────────────────────────────────────────────────
 function ComparisonAccordion({ row, index }: { row: typeof comparisonData[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(index === 0)
@@ -396,56 +463,44 @@ function WhyAccordion({ item, index }: { item: typeof whyMiddlePark[0]; index: n
   )
 }
 
-// ─── 3D HERO FLOATING CARD ──────────────────────────────────────────────────
-function HeroFloatingCard({
-  src,
-  alt,
-  title,
-  subtitle,
-  className,
-  delay,
+// ─── 3D HERO INTERACTIVE ELEMENT ─────────────────────────────────────────────
+function HeroAbstractElement({
   mouseX,
   mouseY,
-  factor,
 }: {
-  src: string
-  alt: string
-  title: string
-  subtitle: string
-  className: string
-  delay: number
   mouseX: any
   mouseY: any
-  factor: number
 }) {
-  const x = useTransform(mouseX, [-0.5, 0.5], [-20 * factor, 20 * factor])
-  const y = useTransform(mouseY, [-0.5, 0.5], [-15 * factor, 15 * factor])
-  const springX = useSpring(x, { stiffness: 100, damping: 30 })
-  const springY = useSpring(y, { stiffness: 100, damping: 30 })
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [15, -15])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-20, 20])
+  const springRotateX = useSpring(rotateX, { stiffness: 60, damping: 20 })
+  const springRotateY = useSpring(rotateY, { stiffness: 60, damping: 20 })
 
   return (
     <motion.div
-      className={`absolute rounded-[16px] overflow-hidden shadow-2xl ${className}`}
+      className="absolute right-[-10%] top-[10%] w-[800px] h-[800px] pointer-events-none hidden lg:block"
       style={{
-        transformStyle: 'preserve-3d',
-        x: springX,
-        y: springY,
+        perspective: '1500px',
+        rotateX: springRotateX,
+        rotateY: springRotateY,
       }}
-      initial={{ opacity: 0, scale: 0.85, rotateY: 15, rotateX: -8 }}
-      animate={{ opacity: 1, scale: 1, rotateY: -3, rotateX: 2 }}
-      transition={{ duration: 1.4, delay, ease: [0.16, 1, 0.3, 1] }}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-cover"
-        sizes="320px"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-      <div className="absolute bottom-4 left-4">
-        <p className="text-white text-sm font-semibold">{title}</p>
-        <p className="text-white/60 text-xs">{subtitle}</p>
+      <div className="relative w-full h-full">
+        {/* Large Architectural Lattice — Minimalist depth */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 border border-green/10 rounded-[100px]"
+            style={{
+              transform: `translateZ(${i * 60}px) rotate(${i * 10}deg)`,
+            }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, delay: 1 + i * 0.2 }}
+          />
+        ))}
+        {/* Central Core Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-green/10 blur-[80px] rounded-full" />
       </div>
     </motion.div>
   )
@@ -490,7 +545,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 1. HERO — IMMERSIVE 3D PERSPECTIVE EXPERIENCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-[#0A0A0C] pt-navbar-offset" id="hero">
+      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-[#0A0A0C] pt-[100px] lg:pt-0" id="hero">
         {/* 3D Perspective Grid Floor — Deep space effect */}
         <div className="absolute inset-0" style={{ perspective: '1200px' }}>
           {/* Main grid */}
@@ -500,8 +555,8 @@ export default function HomePage() {
               transform: 'rotateX(68deg)',
               transformOrigin: 'center bottom',
               backgroundImage: `
-                linear-gradient(rgba(237,27,36,0.12) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(237,27,36,0.12) 1px, transparent 1px)
+                linear-gradient(rgba(40,107,56,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(40,107,56,0.12) 1px, transparent 1px)
               `,
               backgroundSize: '100px 100px',
             }}
@@ -513,8 +568,8 @@ export default function HomePage() {
               transform: 'rotateX(68deg)',
               transformOrigin: 'center bottom',
               backgroundImage: `
-                linear-gradient(rgba(237,27,36,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(237,27,36,0.3) 1px, transparent 1px)
+                linear-gradient(rgba(40,107,56,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(40,107,56,0.3) 1px, transparent 1px)
               `,
               backgroundSize: '100px 100px',
             }}
@@ -525,7 +580,7 @@ export default function HomePage() {
           <div
             className="absolute w-full h-[30%] bottom-[28%] left-0"
             style={{
-              background: 'radial-gradient(ellipse 70% 40% at 50% 100%, rgba(237,27,36,0.08) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse 70% 40% at 50% 100%, rgba(40,107,56,0.08) 0%, transparent 70%)',
             }}
           />
         </div>
@@ -662,123 +717,23 @@ export default function HomePage() {
               </motion.div>
             </div>
 
-            {/* Right — Floating 3D property cards (desktop only) */}
-            <div className="hidden lg:block relative h-[550px]" style={{ perspective: '1000px' }}>
-              {/* Main card — parallax responsive */}
-              <HeroFloatingCard
-                src="/images/dev-dakibiyu-1.jpg"
-                alt="Dakibiyu Estate"
-                title="Dakibiyu Estate"
-                subtitle="Phase 2 · 40 Units"
-                className="top-[8%] left-[5%] w-[320px] h-[240px]"
-                delay={0.8}
-                mouseX={mouseX}
-                mouseY={mouseY}
-                factor={1.2}
-              />
+            {/* Right — Interactive Abstract depth (desktop only) */}
+            <HeroAbstractElement mouseX={mouseX} mouseY={mouseY} />
 
-              {/* Secondary card — offset behind */}
-              <HeroFloatingCard
-                src="/images/dev-katampe-1.jpg"
-                alt="Katampe Heights"
-                title="Katampe Heights"
-                subtitle="Off-Plan · 24 Units"
-                className="top-[38%] right-[0%] w-[280px] h-[200px]"
-                delay={1.2}
-                mouseX={mouseX}
-                mouseY={mouseY}
-                factor={0.8}
-              />
-
-              {/* Third card — smaller, deeper */}
-              <HeroFloatingCard
-                src="/images/dev-apo-1.jpg"
-                alt="Apo Residences"
-                title="Apo Residences"
-                subtitle="For Sale · 60 Units"
-                className="bottom-[8%] left-[15%] w-[240px] h-[170px]"
-                delay={1.5}
-                mouseX={mouseX}
-                mouseY={mouseY}
-                factor={0.6}
-              />
-
-              {/* Floating stat glassmorphism chip */}
-              <motion.div
-                className="absolute bottom-[22%] right-[10%] bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-[14px] px-5 py-4"
-                style={{
-                  x: useSpring(useTransform(mouseX, [-0.5, 0.5], [8, -8]), { stiffness: 100, damping: 30 }),
-                  y: useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 100, damping: 30 }),
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.0 }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green/20 flex items-center justify-center">
-                    <Building2 size={18} className="text-green" />
-                  </div>
-                  <div>
-                    <p className="text-white text-lg font-bold font-cormorant">800+</p>
-                    <p className="text-white/40 text-[10px] uppercase tracking-wider">Units Delivered</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating certified badge */}
-              <motion.div
-                className="absolute top-[3%] right-[12%] bg-green/90 text-white px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5"
-                style={{
-                  x: useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), { stiffness: 80, damping: 25 }),
-                  y: useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), { stiffness: 80, damping: 25 }),
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 2.4 }}
-              >
-                <Award size={12} /> MiddlePark Certified
-              </motion.div>
-
-              {/* Decorative connecting lines */}
-              <motion.div
-                className="absolute top-[28%] left-[42%] w-[1px] h-28 bg-gradient-to-b from-green/25 to-transparent"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.8, delay: 1.8 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div
-                className="absolute top-[55%] right-[30%] w-20 h-[1px] bg-gradient-to-r from-green/20 to-transparent"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 2.1 }}
-                style={{ transformOrigin: 'left' }}
-              />
-            </div>
-
-            {/* Mobile — simplified visual card */}
+            {/* Mobile — Minimalist Visual */}
             <motion.div
-              className="lg:hidden relative mt-4 mx-auto w-full max-w-[320px] h-[200px] rounded-[16px] overflow-hidden"
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 2.0 }}
+              className="lg:hidden relative mt-12 mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 2.2 }}
             >
-              <Image
-                src="/images/dev-dakibiyu-1.jpg"
-                alt="Dakibiyu Estate"
-                fill
-                className="object-cover"
-                sizes="320px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                <div>
-                  <p className="text-white text-sm font-semibold">Dakibiyu Estate</p>
-                  <p className="text-white/60 text-xs">Phase 2 · 40 Units</p>
-                </div>
-                <div className="bg-green/90 text-white px-2.5 py-1 rounded-full text-[9px] font-semibold uppercase tracking-wider flex items-center gap-1">
-                  <Award size={10} /> Certified
-                </div>
+              <div className="w-24 h-24 rounded-full bg-green/5 border border-green/20 backdrop-blur-md flex items-center justify-center relative mx-auto">
+                <motion.div 
+                  className="absolute inset-0 rounded-full border border-green/30"
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <Award className="text-green opacity-40" size={32} strokeWidth={1} />
               </div>
             </motion.div>
           </div>
@@ -836,7 +791,7 @@ export default function HomePage() {
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(237,27,36,0.04) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40,107,56,0.04) 0%, transparent 60%)',
           }}
         />
 

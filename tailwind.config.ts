@@ -10,21 +10,18 @@ const config: Config = {
     extend: {
       // ─── MIDDLEPARK COLOR SYSTEM — V3 UNDERSTATED LUXURY ──────────
       colors: {
-        // Primary Brand — MiddlePark Red (CTAs, overlines, active states)
+        // Primary Brand — Forest Green (CTAs, overlines, active states)
         green: {
-          DEFAULT: '#ED1B24',       // MiddlePark Red — primary CTAs, overlines, active states
-          dark: '#C41720',          // Deep red — hover/pressed states
-          light: '#F04950',         // Lighter red — secondary actions
-          tint: '#FDF2F2',          // Red tint — subtle hover fills
-          muted: '#F5C6C8',         // Muted red — borders, dividers
+          DEFAULT: '#286B38',       // Forest Green — primary CTAs, active states
+          dark: '#1E522A',          // Deeper green — hover states
+          light: '#358A49',         // Brighter green — secondary
+          tint: '#F0F4F1',          // Mint tint — hover states, inactive sidebar
+          muted: '#C8D9CC',         // Muted green — borders, inactive tabs
         },
-        // Alias (for explicit usage)
+        // Accent — Red (alert, sold out)
         red: {
           DEFAULT: '#ED1B24',
           dark: '#C41720',
-          light: '#F04950',
-          tint: '#FDF2F2',
-          muted: '#F5C6C8',
           accent: '#ED1B24',
         },
         // Structural — Graphite tones

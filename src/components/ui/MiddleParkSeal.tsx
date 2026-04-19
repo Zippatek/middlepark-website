@@ -26,7 +26,7 @@ export function MiddleParkSeal({ className, size = 'md' }: MiddleParkSealProps) 
     >
       <Award
         size={config.icon}
-        style={{ color: '#ED1B24' }}
+        style={{ color: '#286B38' }}
         strokeWidth={2}
       />
       <span

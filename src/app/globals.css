@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'leaflet/dist/leaflet.css';
+
 /* ─── MIDDLEPARK PROPERTIES — GLOBAL STYLES v3 (UNDERSTATED LUXURY) ──── */
 
 @layer base {
@@ -10,12 +12,12 @@
     --font-cormorant: 'Cormorant Garamond', Georgia, serif;
     --font-dm-sans: 'DM Sans', system-ui, sans-serif;
 
-    /* Brand Colors — MiddlePark Red Primary */
-    --green: #ED1B24;
-    --green-dark: #C41720;
-    --green-light: #F04950;
-    --green-tint: #FDF2F2;
-    --green-muted: #F5C6C8;
+    /* Brand Colors — Forest Green Primary */
+    --green: #286B38;
+    --green-dark: #1E522A;
+    --green-light: #358A49;
+    --green-tint: #F0F4F1;
+    --green-muted: #C8D9CC;
 
     /* Accent — Red (primary brand) */
     --red: #ED1B24;

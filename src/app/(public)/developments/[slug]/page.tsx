@@ -89,7 +89,7 @@ export default function DevelopmentDetailPage() {
     <div className="w-full bg-[#f4f3ea] min-h-screen pb-20">
       
       {/* ─── Back Nav ───────────────────────────────────────── */}
-      <div className="absolute top-navbar left-4 z-50 mt-4 ml-4">
+      <div className="absolute top-navbar-offset left-4 z-50 mt-4 ml-4">
          <Link
             href="/developments"
             className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full text-charcoal font-medium text-[13px] hover:bg-white transition-colors"
@@ -99,7 +99,7 @@ export default function DevelopmentDetailPage() {
       </div>
 
       {/* ─── Edge-to-Edge Hero Image ────────────────────────────── */}
-      <section className="relative w-full h-[550px] lg:h-[650px] overflow-hidden -mt-navbar" data-cursor="view">
+      <section className="relative w-full h-[550px] lg:h-[650px] overflow-hidden -mt-navbar-offset" data-cursor="view">
         <Image
           src={gallery[0]}
           alt={dev.name}
