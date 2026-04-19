@@ -39,13 +39,13 @@ export function PublicNavbar() {
     <>
       <header
         className={cn(
-          'fixed z-[100] transition-all duration-300 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[calc(100%-2rem)] max-w-[1320px]',
+          'fixed z-[100] transition-all duration-300 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[calc(100%-2rem)] max-w-[1200px]',
           scrolled
             ? 'top-4 bg-white/95 backdrop-blur-md shadow-md rounded-[2rem]'
             : 'top-6 bg-white border border-transparent rounded-[2rem] shadow-sm'
         )}
       >
-        <nav className="max-w-[1320px] mx-auto h-navbar flex items-center justify-between px-6 lg:px-8">
+        <nav className="max-w-[1200px] mx-auto h-navbar flex items-center justify-between px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" id="navbar-logo">
             <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-7 lg:h-8 w-auto" />
@@ -75,7 +75,7 @@ export function PublicNavbar() {
             <Link
               href="/contact"
               id="navbar-client-portal"
-              className="border border-charcoal text-charcoal px-5 py-2.5 rounded-full text-nav font-medium transition-colors duration-200 hover:bg-green-tint"
+              className="border border-charcoal text-charcoal px-5 py-2.5 rounded-full text-nav font-medium transition-colors duration-200 hover:bg-cream-dark"
             >
               CLIENT PORTAL
             </Link>
@@ -148,7 +148,7 @@ export function PublicNavbar() {
                   'block px-6 py-4 text-nav font-medium uppercase tracking-nav transition-all duration-200',
                   pathname === link.href
                     ? 'text-green bg-green-tint border-l-[3px] border-green'
-                    : 'text-charcoal hover:text-green hover:bg-green-tint'
+                    : 'text-charcoal hover:text-green hover:bg-cream-dark'
                 )}
               >
                 {link.label}
@@ -166,7 +166,7 @@ export function PublicNavbar() {
             </Link>
             <Link
               href="/login"
-              className="flex items-center justify-center border border-charcoal text-charcoal px-5 py-3 rounded-full text-nav font-medium w-full transition-colors duration-200 hover:bg-green-tint"
+              className="flex items-center justify-center border border-charcoal text-charcoal px-5 py-3 rounded-full text-nav font-medium w-full transition-colors duration-200 hover:bg-cream-dark"
             >
               CLIENT PORTAL
             </Link>

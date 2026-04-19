@@ -38,27 +38,24 @@ export function PortalSidebar() {
           'transition-all duration-300',
           collapsed ? 'w-sidebar-collapsed' : 'w-sidebar'
         )}
-        style={{ boxShadow: '2px 0 16px rgba(90, 91, 95, 0.06)' }}
+        style={{ boxShadow: '2px 0 16px rgba(0, 0, 0, 0.04)' }}
       >
         {/* Logo */}
         <div className={cn(
           'flex items-center h-navbar border-b border-cream-divider px-5',
           collapsed ? 'justify-center' : 'justify-between'
         )}>
-          <Link href="/" className="flex items-center gap-0.5 shrink-0">
+          <Link href="/" className="flex items-center shrink-0">
             {collapsed ? (
-              <span className="font-bold font-cormorant text-red text-xl">M</span>
+              <img src="/logos/Icon.svg" alt="MP" className="h-7 w-auto" />
             ) : (
-              <>
-                <span className="font-bold font-cormorant text-charcoal text-xl">MIDDLE</span>
-                <span className="font-bold font-cormorant text-red text-xl">PARK</span>
-              </>
+              <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-7 w-auto" />
             )}
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
             className={cn(
-              'p-1.5 rounded-sm text-charcoal-light hover:text-charcoal hover:bg-green-tint transition-all duration-200',
+              'p-1.5 rounded-sm text-charcoal-light hover:text-charcoal hover:bg-cream-dark transition-all duration-200',
               collapsed && 'hidden'
             )}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -82,15 +79,15 @@ export function PortalSidebar() {
                   'flex items-center gap-3 py-3 transition-all duration-150',
                   collapsed ? 'justify-center px-2 rounded-lg' : 'px-4 rounded-r-lg',
                   isActive
-                    ? 'bg-[#FDF2F2] border-l-[3px] border-red text-charcoal'
-                    : 'text-charcoal-light hover:bg-[#FDF2F2] hover:text-charcoal'
+                    ? 'bg-[#F0F4F1] border-l-[3px] border-green text-charcoal'
+                    : 'text-charcoal-light hover:bg-cream-dark hover:text-charcoal'
                 )}
               >
                 <item.icon
                   size={20}
                   className={cn(
                     'shrink-0',
-                    isActive ? 'text-red' : ''
+                    isActive ? 'text-green' : ''
                   )}
                   strokeWidth={1.5}
                 />
@@ -107,7 +104,7 @@ export function PortalSidebar() {
           <div className="px-3 py-2">
             <button
               onClick={() => setCollapsed(false)}
-              className="w-full flex items-center justify-center p-2 rounded-lg text-charcoal-light hover:text-charcoal hover:bg-green-tint transition-all duration-200"
+              className="w-full flex items-center justify-center p-2 rounded-lg text-charcoal-light hover:text-charcoal hover:bg-cream-dark transition-all duration-200"
               aria-label="Expand sidebar"
             >
               <ChevronRight size={16} />
@@ -121,20 +118,20 @@ export function PortalSidebar() {
           collapsed && 'px-3 py-3'
         )}>
           {collapsed ? (
-            <div className="w-9 h-9 rounded-avatar bg-green-tint flex items-center justify-center mx-auto">
-              <span className="text-red text-xs font-bold">AB</span>
+            <div className="w-9 h-9 rounded-avatar bg-cream-dark flex items-center justify-center mx-auto">
+              <span className="text-green text-xs font-bold">AB</span>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-avatar bg-green-tint flex items-center justify-center shrink-0">
-                <span className="text-red text-xs font-bold">AB</span>
+              <div className="w-9 h-9 rounded-avatar bg-cream-dark flex items-center justify-center shrink-0">
+                <span className="text-green text-xs font-bold">AB</span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-charcoal text-sm font-medium truncate">Aisha Bello</p>
-                <p className="text-charcoal-light text-[11px] truncate">demo@middleparkng.com</p>
+                <p className="text-charcoal-light text-[11px] truncate">demo@middleparkproperties.com</p>
               </div>
               <button
-                className="p-1.5 rounded-sm text-charcoal-light hover:text-red transition-colors"
+                className="p-1.5 rounded-sm text-charcoal-light hover:text-charcoal transition-colors"
                 aria-label="Sign out"
                 title="Sign out"
               >
@@ -158,7 +155,7 @@ export function PortalSidebar() {
                 href={item.href}
                 className={cn(
                   'flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-lg transition-colors duration-200',
-                  isActive ? 'text-red' : 'text-charcoal-light'
+                  isActive ? 'text-green' : 'text-charcoal-light'
                 )}
               >
                 <item.icon size={20} strokeWidth={1.5} />

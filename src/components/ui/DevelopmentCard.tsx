@@ -10,17 +10,16 @@ import type { DevelopmentCardProps } from '@/types'
 import type { DevelopmentStatus } from '@/types'
 
 const statusConfig: Record<DevelopmentStatus, { bg: string; text: string; label: string }> = {
-  'for-sale': { bg: 'bg-[#D1F7C4]', text: 'text-[#1A3D18]', label: 'FOR SALE' },
-  'off-plan': { bg: 'bg-[#F2EDD0]', text: 'text-[#5C5013]', label: 'OFF-PLAN' }, // approximate off-plan to yellowish
-  'completed': { bg: 'bg-[#D1F7C4]', text: 'text-[#1A3D18]', label: 'COMPLETED' },
-  'sold-out': { bg: 'bg-[#FEE2E2]', text: 'text-[#991B1B]', label: 'SOLD OUT' },
+  'for-sale': { bg: 'bg-[#286B38]', text: 'text-white', label: 'FOR SALE' },
+  'off-plan': { bg: 'bg-[#3A3A3C]', text: 'text-white', label: 'OFF-PLAN' },
+  'completed': { bg: 'bg-[#1C1C1E]', text: 'text-white', label: 'COMPLETED' },
+  'sold-out': { bg: 'bg-[#8E8E93]', text: 'text-white', label: 'SOLD OUT' },
 }
 
 export function DevelopmentCard({ development, compact = false }: DevelopmentCardProps) {
   const status = statusConfig[development.status]
   const imageHeight = compact ? 'h-[240px]' : 'h-[280px] lg:h-[320px]'
 
-  // If rent, label could be 'FOR RENT', we will use 'FOR RENT' when applicable or fallback to status
   const tagLabel = status.label
 
   return (
@@ -43,7 +42,7 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
             />
           </div>
 
-          {/* Tag Wrapper using Exact Provided CSS (adapted to inline style) */}
+          {/* Tag Wrapper */}
           <div
             className="absolute top-0 right-0"
             style={{
@@ -55,7 +54,7 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
               justifyContent: 'center',
               alignItems: 'center',
               padding: '0px 0px 10px 10px',
-              backgroundColor: '#F8F7F3', // Cream background to blend with page
+              backgroundColor: '#FAFAFA',
               overflow: 'visible',
               zIndex: 10,
               alignContent: 'center',
@@ -68,20 +67,20 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
               {tagLabel}
             </div>
             
-            {/* Corner inverse effects (simulated with tiny divs if needed, but skipping as they are complex to inline perfectly without SVG, Framer often handles them via SVGs or box-shadows. The simple radius above usually suffices for the cutout look.) */}
-            <div className="absolute top-0 left-[-10px] w-[10px] h-[10px] pointer-events-none" style={{ boxShadow: '5px -5px 0 5px #F8F7F3', borderTopRightRadius: '10px' }} />
-            <div className="absolute bottom-[-10px] right-0 w-[10px] h-[10px] pointer-events-none" style={{ boxShadow: '5px -5px 0 5px #F8F7F3', borderTopRightRadius: '10px' }} />
+            {/* Corner inverse effects */}
+            <div className="absolute top-0 left-[-10px] w-[10px] h-[10px] pointer-events-none" style={{ boxShadow: '5px -5px 0 5px #FAFAFA', borderTopRightRadius: '10px' }} />
+            <div className="absolute bottom-[-10px] right-0 w-[10px] h-[10px] pointer-events-none" style={{ boxShadow: '5px -5px 0 5px #FAFAFA', borderTopRightRadius: '10px' }} />
           </div>
 
         </div>
 
-        {/* Content Section (No padding, flush with image, sitting on canvas) */}
+        {/* Content Section */}
         <div className="flex flex-col pt-4">
           
           {/* Location Layer */}
           <div className="flex items-center gap-1.5 mb-2.5">
-            <MapPin size={15} className="text-[#001a40] shrink-0" strokeWidth={1.5} />
-            <span className="text-[#001a40] text-[11px] font-semibold tracking-wide uppercase line-clamp-1">
+            <MapPin size={15} className="text-charcoal-dark shrink-0" strokeWidth={1.5} />
+            <span className="text-charcoal-dark text-[11px] font-semibold tracking-wide uppercase line-clamp-1">
               {development.neighborhood}, {development.city}
             </span>
           </div>
@@ -89,7 +88,7 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
           {/* Specs & Price Layer */}
           <div className="flex items-center justify-between mb-4">
             
-            <div className="flex items-center text-[#001a40]">
+            <div className="flex items-center text-charcoal-dark">
               {development.bedrooms.length > 0 && (
                 <>
                   <div className="flex items-center gap-1.5">
@@ -119,16 +118,16 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
             </div>
 
             {/* Price */}
-            <p className="text-[#001a40] text-[17px] font-bold tracking-tight">
+            <p className="text-charcoal-dark text-[17px] font-bold tracking-tight">
               {formatNaira(development.priceFrom)}
             </p>
           </div>
 
           {/* Divider */}
-          <div className="w-full h-[1px] bg-[#001a40]/10 mb-3" />
+          <div className="w-full h-[1px] bg-cream-border mb-3" />
 
           {/* Title Layer */}
-          <h3 className="font-sans text-[#001a40] text-[14px] leading-relaxed font-medium line-clamp-2">
+          <h3 className="font-sans text-charcoal-dark text-[14px] leading-relaxed font-medium line-clamp-2">
             {development.bedrooms[0] ? `${development.bedrooms[0]}-Bedroom` : ''} {development.name} — {development.neighborhood}
           </h3>
           

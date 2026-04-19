@@ -135,13 +135,13 @@ export default function AboutPage() {
           />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="absolute inset-0 flex items-center">
-            <div className="max-w-[1320px] mx-auto px-6 lg:px-16 w-full">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-16 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="overline text-white/70 text-xs uppercase tracking-widest mb-3">
+                <p className="overline text-white/50 text-xs uppercase tracking-widest mb-3">
                   Our Story
                 </p>
                 <h1 className="font-cormorant text-white text-4xl lg:text-6xl font-bold leading-tight mb-4">
@@ -149,7 +149,7 @@ export default function AboutPage() {
                   <br />
                   Priced With Purpose.
                 </h1>
-                <p className="text-white/75 text-base lg:text-lg max-w-[540px] leading-relaxed font-sans">
+                <p className="text-white/60 text-base lg:text-lg max-w-[540px] leading-relaxed font-sans">
                   MiddlePark Properties was founded on a simple belief — that Abuja deserves a
                   developer you can trust. One that delivers what it promises, on time and on paper.
                 </p>
@@ -169,6 +169,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
+              <span className="accent-line" />
               <SectionHeader
                 overline="Who We Are"
                 heading="A Developer That Delivers"
@@ -211,7 +212,7 @@ export default function AboutPage() {
                 style={{
                   background: 'rgba(255,255,255,0.92)',
                   backdropFilter: 'blur(10px)',
-                  boxShadow: '0 4px 20px rgba(237, 27, 36, 0.15)',
+                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
                 }}
               >
                 <span className="text-charcoal text-xs font-semibold">
@@ -226,15 +227,18 @@ export default function AboutPage() {
       {/* ═══ VALUES ═══ */}
       <section className="section-padding bg-cream" id="values">
         <div className="middlepark-container">
-          <SectionHeader
-            overline="Our Values"
-            heading="What We Stand For"
-            subCopy="These are not slogans — they are the standards we hold every project, every team member, and every decision to."
-            align="center"
-          />
+          <div className="text-center mb-14">
+            <span className="accent-line mx-auto" />
+            <SectionHeader
+              overline="Our Values"
+              heading="What We Stand For"
+              subCopy="These are not slogans — they are the standards we hold every project, every team member, and every decision to."
+              align="center"
+            />
+          </div>
 
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
@@ -243,11 +247,11 @@ export default function AboutPage() {
             {values.map((value) => (
               <motion.div
                 key={value.title}
-                className="bg-white rounded-card p-6 lg:p-8 transition-shadow duration-300 hover:shadow-card-hover"
-                style={{ boxShadow: '0 4px 24px rgba(237, 27, 36, 0.06)' }}
+                className="bg-white rounded-card p-6 lg:p-8 border border-[#E5E5EA] transition-shadow duration-300 hover:shadow-card-hover"
+                style={{ boxShadow: '0 1px 8px rgba(0, 0, 0, 0.04)' }}
                 variants={staggerItem}
               >
-                <div className="w-12 h-12 rounded-container bg-green-tint flex items-center justify-center mb-5">
+                <div className="w-12 h-12 rounded-full bg-[#F2F2F7] flex items-center justify-center mb-5">
                   <value.icon size={24} className="text-green" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-cormorant text-charcoal text-xl font-bold mb-2">
@@ -265,15 +269,18 @@ export default function AboutPage() {
       {/* ═══ TEAM ═══ */}
       <section className="section-padding bg-white" id="team">
         <div className="middlepark-container">
-          <SectionHeader
-            overline="Our Team"
-            heading="The People Behind MiddlePark"
-            subCopy="A team of engineers, architects, lawyers, and client relations professionals — all committed to delivering verified, quality homes."
-            align="center"
-          />
+          <div className="text-center mb-14">
+            <span className="accent-line mx-auto" />
+            <SectionHeader
+              overline="Our Team"
+              heading="The People Behind MiddlePark"
+              subCopy="A team of engineers, architects, lawyers, and client relations professionals — all committed to delivering verified, quality homes."
+              align="center"
+            />
+          </div>
 
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
@@ -282,7 +289,7 @@ export default function AboutPage() {
             {teamMembers.map((member) => (
               <motion.div
                 key={member.id}
-                className="bg-cream rounded-card overflow-hidden group"
+                className="bg-[#F2F2F7] rounded-card overflow-hidden group border border-[#E5E5EA]"
                 variants={staggerItem}
               >
                 <div className="relative h-[280px] overflow-hidden">
@@ -295,7 +302,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-5">
-                  <h4 className="font-cormorant text-charcoal text-lg font-bold">
+                  <h4 className="font-cormorant text-charcoal-dark text-lg font-bold">
                     {member.name}
                   </h4>
                   <p className="text-green text-xs font-medium uppercase tracking-wide mt-0.5 mb-3">
@@ -312,8 +319,8 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ STATS ═══ */}
-      <section className="bg-charcoal-dark py-16 px-6 lg:px-8" id="about-stats">
-        <div className="max-w-[1320px] mx-auto grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/20">
+      <section className="bg-[#1C1C1E] py-16 px-6 lg:px-8" id="about-stats">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -326,7 +333,7 @@ export default function AboutPage() {
               <p className="font-cormorant text-white text-4xl lg:text-5xl font-bold">
                 {stat.number}
               </p>
-              <p className="text-white/75 text-sm mt-2 font-sans">{stat.label}</p>
+              <p className="text-white/50 text-sm mt-2 font-sans">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -341,6 +348,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
+            <span className="accent-line mx-auto" />
             <SectionHeader
               overline="Get Started"
               heading="Find Your MiddlePark Home"

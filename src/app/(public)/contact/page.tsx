@@ -33,7 +33,7 @@ const offices = [
     name: 'Head Office — Wuse II',
     address: 'Plot 1234, Aminu Kano Crescent, Wuse II, Abuja',
     phone: '+234 901 234 5678',
-    email: 'hello@middleparkng.com',
+    email: 'hello@middleparkproperties.com',
     hours: 'Mon – Fri: 9:00 AM – 5:00 PM',
     isPrimary: true,
   },
@@ -41,7 +41,7 @@ const offices = [
     name: 'Sales Office — Dakibiyu',
     address: 'Dakibiyu Estate Site Office, Dakibiyu District, Abuja',
     phone: '+234 901 234 5679',
-    email: 'sales@middleparkng.com',
+    email: 'sales@middleparkproperties.com',
     hours: 'Mon – Sat: 9:00 AM – 6:00 PM',
     isPrimary: false,
   },
@@ -49,7 +49,7 @@ const offices = [
     name: 'Client Centre — Maitama',
     address: 'Plot 456, Maitama District, Abuja',
     phone: '+234 901 234 5680',
-    email: 'clients@middleparkng.com',
+    email: 'clients@middleparkproperties.com',
     hours: 'Mon – Fri: 9:00 AM – 5:00 PM',
     isPrimary: false,
   },
@@ -90,19 +90,19 @@ export default function ContactPage() {
           />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="absolute inset-0 flex items-center">
-            <div className="max-w-[1320px] mx-auto px-6 lg:px-16 w-full">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-16 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="overline text-white/70 text-xs uppercase tracking-widest mb-3">
+                <p className="overline text-white/50 text-xs uppercase tracking-widest mb-3">
                   Get in Touch
                 </p>
                 <h1 className="font-cormorant text-white text-4xl lg:text-5xl font-bold leading-tight mb-4">
                   We&apos;d Like to Hear From You
                 </h1>
-                <p className="text-white/75 text-base max-w-[540px] leading-relaxed font-sans">
+                <p className="text-white/60 text-base max-w-[540px] leading-relaxed font-sans">
                   Whether you&apos;re ready to purchase or just exploring, our team is here to help.
                   Reach out through any of the channels below.
                 </p>
@@ -115,14 +115,17 @@ export default function ContactPage() {
       {/* ═══ OFFICE CARDS ═══ */}
       <section className="section-padding bg-white" id="offices">
         <div className="middlepark-container">
-          <SectionHeader
-            overline="Our Offices"
-            heading="Visit Us in Person"
-            subCopy="Walk into any of our offices across Abuja for a face-to-face conversation with our sales and client relations team."
-          />
+          <div className="mb-12">
+            <span className="accent-line" />
+            <SectionHeader
+              overline="Our Offices"
+              heading="Visit Us in Person"
+              subCopy="Walk into any of our offices across Abuja for a face-to-face conversation with our sales and client relations team."
+            />
+          </div>
 
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -131,7 +134,8 @@ export default function ContactPage() {
             {offices.map((office) => (
               <motion.div
                 key={office.name}
-                className="bg-cream rounded-card p-6 lg:p-8 border border-cream-divider hover:shadow-card transition-shadow duration-300"
+                className="bg-cream rounded-card p-6 lg:p-8 border border-[#E5E5EA] hover:shadow-card-hover transition-shadow duration-300"
+                style={{ boxShadow: '0 1px 8px rgba(0, 0, 0, 0.04)' }}
                 variants={staggerItem}
               >
                 {office.isPrimary && (
@@ -139,7 +143,7 @@ export default function ContactPage() {
                     <Building2 size={10} /> HEAD OFFICE
                   </span>
                 )}
-                <h3 className="font-cormorant text-charcoal text-lg font-bold mb-4">
+                <h3 className="font-cormorant text-charcoal-dark text-lg font-bold mb-4">
                   {office.name}
                 </h3>
 
@@ -182,6 +186,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
+              <span className="accent-line" />
               <SectionHeader
                 overline="Send a Message"
                 heading="Enquire About a Development"
@@ -190,13 +195,13 @@ export default function ContactPage() {
 
               {formSubmitted ? (
                 <motion.div
-                  className="mt-8 bg-green-tint rounded-card p-8 text-center"
+                  className="mt-8 bg-[#F2F2F7] rounded-card p-8 text-center border border-[#E5E5EA]"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
                 >
                   <CheckCircle2 size={48} className="text-green mx-auto mb-4" />
-                  <h3 className="font-cormorant text-charcoal text-2xl font-bold mb-2">
+                  <h3 className="font-cormorant text-charcoal-dark text-2xl font-bold mb-2">
                     Message Sent
                   </h3>
                   <p className="text-charcoal-light text-sm">
@@ -283,9 +288,9 @@ export default function ContactPage() {
             >
               <div className="sticky top-[120px]">
                 {/* Map Placeholder */}
-                <div className="h-[400px] lg:h-[500px] rounded-card bg-green-tint flex items-center justify-center border border-green-muted mb-6">
+                <div className="h-[400px] lg:h-[500px] rounded-card bg-[#F2F2F7] flex items-center justify-center border border-[#E5E5EA] mb-6">
                   <div className="text-center">
-                    <MapPin size={48} className="text-green-muted mx-auto mb-3" />
+                    <MapPin size={48} className="text-charcoal-light/30 mx-auto mb-3" />
                     <p className="text-charcoal text-sm font-medium">Interactive Map</p>
                     <p className="text-charcoal-light text-xs mt-1">Coming soon — Wuse II, Abuja</p>
                   </div>

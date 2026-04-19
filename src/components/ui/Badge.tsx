@@ -10,14 +10,13 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  // Legacy MiddlePark
   green: 'bg-green text-white',
   charcoal: 'bg-charcoal text-white',
-  red: 'bg-red-accent text-white',
+  red: 'bg-red text-white',
   warning: 'bg-[#D97706] text-white',
-  outline: 'bg-transparent border border-green-muted text-charcoal',
-  // Framer Property Card adaptions mappings (Red/Cream palette)
-  sale: 'bg-red-accent text-white',
+  outline: 'bg-transparent border border-cream-border text-charcoal',
+  // Property card status mappings
+  sale: 'bg-green text-white',
   rent: 'bg-charcoal text-white',
   sold: 'bg-charcoal-light text-white opacity-80',
 }

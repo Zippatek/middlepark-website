@@ -6,38 +6,48 @@
  * Use Tailwind CSS classes wherever possible.
  * 
  * Brand: MiddlePark Properties Limited
- * Palette: Red, Grey (Charcoal), White
- * Version: 2.0 | Zippatek Digital Ltd | April 2026
+ * Palette: Forest Green, Grey, White (Understated Luxury)
+ * Version: 3.0 | Zippatek Digital Ltd | April 2026
  */
 
 export const colors = {
   // ─── PRIMARY BRAND PALETTE ────────────────────────────────────
-  red: {
-    DEFAULT: '#ED1B24',           // MiddlePark Red — primary CTA, headings accent, active states
-    dark: '#C41720',              // Deep red — hover/pressed
-    light: '#F04950',             // Lighter red — secondary
-    tint: '#FDF2F2',              // Rose tint — hover fills, section backgrounds
-    muted: '#F5C6C8',             // Muted — borders, dividers
-    alpha10: 'rgba(237, 27, 36, 0.10)',
-    alpha20: 'rgba(237, 27, 36, 0.20)',
+  green: {
+    DEFAULT: '#286B38',           // Forest Green — CTAs, overlines, active states
+    dark: '#1E5429',              // Deep green — hover/pressed
+    light: '#3A8A4D',             // Lighter green — secondary
+    tint: '#F0F4F1',              // Mint tint — subtle hover fills
+    muted: '#C8D9CC',             // Muted — borders, accent borders
+    alpha10: 'rgba(40, 107, 56, 0.10)',
+    alpha20: 'rgba(40, 107, 56, 0.20)',
   },
 
-  // ─── STRUCTURAL ───────────────────────────────────────────────
+  // ─── ACCENT — RED (logo icon only, near-invisible) ────────────
+  red: {
+    DEFAULT: '#ED1B24',           // Logo icon accent ONLY. Never backgrounds.
+    dark: '#C41720',
+    accent: '#ED1B24',
+  },
+
+  // ─── STRUCTURAL — GRAPHITE TONES ──────────────────────────────
   charcoal: {
-    DEFAULT: '#5A5B5F',           // Primary text, nav, footer
-    dark: '#3A3B3F',              // Strong emphasis, headings on white
-    light: '#8A8B8F',             // Captions, placeholders, muted text
-    alpha50: 'rgba(90, 91, 95, 0.5)',
+    DEFAULT: '#3A3A3C',           // Primary body text — authoritative
+    dark: '#1C1C1E',              // Deep Slate — footer, dark sections
+    light: '#8E8E93',             // Cool Grey — captions, muted text
+    alpha50: 'rgba(58, 58, 60, 0.5)',
   },
 
   // ─── SURFACES ─────────────────────────────────────────────────
   cream: {
-    DEFAULT: '#F8F7F3',           // Page canvas
-    dark: '#EEE9E0',              // Section alternate background
-    border: '#D6D3C8',            // Input/card borders
-    divider: '#E8E4DC',           // Section dividers
+    DEFAULT: '#FAFAFA',           // Warm white — page canvas
+    dark: '#F2F2F7',              // Soft grey — section alternates
+    border: '#E5E5EA',            // Whisper grey — input/card borders
+    divider: '#E5E5EA',           // Section dividers
   },
   white: '#FFFFFF',
+
+  // ─── ACCENT GOLD ──────────────────────────────────────────────
+  gold: '#C7A84E',                // Muted gold — star ratings
 
   // ─── STATUS ───────────────────────────────────────────────────
   success: {
@@ -49,8 +59,8 @@ export const colors = {
     light: 'rgba(217, 119, 6, 0.1)',
   },
   danger: {
-    DEFAULT: '#ED1B24',
-    light: 'rgba(237, 27, 36, 0.1)',
+    DEFAULT: '#DC2626',
+    light: 'rgba(220, 38, 38, 0.1)',
   },
 } as const
 
@@ -80,7 +90,6 @@ export const typography = {
 
 
 export const spacing = {
-  // 8pt system
   1: '4px',
   2: '8px',
   3: '12px',
@@ -93,7 +102,9 @@ export const spacing = {
   16: '64px',
   20: '80px',
   24: '96px',
+  30: '120px',
   32: '128px',
+  40: '160px',
 } as const
 
 
@@ -109,13 +120,13 @@ export const radius = {
 
 
 export const shadows = {
-  card: '0 4px 24px rgba(237, 27, 36, 0.06)',
-  cardHover: '0 10px 40px rgba(237, 27, 36, 0.12)',
-  seal: '0 2px 12px rgba(237, 27, 36, 0.14)',
-  sidebar: '2px 0 16px rgba(90, 91, 95, 0.06)',
-  topbar: '0 2px 8px rgba(90, 91, 95, 0.06)',
-  modal: '0 20px 60px rgba(237, 27, 36, 0.15)',
-  cta: '0 8px 32px rgba(237, 27, 36, 0.25)',
+  card: '0 1px 8px rgba(0, 0, 0, 0.04)',
+  cardHover: '0 8px 32px rgba(0, 0, 0, 0.08)',
+  seal: '0 2px 12px rgba(0, 0, 0, 0.08)',
+  sidebar: '2px 0 16px rgba(0, 0, 0, 0.04)',
+  topbar: '0 2px 8px rgba(0, 0, 0, 0.04)',
+  modal: '0 20px 60px rgba(0, 0, 0, 0.12)',
+  cta: '0 4px 16px rgba(40, 107, 56, 0.15)',
   heroFloat: '0 12px 48px rgba(0, 0, 0, 0.20)',
 } as const
 
@@ -125,7 +136,7 @@ export const layout = {
   sidebarWidth: '240px',
   sidebarCollapsed: '72px',
   topbarHeight: '72px',
-  maxSiteWidth: '1320px',
+  maxSiteWidth: '1200px',
   maxPortalWidth: '1280px',
   authCardMaxWidth: '480px',
 } as const
@@ -146,11 +157,11 @@ export const sealStyles = {
 
 
 /**
- * DEVELOPMENT STATUS PILL COLORS
+ * DEVELOPMENT STATUS PILL COLORS — GREY-DOMINANT
  */
 export const developmentStatusPill = {
   'for-sale': {
-    background: colors.red.DEFAULT,
+    background: colors.green.DEFAULT,
     color: colors.white,
     label: 'FOR SALE',
   },
@@ -165,7 +176,7 @@ export const developmentStatusPill = {
     label: 'COMPLETED',
   },
   'sold-out': {
-    background: colors.red.dark,
+    background: colors.red.DEFAULT,
     color: colors.white,
     label: 'SOLD OUT',
   },
@@ -173,17 +184,17 @@ export const developmentStatusPill = {
 
 
 /**
- * PORTAL NAVIGATION ITEM STATES
+ * PORTAL NAVIGATION ITEM STATES — GREEN ACCENT
  */
 export const portalNavStyles = {
   active: {
-    background: colors.red.tint,
-    borderLeft: `3px solid ${colors.red.DEFAULT}`,
-    iconColor: colors.red.DEFAULT,
+    background: colors.green.tint,
+    borderLeft: `3px solid ${colors.green.DEFAULT}`,
+    iconColor: colors.green.DEFAULT,
     textColor: colors.charcoal.DEFAULT,
   },
   hover: {
-    background: colors.red.tint,
+    background: colors.cream.dark,
     iconColor: colors.charcoal.DEFAULT,
     textColor: colors.charcoal.DEFAULT,
   },
@@ -196,37 +207,37 @@ export const portalNavStyles = {
 
 
 /**
- * BUTTON VARIANTS
+ * BUTTON VARIANTS — FOREST GREEN PRIMARY
  */
 export const buttonVariants = {
   primary: {
-    background: colors.red.DEFAULT,
+    background: colors.green.DEFAULT,
     color: colors.white,
     border: 'none',
-    hover: { background: colors.red.dark },
+    hover: { background: colors.green.dark },
     shadow: shadows.cta,
   },
   secondary: {
     background: 'transparent',
     color: colors.charcoal.DEFAULT,
     border: `1.5px solid ${colors.charcoal.DEFAULT}`,
-    hover: { background: colors.red.tint },
+    hover: { background: colors.cream.dark },
   },
   ghost: {
-    background: colors.red.tint,
+    background: colors.cream.dark,
     color: colors.charcoal.DEFAULT,
     border: 'none',
-    hover: { background: colors.red.muted },
+    hover: { background: colors.cream.border },
   },
   danger: {
     background: 'transparent',
-    color: colors.red.DEFAULT,
-    border: `1.5px solid ${colors.red.DEFAULT}`,
-    hover: { background: colors.red.alpha10 },
+    color: colors.danger.DEFAULT,
+    border: `1.5px solid ${colors.danger.DEFAULT}`,
+    hover: { background: colors.danger.light },
   },
   whiteOnDark: {
     background: colors.white,
-    color: colors.red.DEFAULT,
+    color: colors.green.DEFAULT,
     border: 'none',
     hover: { background: 'rgba(255,255,255,0.9)' },
   },
@@ -243,7 +254,7 @@ export const buttonVariants = {
  * SECTION HEADER OVERLINE COLORS BY SECTION THEME
  */
 export const overlineColors = {
-  default: colors.red.DEFAULT,
+  default: colors.green.DEFAULT,
   onDark: 'rgba(255,255,255,0.7)',
   subtle: colors.charcoal.light,
 } as const

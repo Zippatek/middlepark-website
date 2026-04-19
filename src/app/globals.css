@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── MIDDLEPARK PROPERTIES — GLOBAL STYLES ─────────────────────────────── */
+/* ─── MIDDLEPARK PROPERTIES — GLOBAL STYLES v3 (UNDERSTATED LUXURY) ──── */
 
 @layer base {
   /* Root CSS Variables */
@@ -10,28 +10,31 @@
     --font-cormorant: 'Cormorant Garamond', Georgia, serif;
     --font-dm-sans: 'DM Sans', system-ui, sans-serif;
 
-    /* Brand Colors as CSS custom properties */
+    /* Brand Colors — Understated Palette */
+    --green: #286B38;
+    --green-dark: #1E5429;
+    --green-light: #3A8A4D;
+    --green-tint: #F0F4F1;
+    --green-muted: #C8D9CC;
+
+    /* Accent — Red (logo icon only) */
     --red: #ED1B24;
-    --red-dark: #C41720;
-    --red-light: #F04950;
-    --red-tint: #FDF2F2;
-    --red-muted: #F5C6C8;
-    --charcoal: #5A5B5F;
-    --charcoal-dark: #3A3B3F;
-    --charcoal-light: #8A8B8F;
-    --cream: #F8F7F3;
-    --cream-dark: #EEE9E0;
-    --cream-border: #D6D3C8;
-    --cream-divider: #E8E4DC;
+    --red-accent: #ED1B24;
+
+    /* Structural — Graphite tones */
+    --charcoal: #3A3A3C;
+    --charcoal-dark: #1C1C1E;
+    --charcoal-light: #8E8E93;
+
+    /* Surfaces */
+    --cream: #FAFAFA;
+    --cream-dark: #F2F2F7;
+    --cream-border: #E5E5EA;
+    --cream-divider: #E5E5EA;
     --white: #FFFFFF;
 
-    /* Legacy aliases — map green vars to red for compat */
-    --green: #ED1B24;
-    --green-dark: #C41720;
-    --green-light: #F04950;
-    --green-tint: #FDF2F2;
-    --green-muted: #F5C6C8;
-    --red-accent: #ED1B24;
+    /* Muted Gold */
+    --gold: #C7A84E;
   }
 
   /* Base Resets */
@@ -94,9 +97,9 @@
     font-size: inherit;
   }
 
-  /* Focus indicators */
+  /* Focus indicators — green instead of red */
   :focus-visible {
-    outline: 2px solid var(--red);
+    outline: 2px solid var(--green);
     outline-offset: 2px;
   }
 }
@@ -112,9 +115,9 @@
     text-transform: uppercase;
   }
 
-  /* ─── SECTION SPACING ───────────────────────── */
+  /* ─── SECTION SPACING — GENEROUS FOR LUXURY ──── */
   .section-padding {
-    @apply py-20 px-8 lg:py-26 lg:px-16;
+    @apply py-24 px-8 lg:py-30 lg:px-16;
   }
 
   .section-padding-sm {
@@ -126,9 +129,9 @@
     @apply max-w-site mx-auto;
   }
 
-  /* ─── CARD STYLES ───────────────────────────── */
+  /* ─── CARD STYLES — NEUTRAL, NO COLOUR TINTS ── */
   .mp-card {
-    @apply bg-white rounded-card shadow-card transition-shadow duration-200;
+    @apply bg-white rounded-card shadow-card border border-cream-border transition-all duration-300;
   }
 
   .mp-card:hover {
@@ -138,7 +141,7 @@
   /* ─── FORM INPUT STYLES ────────────────────── */
   .mp-input {
     @apply w-full px-4 py-3.5 rounded-sm border border-cream-border bg-white text-charcoal placeholder-charcoal-light
-           focus:outline-none focus:ring-2 focus:ring-red focus:border-transparent text-sm transition-all duration-150;
+           focus:outline-none focus:ring-2 focus:ring-green focus:border-transparent text-sm transition-all duration-150;
   }
 
   .mp-label {
@@ -158,26 +161,35 @@
     background: var(--cream);
   }
   .mp-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--red-muted);
+    background: var(--cream-border);
     border-radius: 3px;
   }
   .mp-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: var(--red);
+    background: var(--charcoal-light);
+  }
+
+  /* ─── ACCENT LINE ──────────────────────────── */
+  .accent-line {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .accent-line-red {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--red);
+    margin-bottom: 16px;
   }
 }
 
 @layer utilities {
-  /* ─── TEXT GRADIENT ────────────────────────── */
-  .text-gradient-red {
-    background: linear-gradient(135deg, #ED1B24, #F04950);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Legacy alias */
+  /* ─── TEXT GRADIENT — GREEN ─────────────────── */
   .text-gradient-green {
-    background: linear-gradient(135deg, #ED1B24, #F04950);
+    background: linear-gradient(135deg, #286B38, #3A8A4D);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -204,7 +216,7 @@
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;

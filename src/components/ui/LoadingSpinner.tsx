@@ -8,11 +8,11 @@ export function LoadingSpinner() {
       {/* Outer spinning ring structure */}
       <div className="relative w-16 h-16 flex items-center justify-center">
         {/* Faded track */}
-        <div className="absolute inset-0 rounded-full border-4 border-[#3A3B3F]/10"></div>
+        <div className="absolute inset-0 rounded-full border-4 border-[#3A3A3C]/10"></div>
         
-        {/* Animated red segment */}
+        {/* Animated green segment */}
         <motion.div
-          className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#ED1B24] border-r-[#ED1B24]"
+          className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#286B38] border-r-[#286B38]"
           animate={{ rotate: 360 }}
           transition={{
             repeat: Infinity,
@@ -21,9 +21,9 @@ export function LoadingSpinner() {
           }}
         />
 
-        {/* Center M */}
+        {/* Center MP */}
         <motion.div 
-          className="text-[#3A3B3F] font-serif font-bold text-xl leading-none"
+          className="text-[#3A3A3C] font-serif font-bold text-xl leading-none"
           animate={{ opacity: [0.6, 1, 0.6] }}
           transition={{
             repeat: Infinity,
@@ -36,7 +36,7 @@ export function LoadingSpinner() {
       </div>
 
       <motion.p
-        className="text-[#3A3B3F] text-sm tracking-[0.2em] uppercase font-semibold"
+        className="text-[#3A3A3C] text-sm tracking-[0.2em] uppercase font-semibold"
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >

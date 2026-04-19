@@ -32,9 +32,9 @@ const socialLinks = [
 
 export function PublicFooter() {
   return (
-    <footer className="bg-charcoal-dark text-white">
+    <footer className="bg-[#1C1C1E] text-white">
       {/* Main Footer */}
-      <div className="max-w-[1320px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Column 1 — Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -42,26 +42,26 @@ export function PublicFooter() {
             <div className="mb-5 inline-block">
               <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-8 lg:h-9 w-auto brightness-0 invert" />
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-[280px]">
+            <p className="text-white/45 text-sm leading-relaxed mb-6 max-w-[280px]">
               Built with intention. Priced with purpose. Abuja&apos;s defining property developer.
             </p>
             {/* Contact Info */}
             <div className="space-y-3">
               <a
                 href="tel:+2349012345678"
-                className="flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors duration-200"
+                className="flex items-center gap-2 text-white/50 text-sm hover:text-white/80 transition-colors duration-200"
               >
                 <Phone size={14} strokeWidth={1.5} />
                 +234 901 234 5678
               </a>
               <a
                 href="mailto:hello@middleparkproperties.com"
-                className="flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors duration-200"
+                className="flex items-center gap-2 text-white/50 text-sm hover:text-white/80 transition-colors duration-200"
               >
                 <Mail size={14} strokeWidth={1.5} />
                 hello@middleparkproperties.com
               </a>
-              <div className="flex items-start gap-2 text-white/70 text-sm">
+              <div className="flex items-start gap-2 text-white/50 text-sm">
                 <MapPin size={14} strokeWidth={1.5} className="shrink-0 mt-0.5" />
                 <span>Plot 1234, Wuse II, Abuja, Nigeria</span>
               </div>
@@ -76,7 +76,7 @@ export function PublicFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors duration-200"
+                    className="text-white/45 text-sm hover:text-white/80 transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -93,7 +93,7 @@ export function PublicFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors duration-200"
+                    className="text-white/45 text-sm hover:text-white/80 transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -107,7 +107,7 @@ export function PublicFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-white/60 text-sm hover:text-white transition-colors duration-200"
+                      className="text-white/45 text-sm hover:text-white/80 transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -117,7 +117,7 @@ export function PublicFooter() {
             </div>
           </div>
 
-          {/* Column 4 — Social & Certifications */}
+          {/* Column 4 — Social */}
           <div>
             <h4 className="font-cormorant text-white text-lg font-bold mb-5">Follow Us</h4>
             <ul className="space-y-3">
@@ -127,7 +127,7 @@ export function PublicFooter() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-white/60 text-sm hover:text-white transition-colors duration-200 group"
+                    className="flex items-center gap-1.5 text-white/45 text-sm hover:text-white/80 transition-colors duration-200 group"
                   >
                     {link.label}
                     <ArrowUpRight
@@ -138,25 +138,23 @@ export function PublicFooter() {
                 </li>
               ))}
             </ul>
-
-
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-xs">
+      <div className="border-t border-white/8">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/30 text-xs">
             © {new Date().getFullYear()} MiddlePark Properties Limited. All rights reserved.
           </p>
-          <p className="text-white/30 text-xs">
+          <p className="text-white/20 text-xs">
             Built by{' '}
             <a
               href="https://zippatek.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors duration-200"
+              className="text-white/35 hover:text-white/60 transition-colors duration-200"
             >
               Zippatek Digital Ltd
             </a>

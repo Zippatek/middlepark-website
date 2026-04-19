@@ -8,40 +8,42 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // ─── MIDDLEPARK COLOR SYSTEM ────────────────────────────────
+      // ─── MIDDLEPARK COLOR SYSTEM — V3 UNDERSTATED LUXURY ──────────
       colors: {
-        // Primary Brand — Red
-        red: {
-          DEFAULT: '#ED1B24',   // MiddlePark Red — Primary brand, CTAs, active states
-          dark: '#C41720',      // Deep red — hover/pressed states
-          light: '#F04950',     // Lighter red — secondary actions
-          tint: '#FDF2F2',      // Rose tint — backgrounds, hover fills
-          muted: '#F5C6C8',     // Muted red — borders, dividers
-          accent: '#ED1B24',    // Alias for backwards compat
-        },
-        // Legacy green alias → now maps to red for any leftover references
+        // Primary Brand — Forest Green (restrained, CTAs only)
         green: {
-          DEFAULT: '#ED1B24',
+          DEFAULT: '#286B38',       // Forest Green — CTAs, overlines, active states
+          dark: '#1E5429',          // Deep green — hover/pressed states
+          light: '#3A8A4D',         // Lighter green — secondary actions
+          tint: '#F0F4F1',          // Mint tint — subtle hover fills
+          muted: '#C8D9CC',         // Muted green — borders, dividers
+        },
+        // Accent — Red (near-invisible, logo icon only)
+        red: {
+          DEFAULT: '#ED1B24',       // Logo icon accent ONLY
           dark: '#C41720',
           light: '#F04950',
           tint: '#FDF2F2',
           muted: '#F5C6C8',
+          accent: '#ED1B24',
         },
-        // Structural
+        // Structural — Graphite tones
         charcoal: {
-          DEFAULT: '#5A5B5F',   // Primary text, structural, footer
-          dark: '#3A3B3F',      // Deeper text for strong emphasis
-          light: '#8A8B8F',     // Captions, placeholders, muted text
+          DEFAULT: '#3A3A3C',       // Primary body text — authoritative
+          dark: '#1C1C1E',          // Deep Slate — footer, dark sections
+          light: '#8E8E93',         // Cool Grey — captions, muted text
         },
         // Canvas & Surfaces
         cream: {
-          DEFAULT: '#F8F7F3',   // Page canvas background
-          dark: '#EEE9E0',      // Section alternate background
-          border: '#D6D3C8',    // Input and card borders
-          divider: '#E8E4DC',   // Section dividers
+          DEFAULT: '#FAFAFA',       // Warm white — page canvas
+          dark: '#F2F2F7',          // Soft grey — section alternates
+          border: '#E5E5EA',        // Whisper grey — input/card borders
+          divider: '#E5E5EA',       // Section dividers
         },
         // Override white
         white: '#FFFFFF',
+        // Muted gold for stars
+        gold: '#C7A84E',
       },
 
       // ─── TYPOGRAPHY ──────────────────────────────────────────────
@@ -72,6 +74,8 @@ const config: Config = {
         '26': '104px',
         '30': '120px',
         '34': '136px',
+        '38': '152px',
+        '40': '160px',
       },
 
       // ─── BORDER RADIUS ────────────────────────────────────────────
@@ -85,32 +89,30 @@ const config: Config = {
         'sm': '4px',
       },
 
-      // ─── BOX SHADOWS ─────────────────────────────────────────────
+      // ─── BOX SHADOWS — NEUTRAL, NO COLOUR TINT ────────────────────
       boxShadow: {
-        'card': '0 4px 24px rgba(237, 27, 36, 0.06)',
-        'card-hover': '0 10px 40px rgba(237, 27, 36, 0.12)',
-        'seal': '0 2px 12px rgba(237, 27, 36, 0.14)',
-        'sidebar': '2px 0 16px rgba(90, 91, 95, 0.06)',
-        'topbar': '0 2px 8px rgba(90, 91, 95, 0.06)',
-        'modal': '0 20px 60px rgba(237, 27, 36, 0.15)',
-        'cta': '0 8px 32px rgba(237, 27, 36, 0.25)',
+        'card': '0 1px 8px rgba(0, 0, 0, 0.04)',
+        'card-hover': '0 8px 32px rgba(0, 0, 0, 0.08)',
+        'seal': '0 2px 12px rgba(0, 0, 0, 0.08)',
+        'sidebar': '2px 0 16px rgba(0, 0, 0, 0.04)',
+        'topbar': '0 2px 8px rgba(0, 0, 0, 0.04)',
+        'modal': '0 20px 60px rgba(0, 0, 0, 0.12)',
+        'cta': '0 4px 16px rgba(40, 107, 56, 0.15)',
         'hero-float': '0 12px 48px rgba(0, 0, 0, 0.2)',
         'none': 'none',
       },
 
       // ─── BACKGROUND GRADIENTS ────────────────────────────────────
       backgroundImage: {
-        // MiddlePark brand gradients — red direction
-        'red-gradient': 'linear-gradient(135deg, #ED1B24 0%, #C41720 100%)',
-        'red-bottom': 'linear-gradient(to bottom, transparent 0%, #C41720 100%)',
-        'charcoal-gradient': 'linear-gradient(135deg, #5A5B5F 0%, #3A3B3F 100%)',
+        // Editorial dark overlay — no colour, pure elegance
+        'hero-overlay': 'linear-gradient(135deg, rgba(28,28,30,0.82) 0%, rgba(28,28,30,0.3) 100%)',
+        'hero-overlay-heavy': 'linear-gradient(135deg, rgba(28,28,30,0.88) 0%, rgba(28,28,30,0.5) 100%)',
+        // Charcoal gradient
+        'charcoal-gradient': 'linear-gradient(135deg, #3A3A3C 0%, #1C1C1E 100%)',
         // Subtle canvas gradient
-        'cream-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #F8F7F3 100%)',
-        // Hero overlay — charcoal-based for elegance with red accent
-        'hero-overlay': 'linear-gradient(to right, rgba(58,59,63,0.88) 40%, rgba(58,59,63,0.3) 100%)',
-        // Legacy aliases
-        'green-gradient': 'linear-gradient(135deg, #ED1B24 0%, #C41720 100%)',
-        'green-bottom': 'linear-gradient(to bottom, transparent 0%, #C41720 100%)',
+        'cream-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)',
+        // Green gradient (CTA only)
+        'green-gradient': 'linear-gradient(135deg, #286B38 0%, #1E5429 100%)',
       },
 
       // ─── TRANSITIONS ─────────────────────────────────────────────
@@ -126,7 +128,7 @@ const config: Config = {
 
       // ─── MAX WIDTHS ───────────────────────────────────────────────
       maxWidth: {
-        'site': '1320px',
+        'site': '1200px',
         'portal': '1280px',
         'auth-card': '480px',
         'dev-card': '400px',

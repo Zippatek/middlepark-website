@@ -20,20 +20,20 @@ export function MiddleParkSeal({ className, size = 'md' }: MiddleParkSealProps) 
         border: '1px solid rgba(255,255,255,0.65)',
         borderRadius: '20px',
         padding: config.padding,
-        boxShadow: '0 2px 12px rgba(237, 27, 36, 0.14)',
+        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
       }}
       className={cn('flex items-center gap-1.5', className)}
     >
       <Award
         size={config.icon}
-        style={{ color: '#ED1B24' }}
+        style={{ color: '#286B38' }}
         strokeWidth={2}
       />
       <span
         style={{
           fontSize: config.text,
           fontWeight: 600,
-          color: '#5A5B5F',
+          color: '#3A3A3C',
         }}
       >
         MiddlePark Certified

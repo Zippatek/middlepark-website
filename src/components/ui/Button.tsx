@@ -9,11 +9,11 @@ const variantStyles: Record<string, string> = {
   primary:
     'bg-green !text-white hover:bg-green-dark shadow-sm hover:shadow-md active:bg-green-dark',
   secondary:
-    'bg-transparent text-charcoal border-[1.5px] border-charcoal hover:bg-green-tint active:bg-green-muted',
+    'bg-transparent text-charcoal border-[1.5px] border-charcoal hover:bg-cream-dark active:bg-cream-dark',
   ghost:
-    'bg-green-tint text-charcoal hover:bg-green-muted active:bg-green-muted',
+    'bg-cream-dark text-charcoal hover:bg-cream-border active:bg-cream-border',
   danger:
-    'bg-transparent text-red-accent border-[1.5px] border-red-accent hover:bg-red-light active:bg-red-light',
+    'bg-transparent text-red border-[1.5px] border-red hover:bg-red-tint active:bg-red-tint',
   'white-on-dark':
     'bg-white text-green hover:bg-white/90 active:bg-white/80',
   'ghost-white':
