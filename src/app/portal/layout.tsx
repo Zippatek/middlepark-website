@@ -1,19 +1,30 @@
+'use client'
+
 import React from 'react'
 import { PortalSidebar } from '@/components/layout/PortalSidebar'
 import { PortalTopbar } from '@/components/layout/PortalTopbar'
+import { usePortalStore } from '@/lib/store'
+import { cn } from '@/lib/utils'
 
 export default function PortalLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const sidebarCollapsed = usePortalStore((state) => state.sidebarCollapsed)
+
   return (
     <div className="min-h-screen bg-cream">
       {/* Sidebar */}
       <PortalSidebar />
 
       {/* Main Content Area */}
-      <div className="lg:ml-sidebar transition-all duration-300">
+      <div 
+        className={cn(
+          "transition-all duration-300",
+          sidebarCollapsed ? "lg:ml-[72px]" : "lg:ml-[240px]"
+        )}
+      >
         {/* Topbar */}
         <PortalTopbar />
 
@@ -25,3 +36,4 @@ export default function PortalLayout({
     </div>
   )
 }
+

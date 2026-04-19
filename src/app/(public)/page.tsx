@@ -480,8 +480,21 @@ export default function HomePage() {
       {/* 1. HERO — IMMERSIVE 3D PERSPECTIVE EXPERIENCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-[100vh] flex flex-col justify-center overflow-hidden bg-[#0A0A0C] pt-[140px] pb-24 lg:pb-32" id="hero">
+        
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/images/hero-estate-aerial.jpg" 
+            alt="MiddlePark Estate" 
+            fill 
+            className="object-cover opacity-30 mix-blend-luminosity" 
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-[#0A0A0C]/80 to-[#0A0A0C]/60" />
+        </div>
+
         {/* 3D Perspective Grid Floor — Deep space effect */}
-        <div className="absolute inset-0" style={{ perspective: '1200px' }}>
+        <div className="absolute inset-0 z-0" style={{ perspective: '1200px' }}>
           {/* Main grid */}
           <div
             className="absolute w-[250%] h-[70%] bottom-0 left-[-75%]"
@@ -566,7 +579,7 @@ export default function HomePage() {
                   transition={{ duration: 0.8, delay: 0.8 }}
                 />
                 <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-sans">
-                  Abuja&apos;s Defining Developer
+                  Building to Serve Generations
                 </p>
               </motion.div>
 
@@ -626,15 +639,19 @@ export default function HomePage() {
                 Tells a <span className="text-green">Story</span>
               </motion.h1>
 
-              <motion.p
-                className="text-white/45 text-sm sm:text-base lg:text-lg max-w-[480px] mb-8 lg:mb-10 leading-[1.7] font-sans"
+              <motion.div
+                className="max-w-[480px] mb-8 lg:mb-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.5 }}
               >
-                MiddlePark Properties builds carefully crafted estates across Abuja&apos;s most
-                sought-after neighbourhoods. Every unit is designed to last. Every title is clean.
-              </motion.p>
+                <p className="text-white/60 text-sm sm:text-base lg:text-lg mb-4 leading-[1.7] font-sans">
+                  We build thoughtfully crafted homes and commercial spaces across Nigeria, where quality meets purpose and every detail is delivered with care.
+                </p>
+                <p className="text-white/60 text-sm sm:text-base lg:text-lg leading-[1.7] font-sans">
+                  From timeless residences to thriving real estate developments, we create properties designed for comfort, value, growth, and lasting impact, spaces built to serve generations.
+                </p>
+              </motion.div>
 
               <motion.div
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4"

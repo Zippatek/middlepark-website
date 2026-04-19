@@ -75,6 +75,8 @@ const config: Config = {
         '40': '160px',
         'navbar': '80px',
         'navbar-offset': '120px',
+        'sidebar': '240px',
+        'sidebar-collapsed': '72px',
       },
 
       // ─── BORDER RADIUS ────────────────────────────────────────────

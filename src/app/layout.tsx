@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MiddlePark Properties Limited — Abuja\'s Defining Developer',
+    default: 'MiddlePark Properties Limited — Building to Serve Generations',
     template: '%s | MiddlePark Properties',
   },
   description:
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'MiddlePark Properties Limited',
     description:
-      'Built with intention. Priced with purpose. Abuja\'s defining property developer.',
+      'Built with intention. Priced with purpose. Building to Serve Generations.',
     siteName: 'MiddlePark Properties',
     locale: 'en_NG',
     type: 'website',

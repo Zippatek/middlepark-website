@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -15,6 +15,7 @@ import {
   ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { usePortalStore } from '@/lib/store'
 
 const navItems = [
   { label: 'Overview', href: '/portal', icon: LayoutDashboard },
@@ -27,7 +28,9 @@ const navItems = [
 
 export function PortalSidebar() {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = useState(false)
+  const collapsed = usePortalStore((state) => state.sidebarCollapsed)
+  const toggleSidebar = usePortalStore((state) => state.toggleSidebar)
+  const setSidebarCollapsed = usePortalStore((state) => state.setSidebarCollapsed)
 
   return (
     <>
@@ -47,15 +50,15 @@ export function PortalSidebar() {
         )}>
           <Link href="/" className="flex items-center shrink-0">
             {collapsed ? (
-              <img src="/logos/Icon.svg" alt="MP" className="h-7 w-auto" />
+              <img src="/logos/Icon Green.svg" alt="MP" className="h-7 w-auto" />
             ) : (
               <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-7 w-auto" />
             )}
           </Link>
           <button
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={toggleSidebar}
             className={cn(
-              'p-1.5 rounded-sm text-charcoal-light hover:text-charcoal hover:bg-cream-dark transition-all duration-200',
+              'p-1.5 rounded-sm text-charcoal-light hover:text-charcoal hover:bg-green-tint transition-all duration-200',
               collapsed && 'hidden'
             )}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -79,8 +82,8 @@ export function PortalSidebar() {
                   'flex items-center gap-3 py-3 transition-all duration-150',
                   collapsed ? 'justify-center px-2 rounded-lg' : 'px-4 rounded-r-lg',
                   isActive
-                    ? 'bg-[#FDF2F2] border-l-[3px] border-green text-charcoal'
-                    : 'text-charcoal-light hover:bg-cream-dark hover:text-charcoal'
+                    ? 'bg-green-tint border-l-[3px] border-green text-charcoal'
+                    : 'text-charcoal-light hover:bg-green-tint hover:text-charcoal'
                 )}
               >
                 <item.icon
@@ -103,8 +106,8 @@ export function PortalSidebar() {
         {collapsed && (
           <div className="px-3 py-2">
             <button
-              onClick={() => setCollapsed(false)}
-              className="w-full flex items-center justify-center p-2 rounded-lg text-charcoal-light hover:text-charcoal hover:bg-cream-dark transition-all duration-200"
+              onClick={() => setSidebarCollapsed(false)}
+              className="w-full flex items-center justify-center p-2 rounded-lg text-charcoal-light hover:text-charcoal hover:bg-green-tint transition-all duration-200"
               aria-label="Expand sidebar"
             >
               <ChevronRight size={16} />
