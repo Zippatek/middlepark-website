@@ -76,6 +76,8 @@ const config: Config = {
         '34': '136px',
         '38': '152px',
         '40': '160px',
+        'navbar': '80px',
+        'navbar-offset': '120px',
       },
 
       // ─── BORDER RADIUS ────────────────────────────────────────────

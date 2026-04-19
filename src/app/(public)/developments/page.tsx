@@ -212,7 +212,7 @@ export default function DevelopmentsPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-charcoal-dark pt-navbar">
+      <section className="bg-charcoal-dark pt-navbar-offset">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

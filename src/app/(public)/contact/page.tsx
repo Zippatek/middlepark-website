@@ -78,7 +78,7 @@ export default function ContactPage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative pt-navbar" id="contact-hero">
+      <section className="relative pt-navbar-offset" id="contact-hero">
         <div className="relative h-[350px] lg:h-[420px]">
           <Image
             src="/images/contact-abuja-skyline.jpg"

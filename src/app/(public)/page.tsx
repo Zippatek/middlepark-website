@@ -490,7 +490,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 1. HERO — IMMERSIVE 3D PERSPECTIVE EXPERIENCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-[#0A0A0C]" id="hero">
+      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-[#0A0A0C] pt-navbar-offset" id="hero">
         {/* 3D Perspective Grid Floor — Deep space effect */}
         <div className="absolute inset-0" style={{ perspective: '1200px' }}>
           {/* Main grid */}

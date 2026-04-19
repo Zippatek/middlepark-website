@@ -123,7 +123,7 @@ export default function AboutPage() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative pt-navbar" id="about-hero">
+      <section className="relative pt-navbar-offset" id="about-hero">
         <div className="relative h-[400px] lg:h-[500px]">
           <Image
             src="/images/about-hero-estate.jpg"
