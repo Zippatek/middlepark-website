@@ -144,6 +144,7 @@ const config: Config = {
       height: {
         'topbar': '72px',
         'navbar': '80px',
+        'navbar-offset': '120px',
         'dev-image': '260px',
         'dev-image-lg': '380px',
         'hero': '100vh',

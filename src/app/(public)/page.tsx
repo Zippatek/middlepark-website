@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 import {
   ChevronRight,
   Shield,
@@ -218,9 +218,9 @@ const comparisonData = [
 ]
 
 const processSteps = [
-  { number: '01', title: 'Title Verification', description: 'We confirm AGIS title verification and FCDA approval before anything else. Your land is clean.', image: '/images/dev-dakibiyu-1.jpg' },
-  { number: '02', title: 'Unit Selection & Pricing', description: 'Choose your preferred unit type, review the transparent pricing breakdown, and lock in your selection.', image: '/images/dev-katampe-1.jpg' },
-  { number: '03', title: 'Payment Plan Agreement', description: 'Select a payment plan that works for you — no hidden extras, no development levies at handover.', image: '/images/interior-living-room.jpg' },
+  { number: '01', title: 'Title Verification', description: 'We confirm AGIS title verification and FCDA approval before anything else. Your land is clean.', image: '/images/process-title-verification.png' },
+  { number: '02', title: 'Unit Selection & Pricing', description: 'Choose your preferred unit type, review the transparent pricing breakdown, and lock in your selection.', image: '/images/process-unit-selection.png' },
+  { number: '03', title: 'Payment Plan Agreement', description: 'Select a payment plan that works for you — no hidden extras, no development levies at handover.', image: '/images/process-payment-plan.png' },
   { number: '04', title: 'Construction & Updates', description: 'Track progress through your Client Portal. Real-time photo updates, milestone notifications, documented at every stage.', image: '/images/interior-kitchen.jpg' },
   { number: '05', title: 'Handover & Move-In', description: 'Receive your keys, your completed documentation pack, and step into a home that\'s exactly what was promised.', image: '/images/dev-apo-1.jpg' },
 ]
@@ -255,15 +255,6 @@ const certifications = [
   { icon: Award, label: 'MiddlePark Quality Seal' },
   { icon: Building2, label: 'COREN Registered' },
   { icon: Users, label: 'NIA Member' },
-]
-
-const pressLogos = [
-  'The Guardian Nigeria',
-  'BusinessDay',
-  'ThisDay',
-  'Premium Times',
-  'The Cable',
-  'Nairametrics',
 ]
 
 // ─── ANIMATION VARIANTS ─────────────────────────────────────────────────────
@@ -405,182 +396,406 @@ function WhyAccordion({ item, index }: { item: typeof whyMiddlePark[0]; index: n
   )
 }
 
+// ─── 3D HERO FLOATING CARD ──────────────────────────────────────────────────
+function HeroFloatingCard({
+  src,
+  alt,
+  title,
+  subtitle,
+  className,
+  delay,
+  mouseX,
+  mouseY,
+  factor,
+}: {
+  src: string
+  alt: string
+  title: string
+  subtitle: string
+  className: string
+  delay: number
+  mouseX: any
+  mouseY: any
+  factor: number
+}) {
+  const x = useTransform(mouseX, [-0.5, 0.5], [-20 * factor, 20 * factor])
+  const y = useTransform(mouseY, [-0.5, 0.5], [-15 * factor, 15 * factor])
+  const springX = useSpring(x, { stiffness: 100, damping: 30 })
+  const springY = useSpring(y, { stiffness: 100, damping: 30 })
+
+  return (
+    <motion.div
+      className={`absolute rounded-[16px] overflow-hidden shadow-2xl ${className}`}
+      style={{
+        transformStyle: 'preserve-3d',
+        x: springX,
+        y: springY,
+      }}
+      initial={{ opacity: 0, scale: 0.85, rotateY: 15, rotateX: -8 }}
+      animate={{ opacity: 1, scale: 1, rotateY: -3, rotateX: 2 }}
+      transition={{ duration: 1.4, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        sizes="320px"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+      <div className="absolute bottom-4 left-4">
+        <p className="text-white text-sm font-semibold">{title}</p>
+        <p className="text-white/60 text-xs">{subtitle}</p>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function HomePage() {
+  // Mouse tracking for hero parallax
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  // Scroll-based 3D portal effect for developments section
+  const developmentsRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress: devScrollProgress } = useScroll({
+    target: developmentsRef,
+    offset: ['start end', 'start 0.3'],
+  })
+  const portalScale = useTransform(devScrollProgress, [0, 1], [0.7, 1])
+  const portalOpacity = useTransform(devScrollProgress, [0, 0.5, 1], [0, 0.5, 1])
+  const portalPerspective = useTransform(devScrollProgress, [0, 1], [800, 0])
+  const portalRotateX = useTransform(devScrollProgress, [0, 1], [25, 0])
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return
+      const rect = heroRef.current.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width - 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5
+      mouseX.set(x)
+      mouseY.set(y)
+    }
+
+    const el = heroRef.current
+    if (el) {
+      el.addEventListener('mousemove', handleMouseMove)
+      return () => el.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [mouseX, mouseY])
+
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 1. HERO — ANIMATED TEXT REVEAL */}
+      {/* 1. HERO — IMMERSIVE 3D PERSPECTIVE EXPERIENCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-screen flex items-center overflow-hidden" id="hero">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-estate-aerial.jpg"
-            alt="MiddlePark Estate — Aerial View"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
+      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden bg-[#0A0A0C]" id="hero">
+        {/* 3D Perspective Grid Floor — Deep space effect */}
+        <div className="absolute inset-0" style={{ perspective: '1200px' }}>
+          {/* Main grid */}
+          <div
+            className="absolute w-[250%] h-[70%] bottom-0 left-[-75%]"
+            style={{
+              transform: 'rotateX(68deg)',
+              transformOrigin: 'center bottom',
+              backgroundImage: `
+                linear-gradient(rgba(237,27,36,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(237,27,36,0.12) 1px, transparent 1px)
+              `,
+              backgroundSize: '100px 100px',
+            }}
           />
-          <div className="absolute inset-0 bg-[#1C1C1E]/65" />
+          {/* Grid glow pulse — breathing effect */}
+          <motion.div
+            className="absolute w-[250%] h-[70%] bottom-0 left-[-75%]"
+            style={{
+              transform: 'rotateX(68deg)',
+              transformOrigin: 'center bottom',
+              backgroundImage: `
+                linear-gradient(rgba(237,27,36,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(237,27,36,0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '100px 100px',
+            }}
+            animate={{ opacity: [0, 0.35, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          {/* Horizon glow — vanishing point */}
+          <div
+            className="absolute w-full h-[30%] bottom-[28%] left-0"
+            style={{
+              background: 'radial-gradient(ellipse 70% 40% at 50% 100%, rgba(237,27,36,0.08) 0%, transparent 70%)',
+            }}
+          />
         </div>
 
-        {/* Animated light sweep overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent"
-          animate={{ x: ['-100%', '200%'] }}
-          transition={{ duration: 4, repeat: Infinity, repeatDelay: 6, ease: 'easeInOut' }}
-          style={{ width: '50%' }}
+        {/* Vertical scan lines — subtle digital texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none hidden lg:block"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.15) 2px, rgba(255,255,255,0.15) 3px)',
+          }}
         />
 
-        {/* Subtle moving particles / bokeh */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-white/[0.03]"
-              style={{
-                width: 120 + i * 80,
-                height: 120 + i * 80,
-                left: `${10 + i * 18}%`,
-                top: `${15 + (i % 3) * 25}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                scale: [1, 1.05, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 6 + i * 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: i * 0.8,
-              }}
-            />
-          ))}
-        </div>
+        {/* Ambient glow orbs — atmospheric depth */}
+        <motion.div
+          className="absolute w-[600px] h-[600px] rounded-full blur-[150px] bg-green/12"
+          style={{ top: '5%', right: '10%' }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.25, 0.45, 0.25] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full blur-[130px] bg-green/6"
+          style={{ bottom: '15%', left: '5%' }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+        />
+        {/* Secondary accent glow */}
+        <motion.div
+          className="absolute w-[300px] h-[300px] rounded-full blur-[100px] bg-white/[0.02]"
+          style={{ top: '40%', left: '35%' }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+        />
 
-        {/* Content */}
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-16 w-full">
-          <div className="max-w-[720px]">
-            {/* Overline with animated line */}
-            <motion.div
-              className="flex items-center gap-3 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
+        {/* Content layer */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+            {/* Left — Text */}
+            <div>
               <motion.div
-                className="h-[1px] bg-green"
-                initial={{ width: 0 }}
-                animate={{ width: 32 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                className="flex items-center gap-3 mb-6 lg:mb-8"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <motion.div
+                  className="h-[1px] bg-green"
+                  initial={{ width: 0 }}
+                  animate={{ width: 40 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                />
+                <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-sans">
+                  Abuja&apos;s Defining Developer
+                </p>
+              </motion.div>
+
+              {/* Desktop headline */}
+              <h1 className="font-cormorant text-white font-bold leading-[0.92] mb-6 lg:mb-8 hidden sm:block">
+                {['Where', 'Every', 'Home'].map((word, i) => (
+                  <motion.span
+                    key={word}
+                    className="inline-block mr-[0.22em]"
+                    style={{ fontSize: 'clamp(48px, 7vw, 84px)' }}
+                    initial={{ opacity: 0, y: 60, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                <br />
+                {['Tells', 'a'].map((word, i) => (
+                  <motion.span
+                    key={word}
+                    className="inline-block mr-[0.22em]"
+                    style={{ fontSize: 'clamp(48px, 7vw, 84px)' }}
+                    initial={{ opacity: 0, y: 60, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.8, delay: 1.0 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                <motion.span
+                  className="inline-block relative"
+                  style={{ fontSize: 'clamp(48px, 7vw, 84px)' }}
+                  initial={{ opacity: 0, y: 60, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.8, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <span className="text-green">Story</span>
+                  <motion.span
+                    className="absolute -bottom-1 left-0 h-[3px] bg-green"
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 0.6, delay: 2 }}
+                  />
+                </motion.span>
+              </h1>
+
+              {/* Mobile headline — compact minimalist */}
+              <motion.h1
+                className="font-cormorant text-white font-bold leading-[0.95] mb-5 sm:hidden"
+                style={{ fontSize: '42px' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                Where Every Home<br />
+                Tells a <span className="text-green">Story</span>
+              </motion.h1>
+
+              <motion.p
+                className="text-white/45 text-sm sm:text-base lg:text-lg max-w-[480px] mb-8 lg:mb-10 leading-[1.7] font-sans"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.5 }}
+              >
+                MiddlePark Properties builds carefully crafted estates across Abuja&apos;s most
+                sought-after neighbourhoods. Every unit is designed to last. Every title is clean.
+              </motion.p>
+
+              <motion.div
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.8 }}
+              >
+                <Button variant="white-on-dark" size="lg" href="/developments">
+                  VIEW DEVELOPMENTS <ArrowRight size={16} />
+                </Button>
+                <Button variant="ghost-white" size="lg" href="/contact">
+                  ENQUIRE ABOUT A UNIT
+                </Button>
+              </motion.div>
+            </div>
+
+            {/* Right — Floating 3D property cards (desktop only) */}
+            <div className="hidden lg:block relative h-[550px]" style={{ perspective: '1000px' }}>
+              {/* Main card — parallax responsive */}
+              <HeroFloatingCard
+                src="/images/dev-dakibiyu-1.jpg"
+                alt="Dakibiyu Estate"
+                title="Dakibiyu Estate"
+                subtitle="Phase 2 · 40 Units"
+                className="top-[8%] left-[5%] w-[320px] h-[240px]"
+                delay={0.8}
+                mouseX={mouseX}
+                mouseY={mouseY}
+                factor={1.2}
               />
-              <p className="text-white/60 text-xs uppercase tracking-[0.2em] font-sans">
-                Abuja&apos;s Defining Developer
-              </p>
-            </motion.div>
 
-            {/* Headline — word-by-word reveal */}
-            <h1 className="font-cormorant text-white font-bold leading-[0.95] mb-8">
-              {['Where', 'Every', 'Home'].map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="inline-block mr-[0.25em]"
-                  style={{ fontSize: 'clamp(52px, 7.5vw, 88px)' }}
-                  initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: [0.2, 0.8, 0.3, 1] }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-              <br />
-              {['Tells', 'a', 'Story'].map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="inline-block mr-[0.25em]"
-                  style={{ fontSize: 'clamp(52px, 7.5vw, 88px)' }}
-                  initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ duration: 0.7, delay: 0.9 + i * 0.12, ease: [0.2, 0.8, 0.3, 1] }}
-                >
-                  {word === 'Story' ? (
-                    <span className="relative">
-                      Story
-                      <motion.span
-                        className="absolute -bottom-2 left-0 h-[3px] bg-green"
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 0.5, delay: 1.8 }}
-                      />
-                    </span>
-                  ) : word}
-                </motion.span>
-              ))}
-            </h1>
+              {/* Secondary card — offset behind */}
+              <HeroFloatingCard
+                src="/images/dev-katampe-1.jpg"
+                alt="Katampe Heights"
+                title="Katampe Heights"
+                subtitle="Off-Plan · 24 Units"
+                className="top-[38%] right-[0%] w-[280px] h-[200px]"
+                delay={1.2}
+                mouseX={mouseX}
+                mouseY={mouseY}
+                factor={0.8}
+              />
 
-            {/* Body text */}
-            <motion.p
-              className="text-white/65 text-lg max-w-[520px] mb-10 leading-[1.7] font-sans"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.3 }}
-            >
-              MiddlePark Properties builds carefully crafted estates across Abuja&apos;s most
-              sought-after neighbourhoods. Every unit is designed to last. Every title is clean.
-            </motion.p>
+              {/* Third card — smaller, deeper */}
+              <HeroFloatingCard
+                src="/images/dev-apo-1.jpg"
+                alt="Apo Residences"
+                title="Apo Residences"
+                subtitle="For Sale · 60 Units"
+                className="bottom-[8%] left-[15%] w-[240px] h-[170px]"
+                delay={1.5}
+                mouseX={mouseX}
+                mouseY={mouseY}
+                factor={0.6}
+              />
 
-            {/* CTAs */}
+              {/* Floating stat glassmorphism chip */}
+              <motion.div
+                className="absolute bottom-[22%] right-[10%] bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-[14px] px-5 py-4"
+                style={{
+                  x: useSpring(useTransform(mouseX, [-0.5, 0.5], [8, -8]), { stiffness: 100, damping: 30 }),
+                  y: useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 100, damping: 30 }),
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 2.0 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-green/20 flex items-center justify-center">
+                    <Building2 size={18} className="text-green" />
+                  </div>
+                  <div>
+                    <p className="text-white text-lg font-bold font-cormorant">800+</p>
+                    <p className="text-white/40 text-[10px] uppercase tracking-wider">Units Delivered</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating certified badge */}
+              <motion.div
+                className="absolute top-[3%] right-[12%] bg-green/90 text-white px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5"
+                style={{
+                  x: useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), { stiffness: 80, damping: 25 }),
+                  y: useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), { stiffness: 80, damping: 25 }),
+                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 2.4 }}
+              >
+                <Award size={12} /> MiddlePark Certified
+              </motion.div>
+
+              {/* Decorative connecting lines */}
+              <motion.div
+                className="absolute top-[28%] left-[42%] w-[1px] h-28 bg-gradient-to-b from-green/25 to-transparent"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.8, delay: 1.8 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div
+                className="absolute top-[55%] right-[30%] w-20 h-[1px] bg-gradient-to-r from-green/20 to-transparent"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 2.1 }}
+                style={{ transformOrigin: 'left' }}
+              />
+            </div>
+
+            {/* Mobile — simplified visual card */}
             <motion.div
-              className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.6 }}
+              className="lg:hidden relative mt-4 mx-auto w-full max-w-[320px] h-[200px] rounded-[16px] overflow-hidden"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 2.0 }}
             >
-              <Button variant="white-on-dark" size="lg" href="/developments">
-                VIEW DEVELOPMENTS <ArrowRight size={16} />
-              </Button>
-              <Button variant="ghost-white" size="lg" href="/contact">
-                ENQUIRE ABOUT A UNIT
-              </Button>
+              <Image
+                src="/images/dev-dakibiyu-1.jpg"
+                alt="Dakibiyu Estate"
+                fill
+                className="object-cover"
+                sizes="320px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                <div>
+                  <p className="text-white text-sm font-semibold">Dakibiyu Estate</p>
+                  <p className="text-white/60 text-xs">Phase 2 · 40 Units</p>
+                </div>
+                <div className="bg-green/90 text-white px-2.5 py-1 rounded-full text-[9px] font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <Award size={10} /> Certified
+                </div>
+              </div>
             </motion.div>
           </div>
-
-          {/* Right side — floating stat card */}
-          <motion.div
-            className="hidden xl:block absolute right-8 top-1/2 -translate-y-1/2"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 2 }}
-          >
-            <div className="bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-[16px] p-6 w-[200px]">
-              <p className="text-white/40 text-[10px] uppercase tracking-widest mb-4">Since 2016</p>
-              <div className="space-y-5">
-                {[
-                  { val: '800+', label: 'Units built' },
-                  { val: '98%', label: 'On-time delivery' },
-                  { val: '12', label: 'Developments' },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <p className="font-cormorant text-white text-2xl font-bold">{s.val}</p>
-                    <p className="text-white/35 text-[11px] mt-0.5">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0A0A0C] to-transparent" />
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 0.8 }}
         >
-          <span className="text-white/25 text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-          <div className="w-[1px] h-8 bg-white/15 relative overflow-hidden">
+          <span className="text-white/20 text-[9px] sm:text-[10px] uppercase tracking-[0.25em]">Scroll</span>
+          <div className="w-[1px] h-6 sm:h-8 bg-white/15 relative overflow-hidden">
             <motion.div
               className="w-full h-3 bg-white/40"
               animate={{ y: [0, 20, 0] }}
@@ -593,8 +808,8 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 2. STATS BAR */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-[#1C1C1E] py-14 px-6 lg:px-8" id="stats-bar">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/8">
+      <section className="bg-[#1C1C1E] py-10 sm:py-14 px-5 sm:px-6 lg:px-8" id="stats-bar">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -604,24 +819,51 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
             >
-              <p className="font-cormorant text-white text-4xl lg:text-5xl font-bold">
+              <p className="font-cormorant text-white text-3xl sm:text-4xl lg:text-5xl font-bold">
                 {stat.number}
               </p>
-              <p className="text-white/40 text-[13px] mt-2 font-sans">{stat.label}</p>
+              <p className="text-white/40 text-[11px] sm:text-[13px] mt-1.5 sm:mt-2 font-sans">{stat.label}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 3. FEATURED DEVELOPMENTS */}
+      {/* 3. FEATURED DEVELOPMENTS — 3D PORTAL ENTRANCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-padding bg-cream" id="featured-developments">
-        <div className="middlepark-container">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+      <section className="section-padding bg-cream relative overflow-hidden" id="featured-developments" ref={developmentsRef}>
+        {/* 3D Portal entrance effect */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(237,27,36,0.04) 0%, transparent 60%)',
+          }}
+        />
+
+        <motion.div
+          className="middlepark-container"
+          style={{
+            scale: portalScale,
+            opacity: portalOpacity,
+          }}
+        >
+          {/* Section header with 3D reveal */}
+          <motion.div
+            className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14"
+            initial={{ opacity: 0, y: 40, rotateX: 15 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-green" />
+                <motion.div
+                  className="w-2 h-2 rounded-full bg-green"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                />
                 <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
                   Our Developments
                 </p>
@@ -640,22 +882,28 @@ export default function HomePage() {
               VIEW ALL
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
 
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            variants={staggerContainer}
-          >
-            {featuredDevelopments.map((dev) => (
-              <motion.div key={dev.id} variants={staggerItem}>
+          {/* Cards with staggered 3D entrance */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredDevelopments.map((dev, i) => (
+              <motion.div
+                key={dev.id}
+                initial={{ opacity: 0, y: 60, rotateX: 12, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.7,
+                  delay: i * 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                style={{ transformOrigin: 'center bottom' }}
+              >
                 <DevelopmentCard development={dev} />
               </motion.div>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
@@ -728,24 +976,24 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 6. HOW WE WORK — ALTERNATING IMAGE + STEP */}
+      {/* 6. HOW WE WORK — ALTERNATING IMAGE + STEP (MINIMALIST MOBILE) */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-[#F2F2F7]" id="process">
         <div className="middlepark-container">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12 lg:mb-20">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-2 h-2 rounded-full bg-green" />
               <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
                 How We Work
               </p>
             </div>
-            <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1]">
+            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1]">
               From Enquiry to Keys in Hand
             </h2>
           </div>
 
-          {/* Alternating timeline */}
-          <div className="space-y-0">
+          {/* Desktop — Alternating timeline */}
+          <div className="hidden lg:block space-y-0">
             {processSteps.map((step, i) => {
               const isEven = i % 2 === 0
               return (
@@ -796,6 +1044,39 @@ export default function HomePage() {
                 </motion.div>
               )
             })}
+          </div>
+
+          {/* Mobile — Minimalist vertical timeline */}
+          <div className="lg:hidden space-y-6">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                className="flex gap-4"
+                initial={{ opacity: 0, x: -15 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+              >
+                {/* Timeline line + number */}
+                <div className="flex flex-col items-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-green text-white flex items-center justify-center text-xs font-bold">
+                    {step.number}
+                  </div>
+                  {i < processSteps.length - 1 && (
+                    <div className="w-[1px] flex-1 bg-green/15 mt-2" />
+                  )}
+                </div>
+                {/* Content */}
+                <div className="pb-6">
+                  <h3 className="font-cormorant text-charcoal-dark text-xl font-bold mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-charcoal-light text-[13px] leading-[1.65]">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -947,27 +1228,28 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 9. WHERE WE BUILD */}
+      {/* 9. WHERE WE BUILD (MINIMALIST MOBILE) */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-white" id="neighbourhoods">
         <div className="middlepark-container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 lg:mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-2 h-2 rounded-full bg-green" />
               <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
                 Where We Build
               </p>
             </div>
-            <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1] mb-4">
+            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1] mb-3 sm:mb-4">
               Abuja&apos;s Most Established<br />Neighbourhoods
             </h2>
-            <p className="text-charcoal-light text-base max-w-lg mx-auto leading-relaxed">
+            <p className="text-charcoal-light text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
               We develop exclusively in locations with existing infrastructure, proven land titles, and strong property appreciation.
             </p>
           </div>
 
+          {/* Desktop — Full cards */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
@@ -1005,28 +1287,60 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Mobile — Compact horizontal scroll cards */}
+          <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
+            {neighbourhoods.map((area, i) => (
+              <motion.div
+                key={area.name}
+                className="shrink-0 w-[260px] rounded-[14px] overflow-hidden bg-white border border-[#E5E5EA] snap-start"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+              >
+                <div className="relative h-[140px] overflow-hidden">
+                  <Image
+                    src={area.image}
+                    alt={`${area.name}`}
+                    fill
+                    className="object-cover"
+                    sizes="260px"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-cormorant text-charcoal-dark text-lg font-bold">{area.name}</h3>
+                  <p className="text-green text-[10px] uppercase tracking-[0.12em] font-semibold mb-1.5">{area.tagline}</p>
+                  <span className="inline-block px-2.5 py-1 bg-[#F2F2F7] rounded-full text-charcoal text-[10px] font-semibold">
+                    {area.developments} Active
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 10. TESTIMONIALS */}
+      {/* 10. TESTIMONIALS (MINIMALIST MOBILE) */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-[#F2F2F7]" id="testimonials">
         <div className="middlepark-container">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10 lg:mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-2 h-2 rounded-full bg-green" />
               <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
                 What Our Clients Say
               </p>
             </div>
-            <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1]">
+            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1]">
               Trusted by Homeowners<br />Across Abuja
             </h2>
           </div>
 
+          {/* Desktop — Full grid */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
@@ -1076,6 +1390,43 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Mobile — Compact stacked cards */}
+          <div className="sm:hidden space-y-4">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.id}
+                className="bg-white rounded-[14px] p-5 border border-[#E5E5EA]"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-full overflow-hidden bg-[#F2F2F7] border border-[#E5E5EA] shrink-0">
+                    <Image
+                      src={t.avatar || '/images/avatar-default.jpg'}
+                      alt={t.clientName}
+                      width={36}
+                      height={36}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-charcoal text-sm font-semibold">{t.clientName}</p>
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: t.rating }).map((_, j) => (
+                        <Star key={j} size={10} className="text-[#C7A84E] fill-[#C7A84E]" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-charcoal text-[13px] leading-[1.65]">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1156,41 +1507,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 13. PRESS & RECOGNITION */}
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-12 px-6 lg:px-8 bg-white" id="press">
-        <div className="max-w-[1200px] mx-auto">
-          <p className="text-center text-charcoal-light/50 text-[10px] uppercase tracking-[0.2em] font-semibold mb-8">
-            As Seen In
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-10 lg:gap-16">
-            {pressLogos.map((name) => (
-              <span
-                key={name}
-                className="font-cormorant text-charcoal-light/25 text-lg lg:text-xl font-bold hover:text-charcoal-light/60 transition-colors duration-300 cursor-default"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 14. STAY UPDATED — WAITLIST CTA */}
+      {/* 13. STAY UPDATED — WAITLIST CTA (TRANSPARENT BG) */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 lg:py-32" id="waitlist-cta">
+      <section className="relative py-24 lg:py-32 overflow-hidden" id="waitlist-cta">
+        {/* Background image with dark transparent overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/images/dev-gwarinpa-1.jpg"
-            alt="Gwarinpa development"
+            src="/images/hero-estate-aerial.jpg"
+            alt="MiddlePark estate aerial"
             fill
             className="object-cover"
-            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[#1C1C1E]/88" />
+          <div className="absolute inset-0 bg-[#0A0A0C]/85" />
         </div>
+
+        {/* Subtle grid bg — on top of the image */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+        {/* Accent glow */}
+        <motion.div
+          className="absolute w-[400px] h-[400px] rounded-full blur-[150px] bg-green/8"
+          style={{ top: '-15%', right: '20%' }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
           <motion.div
@@ -1200,13 +1550,13 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-white/35 text-xs uppercase tracking-[0.2em] mb-4">
+            <p className="text-green text-xs uppercase tracking-[0.25em] font-semibold mb-4">
               Stay Updated
             </p>
             <h2 className="font-cormorant text-white text-4xl lg:text-5xl font-bold leading-tight mb-4">
               Be the First to Know
             </h2>
-            <p className="text-white/50 text-[15px] leading-[1.7] mb-10 font-sans">
+            <p className="text-white/45 text-[15px] leading-[1.7] mb-10 font-sans">
               Get early access to new developments, pricing, and availability before they go
               public. No spam — just the updates that matter.
             </p>
@@ -1218,7 +1568,7 @@ export default function HomePage() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-5 py-3.5 rounded-full bg-white/[0.06] border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-white/25 focus:border-transparent transition-all duration-200"
+                className="flex-1 px-5 py-3.5 rounded-full bg-white/[0.07] border border-white/12 text-white placeholder-white/25 text-sm focus:outline-none focus:ring-1 focus:ring-green/40 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                 id="waitlist-email"
               />
               <button
