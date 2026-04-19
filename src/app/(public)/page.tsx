@@ -397,22 +397,22 @@ function WhyAccordion({ item, index }: { item: typeof whyMiddlePark[0]; index: n
   )
 }
 
-// ─── 3D HERO INTERACTIVE ELEMENT ─────────────────────────────────────────────
-function HeroAbstractElement({
+// ─── 3D HERO INTERACTIVE IMAGE ─────────────────────────────────────────────
+function HeroImageElement({
   mouseX,
   mouseY,
 }: {
   mouseX: any
   mouseY: any
 }) {
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [15, -15])
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-20, 20])
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-15, 15])
   const springRotateX = useSpring(rotateX, { stiffness: 60, damping: 20 })
   const springRotateY = useSpring(rotateY, { stiffness: 60, damping: 20 })
 
   return (
     <motion.div
-      className="absolute right-[-10%] top-[10%] w-[800px] h-[800px] pointer-events-none hidden lg:block"
+      className="absolute right-[0%] top-[40%] -translate-y-1/2 w-[540px] h-[720px] pointer-events-none hidden lg:block"
       style={{
         perspective: '1500px',
         rotateX: springRotateX,
@@ -420,21 +420,45 @@ function HeroAbstractElement({
       }}
     >
       <div className="relative w-full h-full">
-        {/* Large Architectural Lattice — Minimalist depth */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0 border border-green/10 rounded-[100px]"
-            style={{
-              transform: `translateZ(${i * 60}px) rotate(${i * 10}deg)`,
-            }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2, delay: 1 + i * 0.2 }}
+        {/* Decorative Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-green/20 blur-[100px] rounded-full" />
+        
+        {/* Floating Image Card */}
+        <motion.div
+          className="absolute inset-[30px] rounded-[24px] overflow-hidden border border-white/10"
+          style={{
+            boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+          }}
+          initial={{ opacity: 0, scale: 0.9, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <Image 
+            src="/images/dev-dakibiyu-2.jpg" 
+            alt="MiddlePark Premium Estate" 
+            fill 
+            className="object-cover"
           />
-        ))}
-        {/* Central Core Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-green/10 blur-[80px] rounded-full" />
+          {/* Glass Overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10" />
+        </motion.div>
+        
+        {/* Floating Accent Elements */}
+        <motion.div
+          className="absolute bottom-[80px] left-[0px] bg-white/10 backdrop-blur-md border border-white/20 rounded-[16px] p-4 flex items-center gap-4"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          style={{ transform: 'translateZ(60px)' }}
+        >
+          <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center">
+            <span className="text-white font-bold font-cormorant text-xl">MP</span>
+          </div>
+          <div>
+            <p className="text-white text-sm font-medium">MiddlePark Certified</p>
+            <p className="text-white/60 text-xs">Title Verified Before We Break Ground</p>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   )
@@ -669,7 +693,7 @@ export default function HomePage() {
             </div>
 
             {/* Right — Interactive Abstract depth (desktop only) */}
-            <HeroAbstractElement mouseX={mouseX} mouseY={mouseY} />
+            <HeroImageElement mouseX={mouseX} mouseY={mouseY} />
 
             {/* Mobile — Minimalist Visual */}
             <motion.div

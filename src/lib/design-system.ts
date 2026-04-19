@@ -12,14 +12,15 @@
 
 export const colors = {
   // ─── PRIMARY BRAND PALETTE ────────────────────────────────────
+  // Note: Structural variable is 'green', but maps to Brand Red
   green: {
-    DEFAULT: '#286B38',           // Forest Green — Primary brand, CTAs, active states
-    dark: '#1E522A',              // Deeper green — hover states
-    light: '#358A49',             // Brighter green — secondary
-    tint: '#F0F4F1',              // Mint tint — hover states, inactive sidebar
-    muted: '#C8D9CC',             // Muted green — borders, inactive tabs
-    alpha10: 'rgba(40, 107, 56, 0.10)',
-    alpha20: 'rgba(40, 107, 56, 0.20)',
+    DEFAULT: '#ED1B24',           // MiddlePark Red — primary CTAs, overlines, active states
+    dark: '#C41720',              // Deep red — hover/pressed states
+    light: '#F04950',             // Lighter red — secondary actions
+    tint: '#FDF2F2',              // Red tint — subtle hover fills
+    muted: '#F5C6C8',             // Muted red — borders, dividers
+    alpha10: 'rgba(237, 27, 36, 0.10)',
+    alpha20: 'rgba(237, 27, 36, 0.20)',
   },
 
   // ─── ACCENT — RED ─────────────────────────────────────────────
