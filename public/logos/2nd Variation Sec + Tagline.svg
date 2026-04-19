@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165.87 39.59">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: OverusedGrotesk-Bold, 'Overused Grotesk';
+        font-size: 18.02px;
+        font-variation-settings: 'wght' 710, 'slnt' 0;
+        font-weight: 700;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-2 {
+        font-family: OverusedGrotesk-Book, 'Overused Grotesk';
+        font-size: 8px;
+        font-variation-settings: 'wght' 375, 'slnt' 0;
+      }
+
+      .cls-6 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-7 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-8 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-9 {
+        letter-spacing: -.08em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.01em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <text class="cls-1" transform="translate(57.71 14.87)"><tspan x="0" y="0">MIDDLE</tspan><tspan class="cls-9" x="63.66" y="0">P</tspan><tspan x="73.41" y="0">ARK</tspan></text>
+      <text class="cls-1" transform="translate(57.71 30.2)"><tspan x="0" y="0">P</tspan><tspan class="cls-6" x="11.19" y="0">R</tspan><tspan x="22" y="0">OPE</tspan><tspan class="cls-8" x="56.22" y="0">R</tspan><tspan x="67.1" y="0">TI</tspan><tspan class="cls-4" x="82.5" y="0">E</tspan><tspan x="92.48" y="0">S</tspan></text>
+      <text class="cls-2" transform="translate(57.71 37.37)"><tspan class="cls-10" x="0" y="0">Building </tspan><tspan class="cls-5" x="27.07" y="0">t</tspan><tspan class="cls-10" x="29.3" y="0">o Ser</tspan><tspan class="cls-7" x="46.31" y="0">v</tspan><tspan class="cls-10" x="50.06" y="0">e Gene</tspan><tspan class="cls-5" x="73.81" y="0">ra</tspan><tspan class="cls-10" x="79.98" y="0">tions</tspan></text>
+      <polygon class="cls-3" points="2.88 36.65 8.86 36.65 8.86 13.45 2.88 17.51 2.88 36.65"/>
+      <polygon class="cls-3" points="11.87 36.65 17.73 36.65 17.73 7.35 11.87 11.37 11.87 36.65"/>
+      <polygon class="cls-3" points="40.09 13.45 40.09 36.65 46.07 36.65 46.07 17.51 40.09 13.45"/>
+      <polygon class="cls-3" points="31.23 36.65 37.09 36.65 37.09 11.37 31.23 7.35 31.23 36.65"/>
+      <polygon class="cls-3" points="20.66 5.8 20.66 36.42 28.29 36.42 28.29 5.8 24.48 2.72 20.66 5.8"/>
+      <rect class="cls-3" y="35.79" width="48.96" height="1.58"/>
+    </g>
+  </g>
+</svg>

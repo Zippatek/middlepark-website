@@ -48,7 +48,7 @@ export function PublicNavbar() {
         <nav className="max-w-[1200px] mx-auto h-navbar flex items-center justify-between px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" id="navbar-logo">
-            <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-7 lg:h-8 w-auto" />
+            <img src="/logos/Primary Logo + Tagline.svg" alt="MiddlePark Properties" className="h-7 lg:h-8 w-auto" />
           </Link>
 
           {/* Desktop Nav Links */}
@@ -127,7 +127,7 @@ export function PublicNavbar() {
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-6 border-b border-cream-divider">
             <div className="flex items-center">
-              <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-6 w-auto" />
+              <img src="/logos/Primary Logo + Tagline.svg" alt="MiddlePark Properties" className="h-6 w-auto" />
             </div>
             <button
               onClick={() => setMobileOpen(false)}
