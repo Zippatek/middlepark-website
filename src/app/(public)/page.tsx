@@ -412,7 +412,7 @@ function HeroImageElement({
 
   return (
     <motion.div
-      className="absolute right-[0%] top-[20%] -translate-y-1/2 w-[540px] h-[720px] pointer-events-none hidden lg:block"
+      className="relative w-full h-[500px] pointer-events-none hidden lg:block"
       style={{
         perspective: '1500px',
         rotateX: springRotateX,
@@ -425,7 +425,7 @@ function HeroImageElement({
         
         {/* Floating Image Card */}
         <motion.div
-          className="absolute inset-[30px] rounded-[24px] overflow-hidden border border-white/10"
+          className="absolute inset-[20px] rounded-[24px] overflow-hidden border border-white/10"
           style={{
             boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
           }}
@@ -445,7 +445,7 @@ function HeroImageElement({
         
         {/* Floating Accent Elements */}
         <motion.div
-          className="absolute bottom-[80px] left-[0px] bg-white/10 backdrop-blur-md border border-white/20 rounded-[16px] p-4 flex items-center gap-4"
+          className="absolute bottom-[50px] left-[-10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-[16px] p-4 flex items-center gap-4"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1.5 }}
@@ -695,20 +695,30 @@ export default function HomePage() {
             {/* Right — Interactive Abstract depth (desktop only) */}
             <HeroImageElement mouseX={mouseX} mouseY={mouseY} />
 
-            {/* Mobile — Minimalist Visual */}
+            {/* Mobile — Animated trust strip */}
             <motion.div
-              className="lg:hidden relative mt-12 mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="lg:hidden mt-10 pt-8 border-t border-white/8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 2.2 }}
             >
-              <div className="w-24 h-24 rounded-full bg-green/5 border border-green/20 backdrop-blur-md flex items-center justify-center relative mx-auto">
-                <motion.div 
-                  className="absolute inset-0 rounded-full border border-green/30"
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <Award className="text-green opacity-40" size={32} strokeWidth={1} />
+              <div className="flex items-center justify-between gap-4">
+                {[
+                  { icon: '✓', text: 'AGIS Title Verified' },
+                  { icon: '✓', text: 'FCDA Approved' },
+                  { icon: '✓', text: 'Quality Certified' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.text}
+                    className="flex items-center gap-1.5"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 2.5 + i * 0.2, duration: 0.5 }}
+                  >
+                    <span className="text-green text-[11px] font-bold">{item.icon}</span>
+                    <span className="text-white/40 text-[10px] font-medium tracking-wide">{item.text}</span>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
