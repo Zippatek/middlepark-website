@@ -127,7 +127,7 @@ export function PublicNavbar() {
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-6 border-b border-cream-divider">
             <div className="flex items-center">
-              <img src="/logos/Primary Logo + Tagline.png" alt="MiddlePark Properties" className="h-6 w-auto" />
+              <img src="/logos/primary-logo.png" alt="MiddlePark Properties" className="h-6 w-auto" />
             </div>
             <button
               onClick={() => setMobileOpen(false)}
