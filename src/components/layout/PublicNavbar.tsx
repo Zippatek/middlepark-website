@@ -75,14 +75,14 @@ export function PublicNavbar() {
             <Link
               href="/login"
               id="navbar-client-portal"
-              className="border border-charcoal text-charcoal px-5 py-2.5 rounded-full text-nav font-medium transition-colors duration-200 hover:bg-cream-dark"
+              className="border border-charcoal text-charcoal px-5 py-2.5 rounded-sm text-nav font-medium transition-colors duration-200 hover:bg-cream-dark"
             >
               CLIENT PORTAL
             </Link>
             <Link
               href="/contact"
               id="navbar-enquire"
-              className="bg-green text-white px-5 py-2.5 rounded-full text-nav font-medium flex items-center gap-2 transition-all duration-200 hover:bg-green-dark"
+              className="bg-green text-white px-5 py-2.5 rounded-sm text-nav font-medium flex items-center gap-2 transition-all duration-200 hover:bg-green-dark"
             >
               ENQUIRE NOW <ChevronRight size={14} />
             </Link>
@@ -160,13 +160,13 @@ export function PublicNavbar() {
           <div className="p-6 border-t border-cream-divider space-y-3">
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2 bg-green text-white px-5 py-3 rounded-full text-nav font-medium w-full transition-all duration-200 hover:bg-green-dark"
+              className="flex items-center justify-center gap-2 bg-green text-white px-5 py-3 rounded-sm text-nav font-medium w-full transition-all duration-200 hover:bg-green-dark"
             >
               ENQUIRE NOW <ChevronRight size={14} />
             </Link>
             <Link
               href="/login"
-              className="flex items-center justify-center border border-charcoal text-charcoal px-5 py-3 rounded-full text-nav font-medium w-full transition-colors duration-200 hover:bg-cream-dark"
+              className="flex items-center justify-center border border-charcoal text-charcoal px-5 py-3 rounded-sm text-nav font-medium w-full transition-colors duration-200 hover:bg-cream-dark"
             >
               CLIENT PORTAL
             </Link>

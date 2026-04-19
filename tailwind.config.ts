@@ -110,8 +110,8 @@ const config: Config = {
         'charcoal-gradient': 'linear-gradient(135deg, #3A3A3C 0%, #1C1C1E 100%)',
         // Subtle canvas gradient
         'cream-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)',
-        // Red gradient (CTA only)
-        'green-gradient': 'linear-gradient(135deg, #ED1B24 0%, #C41720 100%)',
+        // Green gradient (CTA only)
+        'green-gradient': 'linear-gradient(135deg, #286B38 0%, #1E522A 100%)',
       },
 
       // ─── TRANSITIONS ─────────────────────────────────────────────
