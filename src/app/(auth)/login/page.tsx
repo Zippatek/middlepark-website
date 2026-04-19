@@ -51,7 +51,7 @@ export default function LoginPage() {
         <div className="relative z-10">
           <Link href="/" className="inline-flex items-center gap-0.5">
             <span className="font-bold font-cormorant text-white text-2xl">MIDDLE</span>
-            <span className="font-bold font-cormorant text-red text-2xl">PARK</span>
+            <span className="font-bold font-cormorant text-green text-2xl">PARK</span>
           </Link>
         </div>
 
@@ -74,7 +74,7 @@ export default function LoginPage() {
               'Site visit booking',
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5">
-                <CheckCircle2 size={14} className="text-red shrink-0" strokeWidth={2} />
+                <CheckCircle2 size={14} className="text-green shrink-0" strokeWidth={2} />
                 <span className="text-white/75 text-xs">{item}</span>
               </div>
             ))}
@@ -101,7 +101,7 @@ export default function LoginPage() {
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-0.5 mb-8">
             <span className="font-bold font-cormorant text-charcoal text-2xl">MIDDLE</span>
-            <span className="font-bold font-cormorant text-red text-2xl">PARK</span>
+            <span className="font-bold font-cormorant text-green text-2xl">PARK</span>
           </div>
 
           {/* Back Link */}
@@ -124,7 +124,7 @@ export default function LoginPage() {
           {/* Error */}
           {error && (
             <motion.div
-              className="mb-6 p-3 rounded-sm bg-red-light border border-red-muted text-red text-xs"
+              className="mb-6 p-3 rounded-sm bg-green-tint border border-green-muted text-green text-xs"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -153,7 +153,7 @@ export default function LoginPage() {
                 <label htmlFor="login-password" className="mp-label mb-0">Password</label>
                 <Link
                   href="/forgot-password"
-                  className="text-red text-xs font-medium hover:underline"
+                  className="text-green text-xs font-medium hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -196,17 +196,17 @@ export default function LoginPage() {
           <div className="mt-6 p-3 rounded-sm bg-green-tint border border-green-muted">
             <p className="text-charcoal text-xs font-medium mb-1">Demo Credentials</p>
             <p className="text-charcoal-light text-xs">
-              Email: <code className="text-red font-medium">demo@middleparkng.com</code>
+              Email: <code className="text-green font-medium">demo@middleparkng.com</code>
             </p>
             <p className="text-charcoal-light text-xs">
-              Password: <code className="text-red font-medium">Demo1234</code>
+              Password: <code className="text-green font-medium">Demo1234</code>
             </p>
           </div>
 
           {/* Register Link */}
           <p className="text-center text-charcoal-light text-sm mt-8">
             Don&apos;t have an account?{' '}
-            <Link href="/register" className="text-red font-medium hover:underline">
+            <Link href="/register" className="text-green font-medium hover:underline">
               Create one
             </Link>
           </p>

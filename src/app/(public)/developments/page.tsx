@@ -291,7 +291,7 @@ export default function DevelopmentsPage() {
                   setStatusFilter('all')
                   setAreaFilter('All Areas')
                 }}
-                className="flex items-center gap-1 text-charcoal-light text-xs hover:text-red-accent transition-colors duration-200"
+                className="flex items-center gap-1 text-charcoal-light text-xs hover:text-green transition-colors duration-200"
                 id="clear-filters"
               >
                 <X size={14} />

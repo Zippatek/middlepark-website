@@ -37,7 +37,7 @@ export function PortalTopbar() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-[220px] pl-9 pr-4 py-2 rounded-sm border border-cream-border bg-cream text-charcoal placeholder-charcoal-light text-sm focus:outline-none focus:ring-2 focus:ring-red focus:border-transparent transition-all duration-150"
+            className="w-[220px] pl-9 pr-4 py-2 rounded-sm border border-cream-border bg-cream text-charcoal placeholder-charcoal-light text-sm focus:outline-none focus:ring-2 focus:ring-green focus:border-transparent transition-all duration-150"
             id="portal-search"
           />
         </div>

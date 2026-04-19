@@ -121,7 +121,7 @@ export default function DocumentsPage() {
             placeholder="Search documents..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 rounded-sm border border-cream-border bg-white text-charcoal placeholder-charcoal-light text-sm focus:outline-none focus:ring-2 focus:ring-red focus:border-transparent w-full sm:w-[240px]"
+            className="pl-9 pr-4 py-2 rounded-sm border border-cream-border bg-white text-charcoal placeholder-charcoal-light text-sm focus:outline-none focus:ring-2 focus:ring-green focus:border-transparent w-full sm:w-[240px]"
             id="documents-search"
           />
         </div>
@@ -141,7 +141,7 @@ export default function DocumentsPage() {
             className={cn(
               'px-4 py-2 rounded-sm text-xs font-medium uppercase tracking-wide transition-all duration-200 shrink-0',
               activeTab === tab.value
-                ? 'bg-red text-white'
+                ? 'bg-green text-white'
                 : 'bg-green-tint text-charcoal hover:bg-green-muted'
             )}
           >
@@ -170,8 +170,8 @@ export default function DocumentsPage() {
                 key={doc.id}
                 className="flex items-center gap-4 px-6 py-4 hover:bg-cream/50 transition-colors group"
               >
-                <div className="w-10 h-10 rounded-container bg-red-tint flex items-center justify-center shrink-0">
-                  <doc.icon size={18} className="text-red" strokeWidth={1.5} />
+                <div className="w-10 h-10 rounded-container bg-green-tint flex items-center justify-center shrink-0">
+                  <doc.icon size={18} className="text-green" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-charcoal text-sm font-medium truncate">{doc.name}</p>
@@ -188,7 +188,7 @@ export default function DocumentsPage() {
                     <Eye size={16} />
                   </button>
                   <button
-                    className="p-2 rounded-sm text-charcoal-light hover:text-red hover:bg-red-tint transition-all"
+                    className="p-2 rounded-sm text-charcoal-light hover:text-green hover:bg-green-tint transition-all"
                     aria-label="Download"
                     title="Download"
                   >

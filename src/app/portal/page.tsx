@@ -34,16 +34,16 @@ const statCards = [
     value: '₦95,000,000',
     icon: Home,
     change: '+12% from purchase',
-    color: 'text-red',
-    bg: 'bg-red-tint',
+    color: 'text-green',
+    bg: 'bg-green-tint',
   },
   {
     label: 'Total Paid',
     value: '₦62,500,000',
     icon: CreditCard,
     change: '65.8% of total',
-    color: 'text-red',
-    bg: 'bg-red-tint',
+    color: 'text-green',
+    bg: 'bg-green-tint',
   },
   {
     label: 'Balance Remaining',
@@ -92,8 +92,8 @@ export default function PortalOverview() {
         transition={{ duration: 0.5 }}
       >
         {/* Decorative accent */}
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-red/10 -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[120px] h-[120px] rounded-full bg-red/5 translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-green/10 -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[120px] h-[120px] rounded-full bg-green/5 translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
@@ -152,7 +152,7 @@ export default function PortalOverview() {
         >
           <div className="flex items-center justify-between mb-6">
             <h3 className="font-cormorant text-charcoal text-lg font-bold">Construction Progress</h3>
-            <Link href="/portal/my-unit" className="text-red text-xs font-medium hover:underline">
+            <Link href="/portal/my-unit" className="text-green text-xs font-medium hover:underline">
               View details →
             </Link>
           </div>
@@ -165,7 +165,7 @@ export default function PortalOverview() {
             </div>
             <div className="w-full h-2.5 bg-cream rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-red rounded-full"
+                className="h-full bg-green rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: '72%' }}
                 transition={{ delay: 0.5, duration: 1, ease: 'easeOut' }}
@@ -180,16 +180,16 @@ export default function PortalOverview() {
                 {/* Line + Dot */}
                 <div className="flex flex-col items-center">
                   {step.completed ? (
-                    <CheckCircle2 size={18} className="text-red shrink-0" strokeWidth={2} />
+                    <CheckCircle2 size={18} className="text-green shrink-0" strokeWidth={2} />
                   ) : step.active ? (
-                    <div className="w-[18px] h-[18px] rounded-full border-2 border-red flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-red" />
+                    <div className="w-[18px] h-[18px] rounded-full border-2 border-green flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-green" />
                     </div>
                   ) : (
                     <Circle size={18} className="text-charcoal-light/40 shrink-0" strokeWidth={1.5} />
                   )}
                   {i < timelineSteps.length - 1 && (
-                    <div className={`w-[2px] h-8 ${step.completed ? 'bg-red' : 'bg-cream-border'}`} />
+                    <div className={`w-[2px] h-8 ${step.completed ? 'bg-green' : 'bg-cream-border'}`} />
                   )}
                 </div>
                 {/* Content */}
@@ -227,7 +227,7 @@ export default function PortalOverview() {
             </div>
             <Link
               href="/portal/payments"
-              className="flex items-center justify-center gap-2 w-full mt-4 py-2.5 rounded-sm bg-red text-white text-sm font-medium hover:bg-red-dark transition-colors"
+              className="flex items-center justify-center gap-2 w-full mt-4 py-2.5 rounded-sm bg-green text-white text-sm font-medium hover:bg-green-dark transition-colors"
             >
               VIEW PAYMENT SCHEDULE <ArrowRight size={14} />
             </Link>
@@ -242,7 +242,7 @@ export default function PortalOverview() {
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-cormorant text-charcoal text-lg font-bold">Recent Documents</h3>
-              <Link href="/portal/documents" className="text-red text-xs font-medium hover:underline">
+              <Link href="/portal/documents" className="text-green text-xs font-medium hover:underline">
                 View all →
               </Link>
             </div>
@@ -252,7 +252,7 @@ export default function PortalOverview() {
                   key={doc.name}
                   className="flex items-center gap-3 p-3 rounded-container bg-cream hover:bg-cream-dark transition-colors cursor-pointer group"
                 >
-                  <FileText size={16} className="text-red shrink-0" strokeWidth={1.5} />
+                  <FileText size={16} className="text-green shrink-0" strokeWidth={1.5} />
                   <div className="flex-1 min-w-0">
                     <p className="text-charcoal text-xs font-medium truncate">{doc.name}</p>
                     <p className="text-charcoal-light text-[10px]">{doc.date}</p>

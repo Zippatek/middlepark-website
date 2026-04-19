@@ -78,10 +78,10 @@ export default function MyUnitPage() {
                 border: '1px solid rgba(255,255,255,0.65)',
                 borderRadius: '20px',
                 padding: '6px 14px',
-                boxShadow: '0 2px 12px rgba(237, 27, 36, 0.14)',
+                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
               }}
             >
-              <Award size={14} style={{ color: '#ED1B24' }} strokeWidth={2} />
+              <Award size={14} style={{ color: '#286B38' }} strokeWidth={2} />
               <span style={{ fontSize: '11px', fontWeight: 600, color: '#5A5B5F' }}>
                 MiddlePark Certified
               </span>
@@ -89,7 +89,7 @@ export default function MyUnitPage() {
           </div>
 
           <div className="p-6 lg:p-8 flex flex-col justify-center">
-            <p className="text-red text-xs font-semibold uppercase tracking-widest mb-2">
+            <p className="text-green text-xs font-semibold uppercase tracking-widest mb-2">
               {unitData.id}
             </p>
             <h2 className="font-cormorant text-charcoal text-2xl font-bold mb-2">
@@ -102,16 +102,16 @@ export default function MyUnitPage() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Bed size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Bed size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.bedrooms} Bedrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Bath size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Bath size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.bathrooms} Bathrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F2] border border-[#F5C6C8] text-charcoal text-xs font-medium">
-                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#ED1B24' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
+                <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
                 {unitData.size}
               </span>
             </div>
@@ -134,7 +134,7 @@ export default function MyUnitPage() {
             {specs.map((spec) => (
               <div key={spec.label} className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-container bg-green-tint flex items-center justify-center shrink-0">
-                  <spec.icon size={16} className="text-red" strokeWidth={1.5} />
+                  <spec.icon size={16} className="text-green" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-charcoal-light text-[11px]">{spec.label}</p>
@@ -161,11 +161,11 @@ export default function MyUnitPage() {
               <div key={stage.label}>
                 <div className="flex items-center gap-3 mb-2">
                   <div className={`w-9 h-9 rounded-container flex items-center justify-center shrink-0 ${
-                    stage.completed ? 'bg-green-tint' : stage.active ? 'bg-red-tint' : 'bg-cream'
+                    stage.completed ? 'bg-green-tint' : stage.active ? 'bg-green-tint' : 'bg-cream'
                   }`}>
                     <stage.icon
                       size={16}
-                      className={stage.completed ? 'text-green' : stage.active ? 'text-red' : 'text-charcoal-light'}
+                      className={stage.completed ? 'text-green' : stage.active ? 'text-green' : 'text-charcoal-light'}
                       strokeWidth={1.5}
                     />
                   </div>
@@ -188,7 +188,7 @@ export default function MyUnitPage() {
                   <div className="ml-12">
                     <div className="w-full h-2 bg-cream rounded-full overflow-hidden">
                       <motion.div
-                        className="h-full bg-red rounded-full"
+                        className="h-full bg-green rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${stage.progress}%` }}
                         transition={{ delay: 0.8, duration: 1, ease: 'easeOut' }}

@@ -31,12 +31,12 @@ export default function ForgotPasswordPage() {
         {/* Card */}
         <div
           className="bg-white rounded-card p-8 lg:p-10"
-          style={{ boxShadow: '0 4px 24px rgba(237, 27, 36, 0.06)' }}
+          style={{ boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)' }}
         >
           {/* Logo */}
           <div className="flex items-center gap-0.5 mb-8">
             <span className="font-bold font-cormorant text-charcoal text-2xl">MIDDLE</span>
-            <span className="font-bold font-cormorant text-red text-2xl">PARK</span>
+            <span className="font-bold font-cormorant text-green text-2xl">PARK</span>
           </div>
 
           {sent ? (
@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
                     setSent(false)
                     setEmail('')
                   }}
-                  className="text-red text-sm font-medium w-full text-center hover:underline"
+                  className="text-green text-sm font-medium w-full text-center hover:underline"
                 >
                   Try a different email
                 </button>
@@ -127,7 +127,7 @@ export default function ForgotPasswordPage() {
 
               <p className="text-center text-charcoal-light text-sm mt-8">
                 Remember your password?{' '}
-                <Link href="/login" className="text-red font-medium hover:underline">
+                <Link href="/login" className="text-green font-medium hover:underline">
                   Sign in
                 </Link>
               </p>

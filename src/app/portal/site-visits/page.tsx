@@ -112,7 +112,7 @@ export default function SiteVisitsPage() {
             className={cn(
               'px-4 py-2 rounded-sm text-xs font-medium uppercase tracking-wide transition-all duration-200',
               activeTab === tab
-                ? 'bg-red text-white'
+                ? 'bg-green text-white'
                 : 'bg-green-tint text-charcoal hover:bg-green-muted'
             )}
           >
@@ -142,26 +142,26 @@ export default function SiteVisitsPage() {
                     </div>
                     <div className="space-y-2.5">
                       <div className="flex items-center gap-2.5 text-charcoal text-sm">
-                        <CalendarDays size={14} className="text-red shrink-0" strokeWidth={1.5} />
+                        <CalendarDays size={14} className="text-green shrink-0" strokeWidth={1.5} />
                         {visit.date}
                       </div>
                       <div className="flex items-center gap-2.5 text-charcoal text-sm">
-                        <Clock size={14} className="text-red shrink-0" strokeWidth={1.5} />
+                        <Clock size={14} className="text-green shrink-0" strokeWidth={1.5} />
                         {visit.time}
                       </div>
                       <div className="flex items-center gap-2.5 text-charcoal text-sm">
-                        <MapPin size={14} className="text-red shrink-0" strokeWidth={1.5} />
+                        <MapPin size={14} className="text-green shrink-0" strokeWidth={1.5} />
                         {visit.location}
                       </div>
                       <div className="flex items-center gap-2.5 text-charcoal text-sm">
-                        <User size={14} className="text-red shrink-0" strokeWidth={1.5} />
+                        <User size={14} className="text-green shrink-0" strokeWidth={1.5} />
                         Guide: {visit.guide}
                       </div>
                     </div>
                   </div>
-                  <div className="w-16 h-16 rounded-container bg-red-tint flex flex-col items-center justify-center shrink-0">
-                    <span className="text-red text-xl font-bold leading-none">20</span>
-                    <span className="text-red text-[10px] font-medium">APR</span>
+                  <div className="w-16 h-16 rounded-container bg-green-tint flex flex-col items-center justify-center shrink-0">
+                    <span className="text-green text-xl font-bold leading-none">20</span>
+                    <span className="text-green text-[10px] font-medium">APR</span>
                   </div>
                 </div>
               </motion.div>
@@ -229,7 +229,7 @@ export default function SiteVisitsPage() {
           />
           <motion.div
             className="relative bg-white rounded-card p-6 lg:p-8 w-full max-w-[440px]"
-            style={{ boxShadow: '0 20px 60px rgba(237, 27, 36, 0.15)' }}
+            style={{ boxShadow: '0 20px 60px rgba(40, 107, 56, 0.15)' }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}

@@ -118,7 +118,7 @@ export default function DevelopmentDetailPage() {
             {dev.name}
           </h1>
           <div className="flex items-center gap-2 mt-5 text-[15px] font-medium text-charcoal-light">
-            <MapPin size={18} strokeWidth={2} className="text-red-accent" />
+            <MapPin size={18} strokeWidth={2} className="text-green-accent" />
             <span className="underline underline-offset-4 decoration-current opacity-80">{dev.location}</span>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default function DevelopmentDetailPage() {
                 <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">ID Log</span>
                 <button 
                   onClick={handleCopyId}
-                  className="flex items-center gap-1 text-[13px] text-charcoal-light hover:text-red-accent transition-colors font-medium"
+                  className="flex items-center gap-1 text-[13px] text-charcoal-light hover:text-green transition-colors font-medium"
                 >
                   {dev.id} {copied ? <CheckCircle size={14} className="text-green"/> : <Hash size={14} />}
                 </button>
@@ -233,7 +233,7 @@ export default function DevelopmentDetailPage() {
                       key={amenity}
                       className="inline-flex items-center gap-2.5 px-5 py-3 rounded-[12px] bg-white text-[15px] text-charcoal font-medium shadow-[0px_4px_10px_rgba(0,0,0,0.02)] transition-transform duration-150 hover:-translate-y-0.5"
                     >
-                      <Shield size={18} strokeWidth={1.5} className="text-red-accent/70" />
+                      <Shield size={18} strokeWidth={1.5} className="text-green-accent/70" />
                       {amenity}
                     </span>
                 ))}
@@ -247,7 +247,7 @@ export default function DevelopmentDetailPage() {
                 <div className="space-y-4">
                   {dev.highlights.map((highlight) => (
                     <p key={highlight.label} className="flex items-start gap-4 text-[16px] font-medium text-charcoal">
-                      <span className="text-red-accent font-bold">✓</span>
+                      <span className="text-green-accent font-bold">✓</span>
                       <span><strong className="text-charcoal pr-2">{highlight.label}:</strong> {highlight.description}</span>
                     </p>
                   ))}
@@ -286,7 +286,7 @@ export default function DevelopmentDetailPage() {
                 <div className="flex items-center justify-between pb-4 border-b border-dashed border-charcoal/10">
                   <div>
                     <p className="text-[14px] font-bold text-charcoal mb-0.5">Email</p>
-                    <a href={`mailto:${dev.developer.email}`} className="text-[14px] text-charcoal-light hover:text-red-accent underline underline-offset-4 decoration-current/30">
+                    <a href={`mailto:${dev.developer.email}`} className="text-[14px] text-charcoal-light hover:text-green underline underline-offset-4 decoration-current/30">
                       {dev.developer.email}
                     </a>
                   </div>
@@ -296,7 +296,7 @@ export default function DevelopmentDetailPage() {
                 <div className="flex items-center justify-between pb-4 border-b border-dashed border-charcoal/10">
                   <div>
                     <p className="text-[14px] font-bold text-charcoal mb-0.5">Phone</p>
-                    <a href={`tel:${dev.developer.phone}`} className="text-[14px] text-charcoal-light hover:text-red-accent underline underline-offset-4 decoration-current/30">
+                    <a href={`tel:${dev.developer.phone}`} className="text-[14px] text-charcoal-light hover:text-green underline underline-offset-4 decoration-current/30">
                       {dev.developer.phone}
                     </a>
                   </div>
@@ -321,18 +321,18 @@ export default function DevelopmentDetailPage() {
                <form className="space-y-4">
                   <div>
                     <label className="block text-[14px] font-bold text-charcoal mb-2">Name</label>
-                    <input type="text" placeholder="Full Name" className="w-full px-5 py-3.5 rounded-[12px] bg-[#f4f3ea] border border-transparent text-charcoal text-[15px] placeholder-charcoal/40 focus:outline-none focus:ring-2 focus:ring-red-accent/30 transition-all font-medium" />
+                    <input type="text" placeholder="Full Name" className="w-full px-5 py-3.5 rounded-[12px] bg-[#f4f3ea] border border-transparent text-charcoal text-[15px] placeholder-charcoal/40 focus:outline-none focus:ring-2 focus:ring-green-accent/30 transition-all font-medium" />
                   </div>
                   <div>
                     <label className="block text-[14px] font-bold text-charcoal mb-2">Email</label>
-                    <input type="email" placeholder="Email Address" className="w-full px-5 py-3.5 rounded-[12px] bg-[#f4f3ea] border border-transparent text-charcoal text-[15px] placeholder-charcoal/40 focus:outline-none focus:ring-2 focus:ring-red-accent/30 transition-all font-medium" />
+                    <input type="email" placeholder="Email Address" className="w-full px-5 py-3.5 rounded-[12px] bg-[#f4f3ea] border border-transparent text-charcoal text-[15px] placeholder-charcoal/40 focus:outline-none focus:ring-2 focus:ring-green-accent/30 transition-all font-medium" />
                   </div>
                   <div>
                     <label className="block text-[14px] font-bold text-charcoal mb-2">Development</label>
                     <input type="text" defaultValue={dev.name} disabled className="w-full px-5 py-3.5 rounded-[12px] bg-[#f4f3ea] border border-transparent text-charcoal text-[15px] opacity-70 font-medium overflow-hidden text-ellipsis whitespace-nowrap" />
                   </div>
                   
-                  <button type="submit" className="w-full bg-red-accent hover:bg-red-800 text-white px-6 py-4 rounded-[12px] text-[15px] font-bold tracking-widest uppercase mt-4 flex items-center justify-center gap-2 shadow-[0px_6px_24px_rgba(237,27,36,0.15)] hover:shadow-[0px_8px_30px_rgba(237,27,36,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-none transition-all">
+                  <button type="submit" className="w-full bg-green hover:bg-green-dark text-white px-6 py-4 rounded-[12px] text-[15px] font-bold tracking-widest uppercase mt-4 flex items-center justify-center gap-2 shadow-cta hover:shadow-card-hover hover:-translate-y-0.5 active:translate-y-0 active:shadow-none transition-all">
                     SEND ENQUIRY <ChevronRight size={16} strokeWidth={3} />
                   </button>
                </form>

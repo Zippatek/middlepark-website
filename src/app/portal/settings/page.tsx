@@ -73,13 +73,13 @@ export default function SettingsPage() {
                 className={cn(
                   'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
                   activeTab === tab.value
-                    ? 'bg-red-tint text-charcoal'
+                    ? 'bg-green-tint text-charcoal'
                     : 'text-charcoal-light hover:bg-cream hover:text-charcoal'
                 )}
               >
                 <tab.icon
                   size={18}
-                  className={activeTab === tab.value ? 'text-red' : ''}
+                  className={activeTab === tab.value ? 'text-green' : ''}
                   strokeWidth={1.5}
                 />
                 {tab.label}
@@ -103,7 +103,7 @@ export default function SettingsPage() {
 
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 rounded-avatar bg-green-tint flex items-center justify-center">
-                  <span className="text-red text-lg font-bold">AB</span>
+                  <span className="text-green text-lg font-bold">AB</span>
                 </div>
                 <div>
                   <p className="text-charcoal text-sm font-medium">Aisha Bello</p>
@@ -198,7 +198,7 @@ export default function SettingsPage() {
                         onClick={() => toggleNotif(item.key)}
                         className={cn(
                           'relative w-11 h-6 rounded-full transition-colors duration-200 shrink-0',
-                          notifications[item.key as keyof typeof notifications] ? 'bg-red' : 'bg-cream-border'
+                          notifications[item.key as keyof typeof notifications] ? 'bg-green' : 'bg-cream-border'
                         )}
                       >
                         <span className={cn(
@@ -229,7 +229,7 @@ export default function SettingsPage() {
                         onClick={() => toggleNotif(item.key)}
                         className={cn(
                           'relative w-11 h-6 rounded-full transition-colors duration-200 shrink-0',
-                          notifications[item.key as keyof typeof notifications] ? 'bg-red' : 'bg-cream-border'
+                          notifications[item.key as keyof typeof notifications] ? 'bg-green' : 'bg-cream-border'
                         )}
                       >
                         <span className={cn(
@@ -342,7 +342,7 @@ export default function SettingsPage() {
               </div>
 
               {/* Danger Zone */}
-              <div className="bg-white rounded-card p-6 lg:p-8 border border-red-muted">
+              <div className="bg-white rounded-card p-6 lg:p-8 border border-green-muted">
                 <h3 className="font-cormorant text-charcoal text-xl font-bold mb-2">Danger Zone</h3>
                 <p className="text-charcoal-light text-sm mb-6">
                   Permanently delete your portal account. This action cannot be undone. Your property

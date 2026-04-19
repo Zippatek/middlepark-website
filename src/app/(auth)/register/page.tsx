@@ -105,7 +105,7 @@ export default function RegisterPage() {
         <div className="relative z-10">
           <Link href="/" className="inline-flex items-center gap-0.5">
             <span className="font-bold font-cormorant text-white text-2xl">MIDDLE</span>
-            <span className="font-bold font-cormorant text-red text-2xl">PARK</span>
+            <span className="font-bold font-cormorant text-green text-2xl">PARK</span>
           </Link>
         </div>
 
@@ -128,7 +128,7 @@ export default function RegisterPage() {
               'Portal access from day one',
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5">
-                <CheckCircle2 size={14} className="text-red shrink-0" strokeWidth={2} />
+                <CheckCircle2 size={14} className="text-green shrink-0" strokeWidth={2} />
                 <span className="text-white/75 text-xs">{item}</span>
               </div>
             ))}
@@ -155,7 +155,7 @@ export default function RegisterPage() {
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-0.5 mb-8">
             <span className="font-bold font-cormorant text-charcoal text-2xl">MIDDLE</span>
-            <span className="font-bold font-cormorant text-red text-2xl">PARK</span>
+            <span className="font-bold font-cormorant text-green text-2xl">PARK</span>
           </div>
 
           {/* Back Link */}
@@ -315,7 +315,7 @@ export default function RegisterPage() {
                 </button>
               </div>
               {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                <p className="text-red text-xs mt-1.5">Passwords do not match</p>
+                <p className="text-green text-xs mt-1.5">Passwords do not match</p>
               )}
             </div>
 
@@ -327,15 +327,15 @@ export default function RegisterPage() {
                 checked={formData.terms}
                 onChange={(e) => updateField('terms', e.target.checked)}
                 required
-                className="mt-1 w-4 h-4 rounded-sm border-cream-border text-red focus:ring-red accent-red"
+                className="mt-1 w-4 h-4 rounded-sm border-cream-border text-green focus:ring-green accent-green"
               />
               <label htmlFor="reg-terms" className="text-charcoal-light text-xs leading-relaxed">
                 I agree to the{' '}
-                <Link href="/terms" className="text-red font-medium hover:underline">
+                <Link href="/terms" className="text-green font-medium hover:underline">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link href="/privacy" className="text-red font-medium hover:underline">
+                <Link href="/privacy" className="text-green font-medium hover:underline">
                   Privacy Policy
                 </Link>
               </label>
@@ -356,7 +356,7 @@ export default function RegisterPage() {
           {/* Login Link */}
           <p className="text-center text-charcoal-light text-sm mt-8 pb-8">
             Already have an account?{' '}
-            <Link href="/login" className="text-red font-medium hover:underline">
+            <Link href="/login" className="text-green font-medium hover:underline">
               Sign in
             </Link>
           </p>

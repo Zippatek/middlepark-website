@@ -36,7 +36,7 @@ const payments = [
 const statusConfig = {
   paid: { bg: 'bg-green-tint', text: 'text-green', icon: CheckCircle2, label: 'PAID' },
   upcoming: { bg: 'bg-[#FEF3C7]', text: 'text-[#D97706]', icon: Clock, label: 'UPCOMING' },
-  overdue: { bg: 'bg-red-tint', text: 'text-red', icon: AlertCircle, label: 'OVERDUE' },
+  overdue: { bg: 'bg-green-tint', text: 'text-green', icon: AlertCircle, label: 'OVERDUE' },
 }
 
 export default function PaymentsPage() {
@@ -58,8 +58,8 @@ export default function PaymentsPage() {
         </div>
 
         <div className="bg-white rounded-card p-5 border border-cream-divider">
-          <div className="w-10 h-10 rounded-container bg-red-tint flex items-center justify-center mb-3">
-            <TrendingUp size={20} className="text-red" strokeWidth={1.5} />
+          <div className="w-10 h-10 rounded-container bg-green-tint flex items-center justify-center mb-3">
+            <TrendingUp size={20} className="text-green" strokeWidth={1.5} />
           </div>
           <p className="text-charcoal-light text-xs mb-1">Total Paid</p>
           <p className="font-cormorant text-charcoal text-2xl font-bold">{paymentSummary.totalPaid}</p>
@@ -75,8 +75,8 @@ export default function PaymentsPage() {
         </div>
 
         <div className="bg-white rounded-card p-5 border border-cream-divider">
-          <div className="w-10 h-10 rounded-container bg-red-tint flex items-center justify-center mb-3">
-            <AlertCircle size={20} className="text-red" strokeWidth={1.5} />
+          <div className="w-10 h-10 rounded-container bg-green-tint flex items-center justify-center mb-3">
+            <AlertCircle size={20} className="text-green" strokeWidth={1.5} />
           </div>
           <p className="text-charcoal-light text-xs mb-1">Next Payment</p>
           <p className="font-cormorant text-charcoal text-2xl font-bold">{paymentSummary.nextDue}</p>
@@ -93,11 +93,11 @@ export default function PaymentsPage() {
       >
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-cormorant text-charcoal text-lg font-bold">Payment Progress</h3>
-          <span className="text-red text-sm font-bold">{paymentSummary.percentPaid}%</span>
+          <span className="text-green text-sm font-bold">{paymentSummary.percentPaid}%</span>
         </div>
         <div className="w-full h-3 bg-cream rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-red rounded-full"
+            className="h-full bg-green rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${paymentSummary.percentPaid}%` }}
             transition={{ delay: 0.5, duration: 1.2, ease: 'easeOut' }}
@@ -118,7 +118,7 @@ export default function PaymentsPage() {
       >
         <div className="p-6 pb-4 flex items-center justify-between">
           <h3 className="font-cormorant text-charcoal text-lg font-bold">Payment Schedule</h3>
-          <button className="flex items-center gap-1.5 text-red text-xs font-medium hover:underline">
+          <button className="flex items-center gap-1.5 text-green text-xs font-medium hover:underline">
             <Download size={12} /> Export PDF
           </button>
         </div>
@@ -152,7 +152,7 @@ export default function PaymentsPage() {
                     </td>
                     <td className="px-6 py-4 text-right">
                       {payment.status === 'paid' ? (
-                        <button className="text-red text-xs font-medium hover:underline">Download</button>
+                        <button className="text-green text-xs font-medium hover:underline">Download</button>
                       ) : (
                         <span className="text-charcoal-light text-xs">—</span>
                       )}
