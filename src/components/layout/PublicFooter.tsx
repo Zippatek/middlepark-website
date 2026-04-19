@@ -40,7 +40,7 @@ export function PublicFooter() {
           <div className="sm:col-span-2 lg:col-span-1">
             {/* Logo */}
             <div className="mb-5 inline-block">
-              <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-8 lg:h-9 w-auto brightness-0 invert" />
+              <img src="/logos/Variation 01.svg" alt="MiddlePark Properties" className="h-8 lg:h-9 w-auto" />
             </div>
             <p className="text-white/45 text-sm leading-relaxed mb-6 max-w-[280px]">
               Built with intention. Priced with purpose. Abuja&apos;s defining property developer.

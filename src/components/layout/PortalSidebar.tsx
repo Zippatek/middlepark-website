@@ -50,7 +50,7 @@ export function PortalSidebar() {
         )}>
           <Link href="/" className="flex items-center shrink-0">
             {collapsed ? (
-              <img src="/logos/Icon Green.svg" alt="MP" className="h-7 w-auto" />
+              <img src="/logos/Icon.svg" alt="MP" className="h-7 w-auto" />
             ) : (
               <img src="/logos/Full Color.svg" alt="MiddlePark Properties" className="h-7 w-auto" />
             )}

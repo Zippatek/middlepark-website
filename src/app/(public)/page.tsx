@@ -412,7 +412,7 @@ function HeroImageElement({
 
   return (
     <motion.div
-      className="absolute right-[0%] top-[40%] -translate-y-1/2 w-[540px] h-[720px] pointer-events-none hidden lg:block"
+      className="absolute right-[0%] top-[20%] -translate-y-1/2 w-[540px] h-[720px] pointer-events-none hidden lg:block"
       style={{
         perspective: '1500px',
         rotateX: springRotateX,

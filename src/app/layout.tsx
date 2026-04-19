@@ -45,6 +45,7 @@ export const metadata: Metadata = {
 }
 
 import { CustomCursor } from '@/components/ui/CustomCursor'
+import { ChatWidget } from '@/components/ui/ChatWidget'
 
 export default function RootLayout({
   children,
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-cream text-charcoal">
         <CustomCursor />
         {children}
+        <ChatWidget />
       </body>
     </html>
   )

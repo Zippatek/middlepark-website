@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160.27 90.82">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .09em;
+      }
+
+      .cls-2 {
+        font-family: OverusedGrotesk-Regular, 'Overused Grotesk';
+        font-size: 14.25px;
+        font-variation-settings: 'wght' 450, 'slnt' 0;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #ed1b24;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.08em;
+      }
+
+      .cls-6 {
+        letter-spacing: .1em;
+      }
+
+      .cls-7 {
+        font-family: OverusedGrotesk-Bold, 'Overused Grotesk';
+        font-size: 26.7px;
+        font-variation-settings: 'wght' 710, 'slnt' 0;
+        font-weight: 700;
+      }
+
+      .cls-7, .cls-8, .cls-9 {
+        fill: #5a5b5f;
+      }
+
+      .cls-10 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-11 {
+        letter-spacing: .09em;
+      }
+
+      .cls-9 {
+        font-family: OverusedGrotesk-Book, 'Overused Grotesk';
+        font-size: 8px;
+        font-variation-settings: 'wght' 375, 'slnt' 0;
+      }
+
+      .cls-12 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-13 {
+        letter-spacing: .1em;
+      }
+
+      .cls-14 {
+        letter-spacing: 0em;
+      }
+
+      .cls-15 {
+        letter-spacing: .08em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <text class="cls-7" transform="translate(0 66.45)"><tspan x="0" y="0">MIDDLE</tspan><tspan class="cls-5" x="94.33" y="0">P</tspan><tspan class="cls-14" x="108.78" y="0">ARK</tspan></text>
+      <text class="cls-2" transform="translate(34.52 80.12)"><tspan class="cls-6" x="0" y="0">P</tspan><tspan class="cls-15" x="9.89" y="0">R</tspan><tspan class="cls-13" x="19.49" y="0">OPE</tspan><tspan class="cls-1" x="50.03" y="0">R</tspan><tspan class="cls-6" x="59.69" y="0">TI</tspan><tspan class="cls-11" x="73.75" y="0">E</tspan><tspan class="cls-6" x="82.91" y="0">S</tspan></text>
+      <polygon class="cls-8" points="56.55 37.06 63.08 37.06 63.08 11.71 56.55 16.15 56.55 37.06"/>
+      <polygon class="cls-8" points="66.36 37.06 72.77 37.06 72.77 5.05 66.36 9.44 66.36 37.06"/>
+      <polygon class="cls-8" points="97.19 11.71 97.19 37.06 103.73 37.06 103.73 16.15 97.19 11.71"/>
+      <polygon class="cls-8" points="87.51 37.06 93.91 37.06 93.91 9.44 87.51 5.05 87.51 37.06"/>
+      <polygon class="cls-3" points="75.97 3.36 75.97 36.81 84.3 36.81 84.3 3.36 80.14 0 75.97 3.36"/>
+      <rect class="cls-3" x="53.46" y="36.18" width="53.35" height="1.6"/>
+    </g>
+    <text class="cls-9" transform="translate(32.15 88.61)"><tspan class="cls-12" x="0" y="0">Building </tspan><tspan class="cls-4" x="27.07" y="0">t</tspan><tspan class="cls-12" x="29.3" y="0">o Ser</tspan><tspan class="cls-10" x="46.31" y="0">v</tspan><tspan class="cls-12" x="50.06" y="0">e Gene</tspan><tspan class="cls-4" x="73.81" y="0">ra</tspan><tspan class="cls-12" x="79.98" y="0">tions</tspan></text>
+  </g>
+</svg>
