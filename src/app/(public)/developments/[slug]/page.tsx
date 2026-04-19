@@ -38,7 +38,7 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
     images: ['/images/dev-dakibiyu-1.jpg'],
     amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking', 'Borehole Water', 'Tarred Roads'],
     highlights: [
-      { icon: 'Shield', label: 'AGIS Title Verified', description: 'All land titles confirmed and verified before construction.' },
+      { icon: 'Shield', label: 'Title Verified', description: 'All land titles confirmed and verified before construction.' },
       { icon: 'Building2', label: 'FCDA Approved', description: 'Full Federal Capital Development Authority approval obtained.' },
       { icon: 'Award', label: 'MiddlePark Certified', description: 'Built to MiddlePark\'s rigorous quality standards.' },
     ],
@@ -51,7 +51,7 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
       flexiblePlansAvailable: true,
       note: 'Flexible payment plans available. Speak to our sales team for custom arrangements.',
     },
-    certifications: ['AGIS Title Verified', 'FCDA Approved', 'MiddlePark Quality Seal'],
+    certifications: ['Title Verified', 'Government Approved', 'MiddlePark Quality Seal'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
     developer: {

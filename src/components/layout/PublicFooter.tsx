@@ -43,7 +43,7 @@ export function PublicFooter() {
               <img src="/logos/secondary-logo-white.png" alt="MiddlePark Properties" className="h-8 lg:h-9 w-auto" />
             </div>
             <p className="text-white/45 text-sm leading-relaxed mb-6 max-w-[280px]">
-              Built with intention. Priced with purpose. Abuja&apos;s defining property developer.
+              Built with intention. Priced with purpose. Nigeria&apos;s defining property developer.
             </p>
             {/* Contact Info */}
             <div className="space-y-3">

@@ -41,7 +41,7 @@ const documents = [
   },
   {
     id: 3,
-    name: 'Title Deed — AGIS Certificate',
+    name: 'Title Deed — Land Certificate',
     category: 'legal',
     date: 'Feb 01, 2025',
     size: '890 KB',

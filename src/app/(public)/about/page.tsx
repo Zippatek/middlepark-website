@@ -82,7 +82,7 @@ const teamMembers: TeamMember[] = [
     id: '1',
     name: 'Aminu S Muhammad',
     title: 'Managing Director & CEO',
-    bio: 'Managing Director of MiddlePark Properties. Aminu brings extensive experience in real estate development, overseeing the careful crafting of modern estates across Abuja.',
+    bio: 'Managing Director of MiddlePark Properties. Aminu brings extensive experience in real estate development, overseeing the careful crafting of modern properties across Nigeria.',
     avatar: '/images/aminu.jpg',
     linkedin: 'https://www.linkedin.com/in/aminu-s-muhammad',
   },
@@ -98,7 +98,7 @@ const teamMembers: TeamMember[] = [
     id: '3',
     name: 'Barr. Chinedu Ikechukwu',
     title: 'Head of Legal & Title Verification',
-    bio: 'Chinedu leads our title verification process, ensuring every plot is AGIS-confirmed and free of encumbrances before any construction begins.',
+    bio: 'Chinedu leads our title verification process, ensuring every plot is confirmed and free of encumbrances before any construction begins.',
     avatar: '/images/avatar-default.jpg',
     linkedin: 'https://linkedin.com',
   },
@@ -116,7 +116,7 @@ const stats = [
   { number: '12+', label: 'Completed Developments' },
   { number: '800+', label: 'Units Delivered' },
   { number: '2,500+', label: 'Happy Homeowners' },
-  { number: '8', label: 'Years in Abuja' },
+  { number: '8', label: 'Years in Nigeria' },
 ]
 
 export default function AboutPage() {
@@ -150,7 +150,7 @@ export default function AboutPage() {
                   Priced With Purpose.
                 </h1>
                 <p className="text-white/60 text-base lg:text-lg max-w-[540px] leading-relaxed font-sans">
-                  MiddlePark Properties was founded on a simple belief — that Abuja deserves a
+                  MiddlePark Properties was founded on a simple belief — that Nigeria deserves a
                   developer you can trust. One that delivers what it promises, on time and on paper.
                 </p>
               </motion.div>
@@ -177,17 +177,17 @@ export default function AboutPage() {
               <div className="mt-6 space-y-4 text-charcoal-light text-base leading-relaxed">
                 <p>
                   MiddlePark Properties Limited was established in 2018 with one clear mission — to build
-                  homes across Abuja that families can trust. In a market where delays, title disputes,
+                  homes across Nigeria that families can trust. In a market where delays, title disputes,
                   and hidden fees had become the norm, we set out to do things differently.
                 </p>
                 <p>
                   Every MiddlePark development starts with verified land titles. Before any
-                  foundation is laid, our legal team confirms AGIS title verification and FCDA
+                  foundation is laid, our legal team confirms title verification and government
                   approval. This is not a feature — it is a requirement. No MiddlePark client
                   has ever faced a title dispute.
                 </p>
                 <p>
-                  Today, we have delivered over 800 units across 12 developments in Abuja&apos;s
+                  Today, we have delivered over 800 units across 12 developments in Nigeria&apos;s
                   most established neighbourhoods. And we are just getting started.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function AboutPage() {
                 }}
               >
                 <span className="text-charcoal text-xs font-semibold">
-                  Est. 2018 · Abuja, Nigeria
+                  Est. 2018 · Nigeria
                 </span>
               </div>
             </motion.div>

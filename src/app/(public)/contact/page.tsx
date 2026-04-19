@@ -96,7 +96,7 @@ export default function ContactPage() {
         <div className="relative h-[350px] lg:h-[420px]">
           <Image
             src="/images/contact-abuja-skyline.jpg"
-            alt="Abuja skyline"
+            alt="Nigeria skyline"
             fill
             className="object-cover"
             priority
@@ -134,7 +134,7 @@ export default function ContactPage() {
             <SectionHeader
               overline="Our Offices"
               heading="Visit Us in Person"
-              subCopy="Walk into any of our offices across Abuja for a face-to-face conversation with our sales and client relations team."
+              subCopy="Walk into any of our offices for a face-to-face conversation with our sales and client relations team."
             />
           </div>
 
@@ -206,6 +206,21 @@ export default function ContactPage() {
                 heading="Enquire About a Development"
                 subCopy="Fill out the form below and our team will get back to you within 24 hours."
               />
+
+              {/* WhatsApp CTA */}
+              <motion.a
+                href="https://wa.me/2348055269579?text=Hello%20MiddlePark%2C%20I%27d%20like%20to%20enquire%20about%20your%20properties."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 mb-8 w-full flex items-center justify-center gap-3 bg-[#25D366] text-white font-semibold text-sm py-3.5 px-6 rounded-full hover:bg-[#20BD5A] transition-colors duration-200"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <MessageCircle size={18} />
+                Chat with us on WhatsApp
+              </motion.a>
 
               {formSubmitted ? (
                 <motion.div

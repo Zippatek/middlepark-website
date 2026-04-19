@@ -26,6 +26,7 @@ import {
   Quote,
   Plus,
   Minus,
+  Search,
 } from 'lucide-react'
 import { Button, SectionHeader, DevelopmentCard } from '@/components/ui'
 import type { Development, Testimonial } from '@/types'
@@ -60,7 +61,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-dakibiyu-1.jpg', '/images/dev-dakibiyu-2.jpg'],
     amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
     developer: {
@@ -90,7 +91,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-katampe-1.jpg', '/images/dev-katampe-2.jpg'],
     amenities: ['Estate Club House', 'Swimming Pool', 'Underground Parking', 'Smart Home Ready'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-09-15',
     completionDate: '2028-06-01',
     developer: {
@@ -120,7 +121,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-apo-1.jpg', '/images/dev-apo-2.jpg'],
     amenities: ['Perimeter Fencing', 'Borehole Water', 'Tarred Roads', 'Green Areas'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-03-01',
     completionDate: '2026-12-01',
     developer: {
@@ -146,7 +147,7 @@ const testimonials: Testimonial[] = [
     clientName: 'Emeka Okonkwo',
     unitPurchased: '5-Bed Detached, Maitama Gardens',
     rating: 5,
-    quote: 'I\'ve bought from three developers in Abuja. MiddlePark is the only one that delivered exactly what was promised — no hidden charges, no delays, no stories.',
+    quote: 'I\'ve bought from three developers in Nigeria. MiddlePark is the only one that delivered exactly what was promised — no hidden charges, no delays, no stories.',
     avatar: '/images/avatar-default.jpg',
     purchaseYear: 2023,
   },
@@ -165,7 +166,7 @@ const whyMiddlePark = [
   {
     icon: Shield,
     title: 'Title Verified Before Ground Breaks',
-    description: 'Every plot is AGIS title-verified and FCDA-approved before any construction begins. No grey areas.',
+    description: 'Every plot is title-verified and government-approved before any construction begins. No grey areas.',
   },
   {
     icon: FileCheck,
@@ -188,7 +189,7 @@ const comparisonData = [
   {
     aspect: 'Title Verification',
     typical: 'Verbal assurance, often unverified',
-    middlepark: 'AGIS title confirmed and FCDA approved before construction begins',
+    middlepark: 'Title confirmed and government approved before construction begins',
   },
   {
     aspect: 'Pricing',
@@ -218,7 +219,7 @@ const comparisonData = [
 ]
 
 const processSteps = [
-  { number: '01', title: 'Title Verification', description: 'We confirm AGIS title verification and FCDA approval before anything else. Your land is clean.', image: '/images/process-title-verification.png' },
+  { number: '01', title: 'Title Verification', description: 'We confirm title verification and government approval before anything else. Your land is clean.', image: '/images/process-title-verification.png' },
   { number: '02', title: 'Unit Selection & Pricing', description: 'Choose your preferred unit type, review the transparent pricing breakdown, and lock in your selection.', image: '/images/process-unit-selection.png' },
   { number: '03', title: 'Payment Plan Agreement', description: 'Select a payment plan that works for you — no hidden extras, no development levies at handover.', image: '/images/process-payment-plan.png' },
   { number: '04', title: 'Construction & Updates', description: 'Track progress through your Client Portal. Real-time photo updates, milestone notifications, documented at every stage.', image: '/images/interior-kitchen.jpg' },
@@ -227,31 +228,31 @@ const processSteps = [
 
 const neighbourhoods = [
   {
-    name: 'Dakibiyu',
+    name: 'Dakibiyu, Abuja',
     tagline: 'Growing. Connected. Promising.',
     description: 'One of Abuja\'s fastest-developing districts with direct access to the Outer Northern Expressway. Close to schools, hospitals, and the city\'s expanding commercial corridor.',
     image: '/images/dev-dakibiyu-1.jpg',
     developments: 2,
   },
   {
-    name: 'Katampe Extension',
+    name: 'Katampe, Abuja',
     tagline: 'Elevated. Exclusive. Arrived.',
-    description: 'Abuja\'s most sought-after residential enclave — minutes from Maitama and the Central Business District. Mature infrastructure, excellent security, and surrounded by nature.',
+    description: 'A sought-after residential enclave — minutes from Maitama and the Central Business District. Mature infrastructure, excellent security, and surrounded by nature.',
     image: '/images/dev-katampe-1.jpg',
     developments: 1,
   },
   {
-    name: 'Apo District',
+    name: 'Apo, Abuja',
     tagline: 'Accessible. Central. Grounded.',
-    description: 'A well-established residential area with strong transport links, growing amenities, and proximity to some of Abuja\'s key institutions and shopping centres.',
+    description: 'A well-established residential area with strong transport links, growing amenities, and proximity to key institutions and shopping centres.',
     image: '/images/dev-apo-1.jpg',
     developments: 1,
   },
 ]
 
 const certifications = [
-  { icon: Shield, label: 'AGIS Title Verified' },
-  { icon: FileCheck, label: 'FCDA Approved' },
+  { icon: Shield, label: 'Title Verified' },
+  { icon: FileCheck, label: 'Government Approved' },
   { icon: Award, label: 'MiddlePark Quality Seal' },
   { icon: Building2, label: 'COREN Registered' },
   { icon: Users, label: 'NIA Member' },
@@ -609,7 +610,7 @@ export default function HomePage() {
 
               {/* Desktop headline */}
               <h1 className="font-cormorant text-white font-bold leading-[0.92] mb-6 lg:mb-8 hidden sm:block">
-                {['Where', 'Every', 'Home'].map((word, i) => (
+                {['Where', 'Every', 'Structure'].map((word, i) => (
                   <motion.span
                     key={word}
                     className="inline-block mr-[0.22em]"
@@ -659,7 +660,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Where Every Home<br />
+                Where Every Structure<br />
                 Tells a <span className="text-green">Story</span>
               </motion.h1>
 
@@ -669,19 +670,36 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.5 }}
               >
-                <p className="text-white/60 text-sm sm:text-base lg:text-lg mb-4 leading-[1.7] font-sans">
-                  We build thoughtfully crafted homes and commercial spaces across Nigeria, where quality meets purpose and every detail is delivered with care.
-                </p>
                 <p className="text-white/60 text-sm sm:text-base lg:text-lg leading-[1.7] font-sans">
-                  From timeless residences to thriving real estate developments, we create properties designed for comfort, value, growth, and lasting impact, spaces built to serve generations.
+                  Browse our portfolio of unique properties across Nigeria. Every unit built to last beyond your generation.
                 </p>
+              </motion.div>
+
+              {/* Search Bar */}
+              <motion.div
+                className="max-w-[480px] mb-8 lg:mb-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.7 }}
+              >
+                <div className="flex items-center bg-white/8 backdrop-blur-md border border-white/12 rounded-full overflow-hidden pl-5 pr-1.5 py-1.5">
+                  <Search size={18} className="text-white/40 shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search by location, city, or property type..."
+                    className="w-full bg-transparent border-none outline-none text-white placeholder-white/30 text-sm px-3 py-2 font-sans"
+                  />
+                  <button className="bg-green text-white text-xs font-semibold px-5 py-2.5 rounded-full shrink-0 hover:opacity-90 transition-opacity">
+                    Search
+                  </button>
+                </div>
               </motion.div>
 
               <motion.div
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.8 }}
+                transition={{ duration: 0.6, delay: 1.9 }}
               >
                 <Button variant="white-on-dark" size="lg" href="/developments">
                   VIEW DEVELOPMENTS <ArrowRight size={16} />
@@ -939,7 +957,7 @@ export default function HomePage() {
               Why Families Choose MiddlePark
             </h2>
             <p className="text-charcoal-light text-base max-w-lg mx-auto leading-relaxed">
-              We removed everything that was wrong with buying property in Abuja.
+              We removed everything that was wrong with buying property in Nigeria.
             </p>
           </div>
 
@@ -1216,7 +1234,7 @@ export default function HomePage() {
               </p>
             </div>
             <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1] mb-3 sm:mb-4">
-              Abuja&apos;s Most Established<br />Neighbourhoods
+              Nigeria&apos;s Most Established<br />Neighbourhoods
             </h2>
             <p className="text-charcoal-light text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
               We develop exclusively in locations with existing infrastructure, proven land titles, and strong property appreciation.
@@ -1310,7 +1328,7 @@ export default function HomePage() {
               </p>
             </div>
             <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1]">
-              Trusted by Homeowners<br />Across Abuja
+              Trusted by Property Owners<br />Across Nigeria
             </h2>
           </div>
 

@@ -29,7 +29,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-dakibiyu-1.jpg'],
     amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -55,7 +55,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-katampe-1.jpg'],
     amenities: ['Estate Club House', 'Swimming Pool', 'Underground Parking', 'Smart Home Ready'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-09-15',
     completionDate: '2028-06-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -81,7 +81,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-apo-1.jpg'],
     amenities: ['Perimeter Fencing', 'Borehole Water', 'Tarred Roads', 'Green Areas'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2025-03-01',
     completionDate: '2026-12-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -107,7 +107,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-maitama-1.jpg'],
     amenities: ['Private Gardens', 'Staff Quarters', 'Smart Home System', 'Underground Parking'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2024-01-15',
     completionDate: '2025-12-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -133,7 +133,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-gwarinpa-1.jpg'],
     amenities: ['Gated Community', 'Children Play Area', 'Gym', 'Tarred Roads'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2023-06-01',
     completionDate: '2025-06-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -159,7 +159,7 @@ const allDevelopments: Development[] = [
     images: ['/images/dev-dakibiyu-2.jpg'],
     amenities: ['24/7 Security', 'Community Centre', 'Jogging Track', 'Solar Backup'],
     highlights: [],
-    certifications: ['AGIS Title Verified', 'FCDA Approved'],
+    certifications: ['Title Verified', 'Government Approved'],
     createdAt: '2026-01-01',
     completionDate: '2028-12-01',
     developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
@@ -226,7 +226,7 @@ export default function DevelopmentsPage() {
               Our Developments
             </h1>
             <p className="text-white/75 text-base max-w-[540px] leading-relaxed font-sans">
-              Browse our portfolio of carefully crafted estates across Abuja. Every title verified.
+              Browse our portfolio of carefully crafted estates across Nigeria. Every title verified.
               Every unit built to last.
             </p>
           </motion.div>
