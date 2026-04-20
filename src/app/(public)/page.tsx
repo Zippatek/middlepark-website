@@ -290,16 +290,14 @@ function ComparisonAccordion({ row, index }: { row: typeof comparisonData[0]; in
         className="w-full flex items-center justify-between py-7 text-left group cursor-pointer"
       >
         <div className="flex items-center gap-5">
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-            isOpen 
-              ? 'bg-green text-white shadow-md' 
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
+              ? 'bg-green text-white shadow-md'
               : 'border border-[#E5E5EA] text-charcoal-light group-hover:border-green group-hover:text-green'
-          }`}>
+            }`}>
             {isOpen ? <Minus size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
           </div>
-          <h3 className={`font-cormorant text-xl lg:text-[26px] font-bold transition-colors duration-200 ${
-            isOpen ? 'text-charcoal-dark' : 'text-charcoal group-hover:text-charcoal-dark'
-          }`}>
+          <h3 className={`font-cormorant text-xl lg:text-[26px] font-bold transition-colors duration-200 ${isOpen ? 'text-charcoal-dark' : 'text-charcoal group-hover:text-charcoal-dark'
+            }`}>
             {row.aspect}
           </h3>
         </div>
@@ -363,16 +361,14 @@ function WhyAccordion({ item, index }: { item: typeof whyMiddlePark[0]; index: n
         className="w-full flex items-center justify-between py-7 text-left group cursor-pointer"
       >
         <div className="flex items-center gap-5">
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-            isOpen 
-              ? 'bg-green/10 border border-green/20' 
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
+              ? 'bg-green/10 border border-green/20'
               : 'border border-[#E5E5EA] group-hover:border-green/30'
-          }`}>
+            }`}>
             {isOpen ? <Minus size={16} strokeWidth={1.5} className="text-green" /> : <Plus size={16} strokeWidth={1.5} className="text-charcoal-light group-hover:text-green transition-colors" />}
           </div>
-          <h3 className={`font-sans text-base lg:text-lg font-semibold transition-colors duration-200 ${
-            isOpen ? 'text-charcoal-dark' : 'text-charcoal group-hover:text-charcoal-dark'
-          }`}>
+          <h3 className={`font-sans text-base lg:text-lg font-semibold transition-colors duration-200 ${isOpen ? 'text-charcoal-dark' : 'text-charcoal group-hover:text-charcoal-dark'
+            }`}>
             {item.title}
           </h3>
         </div>
@@ -424,7 +420,7 @@ function HeroImageElement({
       <div className="relative w-full h-full">
         {/* Decorative Glow — positioned below the image */}
         <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[60%] h-[30%] bg-green/20 blur-[100px] rounded-full" />
-        
+
         {/* Floating Image Card */}
         <motion.div
           className="absolute inset-[20px] rounded-[24px] overflow-hidden border border-white/10"
@@ -435,16 +431,16 @@ function HeroImageElement({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Image 
-            src="/images/dev-dakibiyu-2.jpg" 
-            alt="MiddlePark Premium Estate" 
-            fill 
+          <Image
+            src="/images/dev-dakibiyu-2.jpg"
+            alt="MiddlePark Premium Estate"
+            fill
             className="object-cover"
           />
           {/* Glass Overlay for depth */}
           <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10" />
         </motion.div>
-        
+
         {/* Floating Accent Elements */}
         <motion.div
           className="absolute bottom-[50px] left-[-10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-[16px] p-4 flex items-center gap-4"
@@ -506,18 +502,18 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 1. HERO — IMMERSIVE 3D PERSPECTIVE EXPERIENCE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-[100vh] flex flex-col justify-center overflow-hidden bg-[#0A0A0C] pt-[140px] pb-24 lg:pb-32" id="hero">
-        
+      <section ref={heroRef} className="relative min-h-[100vh] flex flex-col justify-center overflow-hidden bg-[#3D4249] pt-[140px] pb-24 lg:pb-32" id="hero">
+
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/images/hero-estate-aerial.jpg" 
-            alt="MiddlePark Estate" 
-            fill 
-            className="object-cover opacity-30 mix-blend-luminosity" 
+          <Image
+            src="/images/hero-estate-aerial.jpg"
+            alt="MiddlePark Estate"
+            fill
+            className="object-cover opacity-30 mix-blend-luminosity"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-[#0A0A0C]/80 to-[#0A0A0C]/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#3D4249] via-[#3D4249]/75 to-[#3D4249]/50" />
         </div>
 
         {/* 3D Perspective Grid Floor — Deep space effect */}
@@ -771,7 +767,7 @@ export default function HomePage() {
                 >
                   <Image src="/images/dev-dakibiyu-2.jpg" alt="MiddlePark Estate" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  
+
                   {/* Glassmorphic badge */}
                   <motion.div
                     className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full"
@@ -794,7 +790,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0A0A0C] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#3D4249] to-transparent" />
 
         {/* Scroll indicator */}
         <motion.div
@@ -817,7 +813,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 2. STATS BAR */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-[#1C1C1E] py-10 sm:py-14 px-5 sm:px-6 lg:px-8" id="stats-bar">
+      <section className="bg-[#454C55] py-10 sm:py-14 px-5 sm:px-6 lg:px-8" id="stats-bar">
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/8">
           {stats.map((stat, i) => (
             <motion.div
@@ -1361,10 +1357,10 @@ export default function HomePage() {
                 className="bg-white rounded-[16px] p-7 lg:p-8 relative border border-[#E5E5EA] hover:shadow-md transition-shadow duration-500"
                 variants={staggerItem}
               >
-                <Quote 
-                  size={40} 
-                  className="absolute top-5 right-5 text-[#E5E5EA]" 
-                  strokeWidth={1} 
+                <Quote
+                  size={40}
+                  className="absolute top-5 right-5 text-[#E5E5EA]"
+                  strokeWidth={1}
                 />
 
                 <div className="flex gap-1 mb-5">
@@ -1463,7 +1459,7 @@ export default function HomePage() {
                   See It For Yourself
                 </h2>
                 <p className="text-white/55 text-[15px] leading-[1.7] mb-8">
-                  Book a private tour of any MiddlePark development. Walk the grounds, inspect the 
+                  Book a private tour of any MiddlePark development. Walk the grounds, inspect the
                   finishes, and speak directly with our construction team on site.
                 </p>
                 <Button variant="white-on-dark" size="lg" href="/contact">
