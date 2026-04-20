@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search, SlidersHorizontal, X, MapPin } from 'lucide-react'
@@ -187,7 +187,7 @@ const staggerItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
 }
 
-export default function DevelopmentsPage() {
+function DevelopmentsContent() {
   const searchParams = useSearchParams()
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<DevelopmentStatus | 'all'>('all')
@@ -361,5 +361,17 @@ export default function DevelopmentsPage() {
         </div>
       </section>
     </>
+  )
+}
+
+export default function DevelopmentsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen pt-navbar-offset flex items-center justify-center bg-cream">
+        <div className="w-8 h-8 border-2 border-green border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <DevelopmentsContent />
+    </Suspense>
   )
 }
