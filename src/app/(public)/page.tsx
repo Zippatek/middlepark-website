@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 import {
   ChevronRight,
@@ -466,6 +467,7 @@ function HeroImageElement({
 }
 
 export default function HomePage() {
+  const router = useRouter()
   // Mouse tracking for hero parallax
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -665,13 +667,16 @@ export default function HomePage() {
               </motion.h1>
 
               <motion.div
-                className="max-w-[480px] mb-8 lg:mb-10"
+                className="max-w-[480px] mb-8 lg:mb-10 text-white/60 text-sm sm:text-base lg:text-lg leading-[1.7] font-sans space-y-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.5 }}
               >
-                <p className="text-white/60 text-sm sm:text-base lg:text-lg leading-[1.7] font-sans">
-                  Browse our portfolio of unique properties across Nigeria. Every unit built to last beyond your generation.
+                <p>
+                  We build thoughtfully crafted homes and commercial spaces across Nigeria, where quality meets purpose and every detail is delivered with care.
+                </p>
+                <p>
+                  From timeless residences to thriving real estate developments, we create properties designed for comfort, value, growth, and lasting impact, spaces built to serve generations.
                 </p>
               </motion.div>
 
@@ -682,29 +687,39 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.7 }}
               >
-                <div className="flex items-center bg-white/8 backdrop-blur-md border border-white/12 rounded-full overflow-hidden pl-5 pr-1.5 py-1.5">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.currentTarget)
+                    const query = formData.get('heroSearch') as string
+                    if (query?.trim()) {
+                      router.push(`/developments?search=${encodeURIComponent(query.trim())}`)
+                    } else {
+                      router.push('/developments')
+                    }
+                  }}
+                  className="flex items-center bg-white/8 backdrop-blur-md border border-white/12 rounded-full overflow-hidden pl-5 pr-1.5 py-1.5"
+                >
                   <Search size={18} className="text-white/40 shrink-0" />
                   <input
                     type="text"
+                    name="heroSearch"
                     placeholder="Search by location, city, or property type..."
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/30 text-sm px-3 py-2 font-sans"
                   />
-                  <button className="bg-green text-white text-xs font-semibold px-5 py-2.5 rounded-full shrink-0 hover:opacity-90 transition-opacity">
+                  <button type="submit" className="bg-green text-white text-xs font-semibold px-5 py-2.5 rounded-full shrink-0 hover:opacity-90 transition-opacity">
                     Search
                   </button>
-                </div>
+                </form>
               </motion.div>
 
               <motion.div
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                className="w-full max-w-[480px] sm:w-fit flex"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.9 }}
               >
-                <Button variant="white-on-dark" size="lg" href="/developments">
-                  VIEW DEVELOPMENTS <ArrowRight size={16} />
-                </Button>
-                <Button variant="ghost-white" size="lg" href="/contact">
+                <Button variant="ghost-white" size="lg" className="w-full sm:w-auto" href="/contact">
                   ENQUIRE ABOUT A UNIT
                 </Button>
               </motion.div>

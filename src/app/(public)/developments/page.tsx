@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search, SlidersHorizontal, X, MapPin } from 'lucide-react'
 import { SectionHeader, DevelopmentCard } from '@/components/ui'
@@ -187,9 +188,16 @@ const staggerItem = {
 }
 
 export default function DevelopmentsPage() {
+  const searchParams = useSearchParams()
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<DevelopmentStatus | 'all'>('all')
   const [areaFilter, setAreaFilter] = useState('All Areas')
+
+  // Pre-populate search from hero search bar
+  useEffect(() => {
+    const q = searchParams.get('search')
+    if (q) setSearch(q)
+  }, [searchParams])
 
   const filtered = useMemo(() => {
     return allDevelopments.filter((dev) => {
@@ -200,7 +208,10 @@ export default function DevelopmentsPage() {
         return (
           dev.name.toLowerCase().includes(q) ||
           dev.neighborhood.toLowerCase().includes(q) ||
-          dev.id.toLowerCase().includes(q)
+          dev.id.toLowerCase().includes(q) ||
+          dev.location.toLowerCase().includes(q) ||
+          dev.city.toLowerCase().includes(q) ||
+          dev.description.toLowerCase().includes(q)
         )
       }
       return true

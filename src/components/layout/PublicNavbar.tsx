@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronRight, Menu, X, Phone } from 'lucide-react'
+import { ChevronRight, Menu, X, Phone, MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -164,6 +164,14 @@ export function PublicNavbar() {
             >
               ENQUIRE NOW <ChevronRight size={14} />
             </Link>
+            <a
+              href="https://wa.me/2348055269579?text=Hello%20MiddlePark%2C%20I%27d%20like%20to%20enquire%20about%20your%20properties."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-5 py-3 rounded-sm text-nav font-medium w-full transition-all duration-200 hover:bg-[#20BD5A]"
+            >
+              <MessageCircle size={16} /> WHATSAPP US
+            </a>
             <Link
               href="/login"
               className="flex items-center justify-center border border-charcoal text-charcoal px-5 py-3 rounded-sm text-nav font-medium w-full transition-colors duration-200 hover:bg-cream-dark"
