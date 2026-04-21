@@ -13,6 +13,7 @@ export function cn(...inputs: ClassValue[]) {
  * Format Nigerian Naira
  */
 export function formatNaira(amount: number): string {
+  if (amount == null || isNaN(amount)) return '₦0';
   return new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN',

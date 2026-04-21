@@ -30,7 +30,8 @@ const staggerItem = {
 }
 
 function formatNaira(amount: number) {
-  return `₦${amount.toLocaleString('en-NG')}`
+  if (amount == null) return '₦0';
+  return `₦${amount.toLocaleString('en-NG')}`;
 }
 
 function getGreeting() {

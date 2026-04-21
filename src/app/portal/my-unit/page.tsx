@@ -42,7 +42,8 @@ function getStageIcon(label: string) {
 }
 
 function formatNaira(n: number) {
-  return `₦${n.toLocaleString('en-NG')}`
+  if (n == null || isNaN(n)) return '₦0';
+  return `₦${n.toLocaleString('en-NG')}`;
 }
 
 function formatDate(d: string | Date | undefined) {
