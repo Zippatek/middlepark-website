@@ -31,7 +31,7 @@ const staggerItem = {
 const statCards = [
   {
     label: 'Property Value',
-    value: '₦100,000,000,000',
+    value: '₦100,000,000',
     icon: Home,
     change: '+12% from purchase',
     color: 'text-green',

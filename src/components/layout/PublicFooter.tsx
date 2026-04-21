@@ -24,10 +24,10 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com/middleparkng' },
-  { label: 'Twitter', href: 'https://twitter.com/middleparkng' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/middlepark' },
-  { label: 'Facebook', href: 'https://facebook.com/middleparkng' },
+  { label: 'Facebook', href: 'https://web.facebook.com/middleparkprop/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/middleparkprop' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/middlepark-properties/' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@middlepark.prop' },
 ]
 
 export function PublicFooter() {

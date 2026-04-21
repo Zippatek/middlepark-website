@@ -166,7 +166,7 @@ const whyMiddlePark = [
 
   {
     icon: FileCheck,
-    title: 'Transparent Pricing, No Hidden Fees',
+    title: 'Transparent Pricing',
     description: 'The quoted price is the final price. No development levies, no surprise charges at handover.',
   },
   {
@@ -815,7 +815,7 @@ export default function HomePage() {
       {/* 2. STATS BAR */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#454C55] py-10 sm:py-14 px-5 sm:px-6 lg:px-8" id="stats-bar">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/8">
+        <div className="max-w-[900px] mx-auto grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 lg:divide-x divide-white/8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}

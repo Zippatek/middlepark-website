@@ -61,13 +61,13 @@ const values = [
     icon: Heart,
     title: 'Community Centred',
     description:
-      'We build neighbourhoods, not just houses. Green areas, shared amenities, and designed common spaces.',
+      'Every estate is planned as a complete neighbourhood — with green spaces, shared amenities, internal roads, and security infrastructure built in from day one.',
   },
   {
     icon: Target,
     title: 'Deliberate Design',
     description:
-      'Every layout is tested for real life — storage, natural light, cross-ventilation, and family flow.',
+      'Every space is tested for real life — storage, natural light, cross-ventilation, and family flow.',
   },
   {
     icon: Eye,
@@ -82,7 +82,7 @@ const teamMembers: TeamMember[] = [
     id: '1',
     name: 'Aminu S Muhammad',
     title: 'Managing Director & CEO',
-    bio: 'Managing Director of MiddlePark Properties. Aminu brings extensive experience in real estate development, overseeing the careful crafting of modern properties across Nigeria.',
+    bio: 'Managing Director of MiddlePark Properties. Aminu has extensive experience in real estate development, leading the delivery of quality-built homes and commercial properties across Nigeria.',
     avatar: '/images/aminu.jpg',
     linkedin: 'https://www.linkedin.com/in/aminu-s-muhammad',
   },
@@ -176,13 +176,13 @@ export default function AboutPage() {
               <div className="mt-6 space-y-4 text-charcoal-light text-base leading-relaxed">
                 <p>
                   MiddlePark Properties Limited was established in 2018 with one clear mission — to build
-                  homes across Nigeria that families can trust. In a market where structural compromises, 
+                  homes across Nigeria that families can trust. In a market where structural compromises,
                   poor finishes, and hidden fees had become the norm, we set out to do things differently.
                 </p>
                 <p>
-                  Every MiddlePark development starts with rigorous material testing. Before any 
-                  foundation is laid, our engineering team confirms structural integrity and 
-                  material quality. This is not a feature — it is a requirement. No MiddlePark home 
+                  Every MiddlePark development starts with rigorous material testing. Before any
+                  foundation is laid, our engineering team confirms structural integrity and
+                  material quality. This is not a feature — it is a requirement. No MiddlePark home
                   will ever face a structural compromise.
                 </p>
                 <p>
@@ -230,7 +230,7 @@ export default function AboutPage() {
             <SectionHeader
               overline="Our Values"
               heading="What We Stand For"
-              subCopy="These are not slogans — they are the standards we hold every project, every team member, and every decision to."
+              subCopy="These are not slogans. They are the standards behind every project we take on, every team we build, and every decision we make."
               align="center"
             />
           </div>
