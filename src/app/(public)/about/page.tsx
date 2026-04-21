@@ -114,7 +114,7 @@ const teamMembers: TeamMember[] = [
 
 const stats = [
   { number: '12+', label: 'Completed Developments' },
-  { number: '800+', label: 'Units Delivered' },
+  { number: '300+', label: 'Units Delivered' },
   { number: '2,500+', label: 'Happy Homeowners' },
   { number: '8', label: 'Years in Nigeria' },
 ]

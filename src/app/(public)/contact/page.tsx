@@ -18,7 +18,7 @@ import dynamic from 'next/dynamic'
 import { Button, SectionHeader } from '@/components/ui'
 
 // Dynamically import map to avoid SSR issues with Leaflet
-const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), { 
+const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full bg-[#F2F2F7] flex items-center justify-center rounded-card border border-[#E5E5EA]">
@@ -318,8 +318,8 @@ export default function ContactPage() {
               <div className="sticky top-[120px]">
                 {/* Interactive Map */}
                 <div className="h-[400px] lg:h-[500px] mb-6 relative">
-                  <InteractiveMap 
-                    center={[9.0578, 7.4950]} 
+                  <InteractiveMap
+                    center={[9.0578, 7.4950]}
                     zoom={15}
                     markers={[
                       {
@@ -333,7 +333,7 @@ export default function ContactPage() {
 
                 {/* WhatsApp CTA */}
                 <a
-                  href="https://wa.me/2349012345678"
+                  href="https://wa.me/2348055269579"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full py-4 rounded-card bg-[#25D366] text-white font-medium text-sm transition-all duration-200 hover:bg-[#1fbc57] hover:shadow-lg"

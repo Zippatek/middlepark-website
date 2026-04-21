@@ -35,9 +35,8 @@ import type { Development, Testimonial } from '@/types'
 // ─── MOCK DATA ──────────────────────────────────────────────────────────────
 const stats = [
   { number: '12+', label: 'Completed Developments' },
-  { number: '800+', label: 'Units Delivered' },
-  { number: '98%', label: 'Client Satisfaction' },
-  { number: '₦15B+', label: 'Property Value Managed' },
+  { number: '300+', label: 'Units Delivered' },
+  { number: '₦100B+', label: 'Property Value Managed' },
 ]
 
 const featuredDevelopments: Development[] = [
@@ -291,8 +290,8 @@ function ComparisonAccordion({ row, index }: { row: typeof comparisonData[0]; in
       >
         <div className="flex items-center gap-5">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
-              ? 'bg-green text-white shadow-md'
-              : 'border border-[#E5E5EA] text-charcoal-light group-hover:border-green group-hover:text-green'
+            ? 'bg-green text-white shadow-md'
+            : 'border border-[#E5E5EA] text-charcoal-light group-hover:border-green group-hover:text-green'
             }`}>
             {isOpen ? <Minus size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
           </div>
@@ -362,8 +361,8 @@ function WhyAccordion({ item, index }: { item: typeof whyMiddlePark[0]; index: n
       >
         <div className="flex items-center gap-5">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
-              ? 'bg-green/10 border border-green/20'
-              : 'border border-[#E5E5EA] group-hover:border-green/30'
+            ? 'bg-green/10 border border-green/20'
+            : 'border border-[#E5E5EA] group-hover:border-green/30'
             }`}>
             {isOpen ? <Minus size={16} strokeWidth={1.5} className="text-green" /> : <Plus size={16} strokeWidth={1.5} className="text-charcoal-light group-hover:text-green transition-colors" />}
           </div>
@@ -874,10 +873,10 @@ export default function HomePage() {
                 </p>
               </div>
               <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1]">
-                Carefully Crafted Estates
+                Carefully Built Estates
               </h2>
               <p className="text-charcoal-light text-base mt-3 max-w-lg leading-relaxed">
-                Every MiddlePark development is title-verified before ground is broken. Browse our current projects.
+                Every MiddlePark development is built for you and the next generations. Browse our current projects.
               </p>
             </div>
             <Link
