@@ -16,6 +16,8 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { usePortalStore } from '@/lib/store'
+import { useSession, signOut } from 'next-auth/react'
+import { logoutUser } from '@/lib/api'
 
 const navItems = [
   { label: 'Overview', href: '/portal', icon: LayoutDashboard },
@@ -31,6 +33,19 @@ export function PortalSidebar() {
   const collapsed = usePortalStore((state) => state.sidebarCollapsed)
   const toggleSidebar = usePortalStore((state) => state.toggleSidebar)
   const setSidebarCollapsed = usePortalStore((state) => state.setSidebarCollapsed)
+  const { data: session } = useSession()
+
+  const handleLogout = async () => {
+    const token = (session as any)?.accessToken
+    if (token) {
+      try {
+        await logoutUser(token)
+      } catch (e) {
+        // Ignore errors (e.g. if token already expired/invalid)
+      }
+    }
+    await signOut({ callbackUrl: '/login' })
+  }
 
   return (
     <>
@@ -134,6 +149,7 @@ export function PortalSidebar() {
                 <p className="text-charcoal-light text-[11px] truncate">info@middleparkproperties.com</p>
               </div>
               <button
+                onClick={handleLogout}
                 className="p-1.5 rounded-sm text-charcoal-light hover:text-charcoal transition-colors"
                 aria-label="Sign out"
                 title="Sign out"
