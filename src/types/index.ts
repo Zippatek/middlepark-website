@@ -35,7 +35,7 @@ export interface Development {
   amenities: string[]
   highlights: DevelopmentHighlight[]
   paymentPlan?: PaymentPlanInfo
-  certifications: string[]       // e.g. ["AGIS Title Verified", "FCDA Approved"]
+  certifications: string[]       // e.g. ["Quality Guaranteed", "Engineered for Generations"]
   createdAt: string
   completionDate?: string        // Projected or actual handover date
   developer: DeveloperInfo
@@ -163,7 +163,7 @@ export type DocumentCategory =
   | 'sale-agreement'
   | 'payment-receipt'
   | 'handover-document'
-  | 'title-document'
+  | 'compliance-document'
   | 'other'
 
 export interface SiteVisit {

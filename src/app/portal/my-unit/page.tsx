@@ -39,7 +39,7 @@ const specs = [
   { label: 'Floor Area', value: '280 SQM', icon: Maximize2 },
   { label: 'Floor Plan', value: 'Ground + First', icon: Building2 },
   { label: 'Parking', value: '2 covered spaces', icon: Home },
-  { label: 'Title', value: 'Title Verified', icon: Shield },
+  { label: 'Quality', value: 'Certified Excellence', icon: Shield },
 ]
 
 const constructionStages = [

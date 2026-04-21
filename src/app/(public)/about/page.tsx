@@ -43,13 +43,13 @@ const values = [
     icon: Shield,
     title: 'Integrity First',
     description:
-      'Every title is verified, every promise kept. We build trust by being transparent — from pricing to timelines.',
+      'Every material is tested, every promise kept. We build trust by being transparent — from specifications to timelines.',
   },
   {
     icon: Building2,
     title: 'Built to Outlast',
     description:
-      'Reinforced concrete, not timber frames. Every MiddlePark home is engineered for decades of comfortable living.',
+      'We use quality building materials to give premium finishing.',
   },
   {
     icon: FileCheck,
@@ -97,8 +97,8 @@ const teamMembers: TeamMember[] = [
   {
     id: '3',
     name: 'Barr. Chinedu Ikechukwu',
-    title: 'Head of Legal & Title Verification',
-    bio: 'Chinedu leads our title verification process, ensuring every plot is confirmed and free of encumbrances before any construction begins.',
+    title: 'Head of Quality & Compliance',
+    bio: 'Chinedu leads our quality control process, ensuring every building material meets our rigorous structural and finishing standards.',
     avatar: '/images/avatar-default.jpg',
     linkedin: 'https://linkedin.com',
   },
@@ -169,7 +169,6 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <span className="accent-line" />
               <SectionHeader
                 overline="Who We Are"
                 heading="A Developer That Delivers"
@@ -177,14 +176,14 @@ export default function AboutPage() {
               <div className="mt-6 space-y-4 text-charcoal-light text-base leading-relaxed">
                 <p>
                   MiddlePark Properties Limited was established in 2018 with one clear mission — to build
-                  homes across Nigeria that families can trust. In a market where delays, title disputes,
-                  and hidden fees had become the norm, we set out to do things differently.
+                  homes across Nigeria that families can trust. In a market where structural compromises, 
+                  poor finishes, and hidden fees had become the norm, we set out to do things differently.
                 </p>
                 <p>
-                  Every MiddlePark development starts with verified land titles. Before any
-                  foundation is laid, our legal team confirms title verification and government
-                  approval. This is not a feature — it is a requirement. No MiddlePark client
-                  has ever faced a title dispute.
+                  Every MiddlePark development starts with rigorous material testing. Before any 
+                  foundation is laid, our engineering team confirms structural integrity and 
+                  material quality. This is not a feature — it is a requirement. No MiddlePark home 
+                  will ever face a structural compromise.
                 </p>
                 <p>
                   Today, we have delivered over 800 units across 12 developments in Nigeria&apos;s
@@ -228,7 +227,6 @@ export default function AboutPage() {
       <section className="section-padding bg-cream" id="values">
         <div className="middlepark-container">
           <div className="text-center mb-14">
-            <span className="accent-line mx-auto" />
             <SectionHeader
               overline="Our Values"
               heading="What We Stand For"
@@ -270,11 +268,10 @@ export default function AboutPage() {
       <section className="section-padding bg-white" id="team">
         <div className="middlepark-container">
           <div className="text-center mb-14">
-            <span className="accent-line mx-auto" />
             <SectionHeader
               overline="Our Team"
               heading="The People Behind MiddlePark"
-              subCopy="A team of engineers, architects, lawyers, and client relations professionals — all committed to delivering verified, quality homes."
+              subCopy="A team of engineers, architects, and quality control professionals — all committed to delivering exceptional, refined homes."
               align="center"
             />
           </div>
@@ -348,7 +345,6 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="accent-line mx-auto" />
             <SectionHeader
               overline="Get Started"
               heading="Find Your MiddlePark Home"

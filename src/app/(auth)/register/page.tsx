@@ -122,8 +122,7 @@ export default function RegisterPage() {
           {/* Trust badges */}
           <div className="space-y-3">
             {[
-              'Title verified before ground breaks',
-              'Transparent pricing, no hidden fees',
+              'Transparent pricing',
               'Dedicated client relationship manager',
               'Portal access from day one',
             ].map((item) => (
@@ -282,9 +281,8 @@ export default function RegisterPage() {
                         strokeWidth={2.5}
                       />
                       <span
-                        className={`text-[11px] ${
-                          check.met ? 'text-green' : 'text-charcoal-light'
-                        }`}
+                        className={`text-[11px] ${check.met ? 'text-green' : 'text-charcoal-light'
+                          }`}
                       >
                         {check.label}
                       </span>

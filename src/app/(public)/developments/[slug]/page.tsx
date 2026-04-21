@@ -21,7 +21,7 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
     name: 'Dakibiyu Estate Phase 2',
     slug: 'dakibiyu-estate-phase-2',
     tagline: 'Where modern living meets nature',
-    description: 'A 40-unit gated community of 4 and 5-bedroom terrace duplexes in Dakibiyu, one of Abuja\'s fastest-growing neighbourhoods. Every unit is built on verified title land with FCDA approval, featuring top-tier finishes, spacious layouts, and community amenities that make everyday living comfortable.',
+    description: 'A 40-unit gated community of 4 and 5-bedroom terrace duplexes in Dakibiyu, one of Abuja\'s fastest-growing neighbourhoods. Every unit is built with rigorous material testing and structural integrity at its core, featuring top-tier finishes, spacious layouts, and community amenities that make everyday living comfortable.',
     status: 'for-sale',
     location: 'Plot 2045, Dakibiyu District, Abuja',
     neighborhood: 'Dakibiyu',
@@ -38,8 +38,8 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
     images: ['/images/dev-dakibiyu-1.jpg'],
     amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking', 'Borehole Water', 'Tarred Roads'],
     highlights: [
-      { icon: 'Shield', label: 'Title Verified', description: 'All land titles confirmed and verified before construction.' },
-      { icon: 'Building2', label: 'FCDA Approved', description: 'Full Federal Capital Development Authority approval obtained.' },
+      { icon: 'Shield', label: 'Material Tested', description: 'Rigorous testing at every stage to ensure lasting durability.' },
+      { icon: 'Building2', label: 'Certified Quality', description: 'Built with intention, following strict engineering standards.' },
       { icon: 'Award', label: 'MiddlePark Certified', description: 'Built to MiddlePark\'s rigorous quality standards.' },
     ],
     paymentPlan: {
@@ -51,7 +51,7 @@ const mockDevelopments: Record<string, Development & { gallery: string[]; units:
       flexiblePlansAvailable: true,
       note: 'Flexible payment plans available. Speak to our sales team for custom arrangements.',
     },
-    certifications: ['Title Verified', 'Government Approved', 'MiddlePark Quality Seal'],
+    certifications: ['Quality Guaranteed', 'Engineered for Generations', 'MiddlePark Quality Seal'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
     developer: {

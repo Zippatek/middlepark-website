@@ -61,7 +61,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-dakibiyu-1.jpg', '/images/dev-dakibiyu-2.jpg'],
     amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking'],
     highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
+    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
     createdAt: '2025-06-01',
     completionDate: '2027-03-01',
     developer: {
@@ -91,7 +91,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-katampe-1.jpg', '/images/dev-katampe-2.jpg'],
     amenities: ['Estate Club House', 'Swimming Pool', 'Underground Parking', 'Smart Home Ready'],
     highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
+    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
     createdAt: '2025-09-15',
     completionDate: '2028-06-01',
     developer: {
@@ -121,7 +121,7 @@ const featuredDevelopments: Development[] = [
     images: ['/images/dev-apo-1.jpg', '/images/dev-apo-2.jpg'],
     amenities: ['Perimeter Fencing', 'Borehole Water', 'Tarred Roads', 'Green Areas'],
     highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
+    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
     createdAt: '2025-03-01',
     completionDate: '2026-12-01',
     developer: {
@@ -138,7 +138,7 @@ const testimonials: Testimonial[] = [
     clientName: 'Aisha Bello',
     unitPurchased: '4-Bed Terrace, Dakibiyu Phase 1',
     rating: 5,
-    quote: 'From the first site visit to handover, MiddlePark kept every promise. Our title was clean, the build quality exceeded expectations, and we moved in on schedule.',
+    quote: 'From the first site visit to handover, MiddlePark kept every promise. The build quality exceeded expectations, the finishing is exceptional, and we moved in on schedule.',
     avatar: '/images/avatar-default.jpg',
     purchaseYear: 2024,
   },
@@ -163,11 +163,7 @@ const testimonials: Testimonial[] = [
 ]
 
 const whyMiddlePark = [
-  {
-    icon: Shield,
-    title: 'Title Verified Before Ground Breaks',
-    description: 'Every plot is title-verified and government-approved before any construction begins. No grey areas.',
-  },
+
   {
     icon: FileCheck,
     title: 'Transparent Pricing, No Hidden Fees',
@@ -176,20 +172,30 @@ const whyMiddlePark = [
   {
     icon: Building2,
     title: 'Built to Outlast Trends',
-    description: 'We use reinforced concrete, not timber frames. Every unit is designed for decades, not just show.',
+    description: 'We use quality building materials to give premium finishing.',
   },
   {
     icon: Users,
     title: 'Client Portal Access from Day One',
     description: 'Track your payment schedule, construction progress, and download documents from your personal dashboard.',
   },
+  {
+    icon: Shield,
+    title: 'Rigorous Material Testing',
+    description: 'Every batch of materials — from concrete to finishing — is tested before use. No shortcuts, no compromises on what goes into your home.',
+  },
+  {
+    icon: Home,
+    title: 'Complete Estate Infrastructure',
+    description: 'Tarred roads, perimeter fencing, borehole water, and prepaid meters are included as standard — not sold as extras.',
+  },
 ]
 
 const comparisonData = [
   {
-    aspect: 'Title Verification',
-    typical: 'Verbal assurance, often unverified',
-    middlepark: 'Title confirmed and government approved before construction begins',
+    aspect: 'Structural Integrity',
+    typical: 'Standard blocks, quick finishes',
+    middlepark: 'Reinforced concrete, rigorously tested materials, and superior finishing',
   },
   {
     aspect: 'Pricing',
@@ -201,11 +207,7 @@ const comparisonData = [
     typical: '"18 months" that becomes 3+ years',
     middlepark: 'Published timeline with milestone tracking via your Client Portal',
   },
-  {
-    aspect: 'Construction Quality',
-    typical: 'Timber frame, quick finishes',
-    middlepark: 'Reinforced concrete, porcelain tiles, solid hardwood cabinetry',
-  },
+
   {
     aspect: 'Communication',
     typical: 'Occasional WhatsApp updates',
@@ -213,13 +215,13 @@ const comparisonData = [
   },
   {
     aspect: 'Documentation',
-    typical: 'Handed over informally, often incomplete',
-    middlepark: 'Full digital documentation pack — title, building plans, receipts, warranties',
+    typical: 'Handover informally, often incomplete',
+    middlepark: 'Full digital documentation pack — building plans, receipts, and certificates of handover',
   },
 ]
 
 const processSteps = [
-  { number: '01', title: 'Title Verification', description: 'We confirm title verification and government approval before anything else. Your land is clean.', image: '/images/process-title-verification.png' },
+  { number: '01', title: 'Quality Assurance', description: 'We conduct rigorous material testing and structural analysis before any construction begins to ensure a final building to last generations.', image: '/images/process-title-verification.png' },
   { number: '02', title: 'Unit Selection & Pricing', description: 'Choose your preferred unit type, review the transparent pricing breakdown, and lock in your selection.', image: '/images/process-unit-selection.png' },
   { number: '03', title: 'Payment Plan Agreement', description: 'Select a payment plan that works for you — no hidden extras, no development levies at handover.', image: '/images/process-payment-plan.png' },
   { number: '04', title: 'Construction & Updates', description: 'Track progress through your Client Portal. Real-time photo updates, milestone notifications, documented at every stage.', image: '/images/interior-kitchen.jpg' },
@@ -251,7 +253,7 @@ const neighbourhoods = [
 ]
 
 const certifications = [
-  { icon: Shield, label: 'Title Verified' },
+  { icon: Shield, label: 'Quality Certified' },
   { icon: FileCheck, label: 'Government Approved' },
   { icon: Award, label: 'MiddlePark Quality Seal' },
   { icon: Building2, label: 'COREN Registered' },
@@ -453,7 +455,7 @@ function HeroImageElement({
           </div>
           <div>
             <p className="text-white text-sm font-medium">MiddlePark Certified</p>
-            <p className="text-white/60 text-xs">Title Verified Before We Break Ground</p>
+            <p className="text-white/60 text-xs">Built for You and the Next Generations</p>
           </div>
         </motion.div>
       </div>
@@ -859,29 +861,14 @@ export default function HomePage() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <motion.div
-                  className="w-2 h-2 rounded-full bg-green"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                />
-                <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                  Our Developments
-                </p>
-              </div>
-              <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1]">
-                Carefully Built Estates
-              </h2>
-              <p className="text-charcoal-light text-base mt-3 max-w-lg leading-relaxed">
-                Every MiddlePark development is built for you and the next generations. Browse our current projects.
-              </p>
-            </div>
+            <SectionHeader
+              overline="Our Developments"
+              heading="Carefully Built Estates"
+              subCopy="Every MiddlePark development is built for you and the next generations. Browse our current projects."
+            />
             <Link
               href="/developments"
-              className="inline-flex items-center gap-2 text-charcoal text-sm font-medium shrink-0 hover:text-green transition-colors duration-200 group"
+              className="inline-flex items-center gap-2 text-charcoal text-sm font-medium shrink-0 hover:text-green transition-colors duration-200 group mb-2"
             >
               VIEW ALL
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -918,19 +905,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             {/* Left — Sticky header + image */}
             <div className="lg:sticky lg:top-32">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-green" />
-                <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                  Why MiddlePark
-                </p>
-              </div>
-              <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1] mb-5">
-                We Build Homes That<br />Keep Their Promise
-              </h2>
-              <p className="text-charcoal-light text-base leading-[1.7] mb-8 max-w-md">
-                In a market where delays and disputes are common, MiddlePark delivers on time, on budget, and on paper.
-              </p>
-              <div className="relative h-[320px] lg:h-[380px] rounded-[16px] overflow-hidden">
+              <SectionHeader
+                overline="Why MiddlePark"
+                heading="We Build Homes That Keep Their Promise"
+                subCopy="In a market where delays and disputes are common, MiddlePark delivers on time, on budget, and on paper."
+              />
+              <div className="relative h-[320px] lg:h-[380px] rounded-[16px] overflow-hidden mt-8">
                 <Image
                   src="/images/why-middlepark-interior.jpg"
                   alt="MiddlePark interior — living room"
@@ -956,22 +936,14 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-cream" id="difference">
         <div className="middlepark-container">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-2 h-2 rounded-full bg-green" />
-              <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                The Difference
-              </p>
-            </div>
-            <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1] mb-4">
-              Why Families Choose MiddlePark
-            </h2>
-            <p className="text-charcoal-light text-base max-w-lg mx-auto leading-relaxed">
-              We removed everything that was wrong with buying property in Nigeria.
-            </p>
-          </div>
+          <SectionHeader
+            overline="The Difference"
+            heading="Why Families Choose MiddlePark"
+            subCopy="The details that separate a MiddlePark home from everything else."
+            align="center"
+          />
 
-          <div className="max-w-[960px] mx-auto border-t border-[#E5E5EA]">
+          <div className="max-w-[960px] mx-auto border-t border-[#E5E5EA] mt-16">
             {comparisonData.map((row, i) => (
               <ComparisonAccordion key={row.aspect} row={row} index={i} />
             ))}
@@ -984,17 +956,14 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-[#F2F2F7]" id="process">
         <div className="middlepark-container">
-          <div className="text-center mb-12 lg:mb-20">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-2 h-2 rounded-full bg-green" />
-              <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                How We Work
-              </p>
-            </div>
-            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1]">
-              From Enquiry to Keys in Hand
-            </h2>
-          </div>
+          <SectionHeader
+            overline="How We Work"
+            heading="From Enquiry to Keys in Hand"
+            align="center"
+          />
+        </div>
+
+        <div className="middlepark-container mt-12 lg:mt-20">
 
           {/* Desktop — Alternating timeline */}
           <div className="hidden lg:block space-y-0">
@@ -1104,8 +1073,7 @@ export default function HomePage() {
             </div>
             <div className="lg:text-right">
               <p className="text-charcoal-light text-base leading-[1.7] max-w-md lg:ml-auto mb-5">
-                Every MiddlePark home comes finished to move-in standard. High-grade porcelain
-                tiles, solid hardwood kitchen cabinets, and integrated smart-home rough-ins.
+                Every MiddlePark home comes finished to move-in standard.
               </p>
               <Link
                 href="/developments"
@@ -1195,20 +1163,12 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-green" />
-                <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                  Community
-                </p>
-              </div>
-              <h2 className="font-cormorant text-charcoal-dark text-4xl lg:text-[44px] font-bold leading-[1.1] mb-5">
-                Neighbourhoods<br />That Work For You
-              </h2>
-              <p className="text-charcoal-light text-base leading-[1.7] mb-8 max-w-md">
-                We build in established neighbourhoods with existing infrastructure — tarred
-                roads, reliable power connections, and proximity to schools, hospitals, and retail.
-              </p>
-              <div className="grid grid-cols-2 gap-5 mb-8">
+              <SectionHeader
+                overline="Community"
+                heading="Neighbourhoods That Work For You"
+                subCopy="We build in established neighbourhoods with existing infrastructure — tarred roads, reliable power connections, and proximity to schools, hospitals, and retail."
+              />
+              <div className="grid grid-cols-2 gap-5 mb-8 mt-8">
                 {[
                   { icon: MapPin, label: 'Established locations' },
                   { icon: Home, label: 'Gated communities' },
@@ -1236,20 +1196,13 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-white" id="neighbourhoods">
         <div className="middlepark-container">
-          <div className="text-center mb-10 lg:mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-2 h-2 rounded-full bg-green" />
-              <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                Where We Build
-              </p>
-            </div>
-            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1] mb-3 sm:mb-4">
-              Nigeria&apos;s Most Established<br />Neighbourhoods
-            </h2>
-            <p className="text-charcoal-light text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-              We develop exclusively in locations with existing infrastructure, proven land titles, and strong property appreciation.
-            </p>
-          </div>
+          <SectionHeader
+            overline="Where We Build"
+            heading="Nigeria's Most Established Neighbourhoods"
+            subCopy="We develop exclusively in locations with existing infrastructure, proven land titles, and strong property appreciation."
+            align="center"
+          />
+          <div className="mt-12 lg:mt-16"></div>
 
           {/* Desktop — Full cards */}
           <motion.div
@@ -1330,17 +1283,12 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="section-padding bg-[#F2F2F7]" id="testimonials">
         <div className="middlepark-container">
-          <div className="text-center mb-10 lg:mb-14">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-2 h-2 rounded-full bg-green" />
-              <p className="text-charcoal-light text-xs uppercase tracking-[0.15em] font-semibold">
-                What Our Clients Say
-              </p>
-            </div>
-            <h2 className="font-cormorant text-charcoal-dark text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1]">
-              Trusted by Property Owners<br />Across Nigeria
-            </h2>
-          </div>
+          <SectionHeader
+            overline="What Our Clients Say"
+            heading="Trusted by Property Owners Across Nigeria"
+            align="center"
+          />
+          <div className="mt-10 lg:mt-14"></div>
 
           {/* Desktop — Full grid */}
           <motion.div
@@ -1554,16 +1502,14 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-green text-xs uppercase tracking-[0.25em] font-semibold mb-4">
-              Stay Updated
-            </p>
-            <h2 className="font-cormorant text-white text-4xl lg:text-5xl font-bold leading-tight mb-4">
-              Be the First to Know
-            </h2>
-            <p className="text-white/45 text-[15px] leading-[1.7] mb-10 font-sans">
-              Get early access to new developments, pricing, and availability before they go
-              public. No spam — just the updates that matter.
-            </p>
+            <SectionHeader
+              overline="Stay Updated"
+              heading="Be the First to Know"
+              subCopy="Get early access to new developments, pricing, and availability before they go public. No spam — just the updates that matter."
+              align="center"
+              onDark={true}
+            />
+            <div className="mt-10"></div>
 
             <form
               className="flex flex-col sm:flex-row gap-3 max-w-[460px] mx-auto"
