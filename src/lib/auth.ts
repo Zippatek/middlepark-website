@@ -30,12 +30,13 @@ const authConfig: NextAuthConfig = {
 
           if (!res.success || !res.data) return null
 
-          const { id, firstName, lastName, email, accessToken, refreshToken } = res.data
+          const { id, firstName, lastName, email, role, accessToken, refreshToken } = res.data
 
           return {
             id,
             name: `${firstName} ${lastName}`,
             email,
+            role,
             // Store tokens in the user object so JWT callback can access them
             accessToken,
             refreshToken,
@@ -71,6 +72,7 @@ const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
+        token.role = (user as any).role
         // These come from the authorize() return above
         token.accessToken = (user as any).accessToken
         token.refreshToken = (user as any).refreshToken
@@ -82,6 +84,7 @@ const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
+        ;(session.user as any).role = token.role
         ;(session as any).accessToken = token.accessToken
       }
       return session

@@ -13,6 +13,10 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  Shield,
+  Users,
+  Building2,
+  Landmark,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { usePortalStore } from '@/lib/store'
@@ -84,6 +88,11 @@ export function PortalSidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto mp-scrollbar">
+          {!collapsed && (
+            <p className="px-4 text-[10px] font-bold text-charcoal-light/40 uppercase tracking-widest mb-2">
+              Client Portal
+            </p>
+          )}
           {navItems.map((item) => {
             const isActive = pathname === item.href ||
               (item.href !== '/portal' && pathname.startsWith(item.href))
@@ -115,6 +124,36 @@ export function PortalSidebar() {
               </Link>
             )
           })}
+
+          {/* Admin Section */}
+          {((session?.user as any)?.role === 'SUPER_ADMIN' || (session?.user as any)?.role === 'ADMIN') && (
+            <div className={cn("pt-6 mt-6 border-t border-cream-divider", collapsed && "border-none pt-0 mt-0")}>
+              {!collapsed && (
+                <p className="px-4 text-[10px] font-bold text-red/60 uppercase tracking-widest mb-2">
+                  Administration
+                </p>
+              )}
+              <div className="space-y-1">
+                {[
+                  { label: 'Admin Home', icon: Shield, href: '/admin' },
+                  { label: 'All Clients', icon: Users, href: '/admin/clients' },
+                  { label: 'Developments', icon: Building2, href: '/admin/developments' },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className={cn(
+                      'flex items-center gap-3 py-3 px-4 text-charcoal-light/40 cursor-not-allowed',
+                      collapsed && 'justify-center px-2'
+                    )}
+                    title={`${item.label} (Coming Soon)`}
+                  >
+                    <item.icon size={20} strokeWidth={1.5} className="shrink-0" />
+                    {!collapsed && <span className="text-sm font-medium truncate">{item.label}</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* Collapse Toggle (when collapsed) */}
@@ -137,16 +176,30 @@ export function PortalSidebar() {
         )}>
           {collapsed ? (
             <div className="w-9 h-9 rounded-avatar bg-cream-dark flex items-center justify-center mx-auto">
-              <span className="text-green text-xs font-bold">AB</span>
+              <span className="text-green text-xs font-bold">
+                {session?.user?.name ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'MP'}
+              </span>
             </div>
           ) : (
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-avatar bg-cream-dark flex items-center justify-center shrink-0">
-                <span className="text-green text-xs font-bold">AB</span>
+                <span className="text-green text-xs font-bold">
+                  {session?.user?.name ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'MP'}
+                </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-charcoal text-sm font-medium truncate">Aisha Bello</p>
-                <p className="text-charcoal-light text-[11px] truncate">info@middleparkproperties.com</p>
+                <p className="text-charcoal text-sm font-medium truncate">{session?.user?.name || 'User'}</p>
+                <div className="flex items-center gap-1.5">
+                  <span className={cn(
+                    "text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter",
+                    (session?.user as any)?.role === 'SUPER_ADMIN' || (session?.user as any)?.role === 'ADMIN'
+                      ? "bg-red text-white"
+                      : "bg-green-tint text-green"
+                  )}>
+                    {(session?.user as any)?.role || 'Client'}
+                  </span>
+                  <p className="text-charcoal-light text-[10px] truncate">{session?.user?.email}</p>
+                </div>
               </div>
               <button
                 onClick={handleLogout}
