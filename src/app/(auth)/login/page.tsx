@@ -3,11 +3,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, ChevronRight, ArrowLeft, Shield, CheckCircle2 } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui'
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -19,15 +22,18 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
-    // Simulate auth — replace with actual NextAuth signIn
-    await new Promise((r) => setTimeout(r, 1500))
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    })
 
-    if (email === 'info@middleparkproperties.com' && password === 'Demo1234') {
-      // Success — redirect to portal
-      window.location.href = '/portal'
-    } else {
-      setError('Invalid email or password. Try info@middleparkproperties.com / Demo1234')
+    if (result?.error) {
+      setError('Invalid email or password. Please check your credentials and try again.')
       setLoading(false)
+    } else {
+      router.push('/portal')
+      router.refresh()
     }
   }
 
@@ -192,16 +198,7 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          {/* Demo credentials notice */}
-          <div className="mt-6 p-3 rounded-sm bg-green-tint border border-green-muted">
-            <p className="text-charcoal text-xs font-medium mb-1">Demo Credentials</p>
-            <p className="text-charcoal-light text-xs">
-              Email: <code className="text-green font-medium">info@middleparkproperties.com</code>
-            </p>
-            <p className="text-charcoal-light text-xs">
-              Password: <code className="text-green font-medium">Demo1234</code>
-            </p>
-          </div>
+
 
           {/* Register Link */}
           <p className="text-center text-charcoal-light text-sm mt-8">

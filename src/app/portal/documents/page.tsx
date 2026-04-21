@@ -1,105 +1,78 @@
 'use client'
+export const dynamic = 'force-dynamic'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import {
   FileText,
   Download,
   Eye,
   Search,
-  Filter,
-  File,
   FileCheck,
   Receipt,
   ShieldCheck,
+  File,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getDocuments, downloadDocument } from '@/lib/api'
+import type { Document } from '@/types'
 
-const tabs = [
-  { label: 'All', value: 'all', count: 8 },
-  { label: 'Legal', value: 'legal', count: 3 },
-  { label: 'Financial', value: 'financial', count: 3 },
-  { label: 'Construction', value: 'construction', count: 2 },
+const CATEGORY_TABS = [
+  { label: 'All',          value: 'all' },
+  { label: 'Legal',        value: 'ALLOCATION_LETTER,SALE_AGREEMENT' },
+  { label: 'Financial',    value: 'PAYMENT_RECEIPT' },
+  { label: 'Construction', value: 'COMPLIANCE_DOCUMENT,OTHER' },
 ]
 
-const documents = [
-  {
-    id: 1,
-    name: 'Offer Letter — Unit 12B',
-    category: 'legal',
-    date: 'Jan 15, 2025',
-    size: '245 KB',
-    icon: FileCheck,
-  },
-  {
-    id: 2,
-    name: 'Sales Agreement',
-    category: 'legal',
-    date: 'Jan 20, 2025',
-    size: '1.2 MB',
-    icon: FileCheck,
-  },
-  {
-    id: 3,
-    name: 'Structural Compliance Certificate',
-    category: 'legal',
-    date: 'Feb 01, 2025',
-    size: '890 KB',
-    icon: ShieldCheck,
-  },
-  {
-    id: 4,
-    name: 'Payment Receipt — Initial Deposit',
-    category: 'financial',
-    date: 'Jan 15, 2025',
-    size: '120 KB',
-    icon: Receipt,
-  },
-  {
-    id: 5,
-    name: 'Payment Receipt — 2nd Instalment',
-    category: 'financial',
-    date: 'Apr 15, 2025',
-    size: '118 KB',
-    icon: Receipt,
-  },
-  {
-    id: 6,
-    name: 'Payment Schedule (Updated)',
-    category: 'financial',
-    date: 'Mar 01, 2025',
-    size: '95 KB',
-    icon: Receipt,
-  },
-  {
-    id: 7,
-    name: 'Construction Update — Q1 2025',
-    category: 'construction',
-    date: 'Mar 01, 2025',
-    size: '3.4 MB',
-    icon: File,
-  },
-  {
-    id: 8,
-    name: 'Construction Update — Q4 2025',
-    category: 'construction',
-    date: 'Dec 15, 2025',
-    size: '4.1 MB',
-    icon: File,
-  },
-]
+function docIcon(category: string) {
+  if (category === 'PAYMENT_RECEIPT') return Receipt
+  if (category === 'SALE_AGREEMENT' || category === 'ALLOCATION_LETTER') return FileCheck
+  if (category === 'COMPLIANCE_DOCUMENT') return ShieldCheck
+  return File
+}
+
+function formatDate(d: string | Date) {
+  return new Date(d).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' })
+}
 
 export default function DocumentsPage() {
+  const { data: session } = useSession()
   const [activeTab, setActiveTab] = useState('all')
   const [search, setSearch] = useState('')
+  const [documents, setDocuments] = useState<Document[]>([])
+  const [loading, setLoading] = useState(true)
+  const [downloadingId, setDownloadingId] = useState<string | null>(null)
 
-  const filtered = documents.filter((doc) => {
-    if (activeTab !== 'all' && doc.category !== activeTab) return false
-    if (search) {
-      return doc.name.toLowerCase().includes(search.toLowerCase())
-    }
-    return true
-  })
+  useEffect(() => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    setLoading(true)
+    const category = activeTab !== 'all' ? activeTab : undefined
+    getDocuments(token, { category, search: search || undefined })
+      .then((res) => { if (res.success && res.data) setDocuments(res.data) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [session, activeTab, search])
+
+  const handleDownload = async (id: string) => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    setDownloadingId(id)
+    try {
+      const res = await downloadDocument(token, id)
+      if (res.success && res.data?.downloadUrl) {
+        window.open(res.data.downloadUrl, '_blank')
+      }
+    } catch {}
+    finally { setDownloadingId(null) }
+  }
+
+  // Count by category for tab badges
+  const countForTab = (val: string) =>
+    val === 'all'
+      ? documents.length
+      : documents.filter((d) => val.split(',').includes(d.category)).length
 
   return (
     <div className="max-w-portal mx-auto space-y-6">
@@ -134,7 +107,7 @@ export default function DocumentsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.4 }}
       >
-        {tabs.map((tab) => (
+        {CATEGORY_TABS.map((tab) => (
           <button
             key={tab.value}
             onClick={() => setActiveTab(tab.value)}
@@ -146,12 +119,6 @@ export default function DocumentsPage() {
             )}
           >
             {tab.label}
-            <span className={cn(
-              'ml-1.5 text-[10px]',
-              activeTab === tab.value ? 'text-white/70' : 'text-charcoal-light'
-            )}>
-              ({tab.count})
-            </span>
           </button>
         ))}
       </motion.div>
@@ -163,40 +130,54 @@ export default function DocumentsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        {filtered.length > 0 ? (
-          <div className="divide-y divide-cream-divider">
-            {filtered.map((doc) => (
-              <div
-                key={doc.id}
-                className="flex items-center gap-4 px-6 py-4 hover:bg-cream/50 transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-container bg-green-tint flex items-center justify-center shrink-0">
-                  <doc.icon size={18} className="text-green" strokeWidth={1.5} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-charcoal text-sm font-medium truncate">{doc.name}</p>
-                  <p className="text-charcoal-light text-xs">
-                    {doc.date} · {doc.size}
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    className="p-2 rounded-sm text-charcoal-light hover:text-charcoal hover:bg-cream transition-all opacity-0 group-hover:opacity-100"
-                    aria-label="Preview"
-                    title="Preview"
-                  >
-                    <Eye size={16} />
-                  </button>
-                  <button
-                    className="p-2 rounded-sm text-charcoal-light hover:text-green hover:bg-green-tint transition-all"
-                    aria-label="Download"
-                    title="Download"
-                  >
-                    <Download size={16} />
-                  </button>
+        {loading ? (
+          <div className="divide-y divide-cream-divider animate-pulse">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex items-center gap-4 px-6 py-4">
+                <div className="w-10 h-10 rounded-container bg-cream shrink-0" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-3 bg-cream rounded w-2/3" />
+                  <div className="h-2 bg-cream rounded w-1/3" />
                 </div>
               </div>
             ))}
+          </div>
+        ) : documents.length > 0 ? (
+          <div className="divide-y divide-cream-divider">
+            {documents.map((doc) => {
+              const Icon = docIcon(doc.category)
+              return (
+                <div
+                  key={doc.id}
+                  className="flex items-center gap-4 px-6 py-4 hover:bg-cream/50 transition-colors group"
+                >
+                  <div className="w-10 h-10 rounded-container bg-green-tint flex items-center justify-center shrink-0">
+                    <Icon size={18} className="text-green" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-charcoal text-sm font-medium truncate">{doc.name}</p>
+                    <p className="text-charcoal-light text-xs">
+                      {formatDate(doc.issuedAt)} {doc.fileSize && `· ${doc.fileSize}`}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={() => handleDownload(doc.id)}
+                      disabled={downloadingId === doc.id}
+                      className="p-2 rounded-sm text-charcoal-light hover:text-green hover:bg-green-tint transition-all disabled:opacity-50"
+                      aria-label="Download"
+                      title="Download"
+                    >
+                      {downloadingId === doc.id ? (
+                        <span className="w-4 h-4 border border-green border-t-transparent rounded-full animate-spin block" />
+                      ) : (
+                        <Download size={16} />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         ) : (
           <div className="text-center py-16">

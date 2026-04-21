@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { Button, SectionHeader } from '@/components/ui'
+import { submitContact } from '@/lib/api'
 
 // Dynamically import map to avoid SSR issues with Leaflet
 const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), {
@@ -82,11 +83,30 @@ const developments = [
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formLoading, setFormLoading] = useState(false)
+  const [formError, setFormError] = useState('')
+  const [formData, setFormData] = useState({
+    fullName: '', phone: '', email: '', development: '', message: ''
+  })
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setFormSubmitted(true)
-    setTimeout(() => setFormSubmitted(false), 4000)
+    setFormError('')
+    setFormLoading(true)
+    try {
+      await submitContact({
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        development: formData.development || undefined,
+        message: formData.message || undefined,
+      })
+      setFormSubmitted(true)
+    } catch (err: any) {
+      setFormError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setFormLoading(false)
+    }
   }
 
   return (
@@ -239,6 +259,15 @@ export default function ContactPage() {
                 </motion.div>
               ) : (
                 <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+                  {formError && (
+                    <motion.div
+                      className="p-3 rounded-sm bg-red-50 border border-red-200 text-red-700 text-xs"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      {formError}
+                    </motion.div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-name" className="mp-label">Full Name</label>
@@ -247,6 +276,8 @@ export default function ContactPage() {
                         id="contact-name"
                         placeholder="Your full name"
                         required
+                        value={formData.fullName}
+                        onChange={(e) => setFormData(p => ({ ...p, fullName: e.target.value }))}
                         className="mp-input"
                       />
                     </div>
@@ -257,6 +288,8 @@ export default function ContactPage() {
                         id="contact-phone"
                         placeholder="+234 ..."
                         required
+                        value={formData.phone}
+                        onChange={(e) => setFormData(p => ({ ...p, phone: e.target.value }))}
                         className="mp-input"
                       />
                     </div>
@@ -269,6 +302,8 @@ export default function ContactPage() {
                       id="contact-email"
                       placeholder="you@example.com"
                       required
+                      value={formData.email}
+                      onChange={(e) => setFormData(p => ({ ...p, email: e.target.value }))}
                       className="mp-input"
                     />
                   </div>
@@ -278,9 +313,10 @@ export default function ContactPage() {
                     <select
                       id="contact-development"
                       className="mp-input cursor-pointer"
-                      defaultValue=""
+                      value={formData.development}
+                      onChange={(e) => setFormData(p => ({ ...p, development: e.target.value }))}
                     >
-                      <option value="" disabled>Select a development</option>
+                      <option value="">Select a development</option>
                       {developments.slice(1).map((d) => (
                         <option key={d} value={d}>{d}</option>
                       ))}
@@ -293,11 +329,13 @@ export default function ContactPage() {
                       id="contact-message"
                       placeholder="Tell us what you&apos;re looking for..."
                       rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData(p => ({ ...p, message: e.target.value }))}
                       className="mp-input resize-none"
                     />
                   </div>
 
-                  <Button variant="primary" size="lg" type="submit" fullWidth>
+                  <Button variant="primary" size="lg" type="submit" fullWidth loading={formLoading} disabled={formLoading}>
                     SEND MESSAGE <Send size={14} />
                   </Button>
 
@@ -306,6 +344,7 @@ export default function ContactPage() {
                   </p>
                 </form>
               )}
+
             </motion.div>
 
             {/* Map */}

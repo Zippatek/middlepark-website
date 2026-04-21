@@ -3,22 +3,30 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Mail, ChevronRight, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, Mail, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui'
+import { forgotPasswordRequest } from '@/lib/api'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
     setLoading(true)
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500))
-    setSent(true)
-    setLoading(false)
+    try {
+      await forgotPasswordRequest(email)
+      setSent(true)
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
@@ -97,6 +105,16 @@ export default function ForgotPasswordPage() {
                 Enter the email address associated with your account and we&apos;ll send you a
                 link to reset your password.
               </p>
+
+              {error && (
+                <motion.div
+                  className="mb-4 p-3 rounded-sm bg-red-50 border border-red-200 text-red-700 text-xs"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {error}
+                </motion.div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>

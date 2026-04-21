@@ -3,9 +3,12 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, ChevronRight, ArrowLeft, Shield, CheckCircle2, Check } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui'
+import { registerUser } from '@/lib/api'
 
 const developments = [
   'Dakibiyu Estate Phase 2',
@@ -18,6 +21,7 @@ const developments = [
 ]
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -31,6 +35,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
   const updateField = (field: string, value: string | boolean) => {
@@ -45,11 +50,40 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.')
+      return
+    }
     setLoading(true)
-    // Simulate registration
-    await new Promise((r) => setTimeout(r, 2000))
-    setSuccess(true)
-    setLoading(false)
+    try {
+      const res = await registerUser({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        password: formData.password,
+        developmentInterest: formData.developmentInterest || undefined,
+        terms: true,
+      })
+      if (!res.success) throw new Error(res.error || 'Registration failed')
+      // Auto sign in after registration
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      })
+      if (result?.ok) {
+        router.push('/portal')
+      } else {
+        // Registration succeeded but auto-login failed — show success anyway
+        setSuccess(true)
+      }
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (success) {
@@ -173,6 +207,17 @@ export default function RegisterPage() {
           <p className="text-charcoal-light text-sm mb-8">
             Register to access the MiddlePark client portal.
           </p>
+
+          {/* Error */}
+          {error && (
+            <motion.div
+              className="mb-4 p-3 rounded-sm bg-red-50 border border-red-200 text-red-700 text-xs"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {error}
+            </motion.div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">

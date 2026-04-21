@@ -1,6 +1,8 @@
 'use client'
+export const dynamic = 'force-dynamic'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import {
   User,
@@ -10,11 +12,12 @@ import {
   Save,
   Eye,
   EyeOff,
-  ChevronRight,
   CheckCircle2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui'
+import { getSettings, updateProfile, updateNotifications, updatePassword } from '@/lib/api'
+import type { NotificationPrefs, PortalSettings } from '@/lib/api'
 
 const settingsTabs = [
   { label: 'Profile', value: 'profile', icon: User },
@@ -24,19 +27,22 @@ const settingsTabs = [
 ]
 
 export default function SettingsPage() {
+  const { data: session } = useSession()
   const [activeTab, setActiveTab] = useState('profile')
   const [saved, setSaved] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const [saving, setSaving] = useState(false)
   const [showOldPassword, setShowOldPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
 
   const [profile, setProfile] = useState({
-    firstName: 'Aisha',
-    lastName: 'Bello',
-    email: 'info@middleparkproperties.com',
-    phone: '0805 526 9579',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
   })
 
-  const [notifications, setNotifications] = useState({
+  const [notifications, setNotifications] = useState<NotificationPrefs>({
     email_payment: true,
     email_construction: true,
     email_documents: false,
@@ -46,13 +52,77 @@ export default function SettingsPage() {
     sms_visits: true,
   })
 
-  const handleSave = () => {
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2500)
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  })
+
+  // Load settings from API
+  useEffect(() => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    getSettings(token)
+      .then((res) => {
+        if (res.success && res.data) {
+          const d: PortalSettings = res.data
+          setProfile({
+            firstName: d.profile.firstName,
+            lastName: d.profile.lastName,
+            email: d.profile.email,
+            phone: d.profile.phone || '',
+          })
+          setNotifications(d.notifications)
+        }
+      })
+      .catch(() => {})
+  }, [session])
+
+  const showSaved = () => { setSaved(true); setTimeout(() => setSaved(false), 2500) }
+
+  const handleSaveProfile = async () => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    setSaving(true); setSaveError('')
+    try {
+      await updateProfile(token, profile)
+      showSaved()
+    } catch (e: any) { setSaveError(e.message || 'Save failed') }
+    finally { setSaving(false) }
+  }
+
+  const handleSaveNotifications = async () => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    setSaving(true); setSaveError('')
+    try {
+      await updateNotifications(token, notifications)
+      showSaved()
+    } catch (e: any) { setSaveError(e.message || 'Save failed') }
+    finally { setSaving(false) }
+  }
+
+  const handleSavePassword = async () => {
+    const token = (session as any)?.accessToken
+    if (!token) return
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setSaveError('Passwords do not match')
+      return
+    }
+    setSaving(true); setSaveError('')
+    try {
+      await updatePassword(token, {
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword,
+      })
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' })
+      showSaved()
+    } catch (e: any) { setSaveError(e.message || 'Update failed') }
+    finally { setSaving(false) }
   }
 
   const toggleNotif = (key: string) => {
-    setNotifications((prev) => ({ ...prev, [key]: !prev[key as keyof typeof prev] }))
+    setNotifications((prev) => ({ ...prev, [key]: !prev[key as keyof NotificationPrefs] }))
   }
 
   return (
@@ -156,9 +226,10 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 mt-8">
-                <Button variant="primary" onClick={handleSave}>
-                  <Save size={14} /> SAVE CHANGES
+                <div className="flex items-center gap-3 mt-8">
+                <Button variant="primary" onClick={handleSaveProfile} disabled={saving}>
+                  {saving ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save size={14} />}
+                  SAVE CHANGES
                 </Button>
                 {saved && (
                   <motion.span
@@ -169,6 +240,7 @@ export default function SettingsPage() {
                     <CheckCircle2 size={14} /> Saved
                   </motion.span>
                 )}
+                {saveError && <p className="text-red-600 text-xs">{saveError}</p>}
               </div>
             </div>
           )}
@@ -243,9 +315,19 @@ export default function SettingsPage() {
               </div>
 
               <div className="mt-8">
-                <Button variant="primary" onClick={handleSave}>
-                  <Save size={14} /> SAVE PREFERENCES
+                <Button variant="primary" onClick={handleSaveNotifications} disabled={saving}>
+                  {saving ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save size={14} />}
+                  SAVE PREFERENCES
                 </Button>
+                {saved && (
+                  <motion.span
+                    className="flex items-center gap-1.5 text-green text-xs font-medium ml-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <CheckCircle2 size={14} /> Saved
+                  </motion.span>
+                )}
               </div>
             </div>
           )}
@@ -264,6 +346,8 @@ export default function SettingsPage() {
                       type={showOldPassword ? 'text' : 'password'}
                       id="sec-old-pw"
                       placeholder="Enter current password"
+                      value={passwordForm.currentPassword}
+                      onChange={(e) => setPasswordForm(p => ({ ...p, currentPassword: e.target.value }))}
                       className="mp-input pr-11"
                     />
                     <button
@@ -282,6 +366,8 @@ export default function SettingsPage() {
                       type={showNewPassword ? 'text' : 'password'}
                       id="sec-new-pw"
                       placeholder="Enter new password"
+                      value={passwordForm.newPassword}
+                      onChange={(e) => setPasswordForm(p => ({ ...p, newPassword: e.target.value }))}
                       className="mp-input pr-11"
                     />
                     <button
@@ -299,15 +385,24 @@ export default function SettingsPage() {
                     type="password"
                     id="sec-confirm-pw"
                     placeholder="Confirm new password"
+                    value={passwordForm.confirmPassword}
+                    onChange={(e) => setPasswordForm(p => ({ ...p, confirmPassword: e.target.value }))}
                     className="mp-input"
                   />
                 </div>
               </div>
 
-              <div className="mt-8">
-                <Button variant="primary" onClick={handleSave}>
-                  <Save size={14} /> UPDATE PASSWORD
+              <div className="mt-8 space-y-2">
+                <Button variant="primary" onClick={handleSavePassword} disabled={saving}>
+                  {saving ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save size={14} />}
+                  UPDATE PASSWORD
                 </Button>
+                {saved && (
+                  <motion.p className="text-green text-xs flex items-center gap-1.5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <CheckCircle2 size={12} /> Password updated successfully.
+                  </motion.p>
+                )}
+                {saveError && <p className="text-red-600 text-xs">{saveError}</p>}
               </div>
             </div>
           )}

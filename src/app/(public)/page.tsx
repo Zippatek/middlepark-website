@@ -31,108 +31,21 @@ import {
 } from 'lucide-react'
 import { Button, SectionHeader, DevelopmentCard } from '@/components/ui'
 import type { Development, Testimonial } from '@/types'
+import {
+  getFeaturedDevelopments,
+  getTestimonials,
+  getSiteStats,
+  addToWaitlist,
+} from '@/lib/api'
 
-// ─── MOCK DATA ──────────────────────────────────────────────────────────────
-const stats = [
+// ─── FALLBACK STATIC DATA (shown while API loads or if unavailable) ───────────
+const FALLBACK_STATS = [
   { number: '12+', label: 'Completed Developments' },
   { number: '300+', label: 'Units Delivered' },
   { number: '₦100B+', label: 'Property Value Managed' },
 ]
 
-const featuredDevelopments: Development[] = [
-  {
-    id: 'MP-ABJ-0012',
-    name: 'Dakibiyu Estate Phase 2',
-    slug: 'dakibiyu-estate-phase-2',
-    tagline: 'Where modern living meets nature',
-    description: 'A 40-unit gated community of 4 and 5-bedroom terrace duplexes in Dakibiyu, one of Abuja\'s fastest-growing neighbourhoods.',
-    status: 'for-sale',
-    location: 'Plot 2045, Dakibiyu District, Abuja',
-    neighborhood: 'Dakibiyu',
-    city: 'Abuja',
-    priceFrom: 95000000,
-    priceTo: 120000000,
-    unitTypes: [],
-    totalUnits: 40,
-    availableUnits: 12,
-    bedrooms: [4, 5],
-    bathrooms: [4, 5],
-    sizeRange: '260–320 SQM',
-    images: ['/images/dev-dakibiyu-1.jpg', '/images/dev-dakibiyu-2.jpg'],
-    amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking'],
-    highlights: [],
-    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
-    createdAt: '2025-06-01',
-    completionDate: '2027-03-01',
-    developer: {
-      name: 'MiddlePark Sales Team',
-      email: 'info@middleparkproperties.com',
-      phone: '08055269579',
-    },
-  },
-  {
-    id: 'MP-ABJ-0015',
-    name: 'Katampe Heights',
-    slug: 'katampe-heights',
-    tagline: 'Elevated living in the heart of Abuja',
-    description: 'A collection of 24 carefully designed 5-bedroom detached duplexes in the exclusive Katampe Extension.',
-    status: 'off-plan',
-    location: 'Plot 1089, Katampe Extension, Abuja',
-    neighborhood: 'Katampe Extension',
-    city: 'Abuja',
-    priceFrom: 150000000,
-    priceTo: 180000000,
-    unitTypes: [],
-    totalUnits: 24,
-    availableUnits: 24,
-    bedrooms: [5],
-    bathrooms: [6],
-    sizeRange: '380–420 SQM',
-    images: ['/images/dev-katampe-1.jpg', '/images/dev-katampe-2.jpg'],
-    amenities: ['Estate Club House', 'Swimming Pool', 'Underground Parking', 'Smart Home Ready'],
-    highlights: [],
-    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
-    createdAt: '2025-09-15',
-    completionDate: '2028-06-01',
-    developer: {
-      name: 'MiddlePark Sales Team',
-      email: 'info@middleparkproperties.com',
-      phone: '08055269579',
-    },
-  },
-  {
-    id: 'MP-ABJ-0018',
-    name: 'Apo Residences',
-    slug: 'apo-residences',
-    tagline: 'Accessible homes, uncompromised quality',
-    description: 'A 60-unit community of 3 and 4-bedroom terrace homes in the growing Apo District.',
-    status: 'for-sale',
-    location: 'Plot 567, Apo District, Abuja',
-    neighborhood: 'Apo',
-    city: 'Abuja',
-    priceFrom: 65000000,
-    priceTo: 85000000,
-    unitTypes: [],
-    totalUnits: 60,
-    availableUnits: 28,
-    bedrooms: [3, 4],
-    bathrooms: [3, 4],
-    sizeRange: '200–280 SQM',
-    images: ['/images/dev-apo-1.jpg', '/images/dev-apo-2.jpg'],
-    amenities: ['Perimeter Fencing', 'Borehole Water', 'Tarred Roads', 'Green Areas'],
-    highlights: [],
-    certifications: ['Quality Guaranteed', 'Engineered for Generations'],
-    createdAt: '2025-03-01',
-    completionDate: '2026-12-01',
-    developer: {
-      name: 'MiddlePark Sales Team',
-      email: 'info@middleparkproperties.com',
-      phone: '08055269579',
-    },
-  },
-]
-
-const testimonials: Testimonial[] = [
+const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
     clientName: 'Aisha Bello',
@@ -147,7 +60,7 @@ const testimonials: Testimonial[] = [
     clientName: 'Emeka Okonkwo',
     unitPurchased: '5-Bed Detached, Maitama Gardens',
     rating: 5,
-    quote: 'I\'ve bought from three developers in Nigeria. MiddlePark is the only one that delivered exactly what was promised — no hidden charges, no delays, no stories.',
+    quote: "I've bought from three developers in Nigeria. MiddlePark is the only one that delivered exactly what was promised — no hidden charges, no delays, no stories.",
     avatar: '/images/avatar-default.jpg',
     purchaseYear: 2023,
   },
@@ -465,6 +378,14 @@ function HeroImageElement({
 
 export default function HomePage() {
   const router = useRouter()
+
+  // ─── API Data State ──────────────────────────────────────────────────────
+  const [stats, setStats] = useState(FALLBACK_STATS)
+  const [featuredDevelopments, setFeaturedDevelopments] = useState<Development[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK_TESTIMONIALS)
+  const [waitlistEmail, setWaitlistEmail] = useState('')
+  const [waitlistState, setWaitlistState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
   // Mouse tracking for hero parallax
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -480,6 +401,47 @@ export default function HomePage() {
   const portalOpacity = useTransform(devScrollProgress, [0, 0.5, 1], [0, 0.5, 1])
   const portalPerspective = useTransform(devScrollProgress, [0, 1], [800, 0])
   const portalRotateX = useTransform(devScrollProgress, [0, 1], [25, 0])
+
+  // ─── Fetch live data on mount ─────────────────────────────────────────────
+  useEffect(() => {
+    // Fetch featured developments
+    getFeaturedDevelopments()
+      .then((res) => { if (res.success && res.data?.length) setFeaturedDevelopments(res.data) })
+      .catch(() => {})
+
+    // Fetch testimonials
+    getTestimonials()
+      .then((res) => { if (res.success && res.data?.length) setTestimonials(res.data) })
+      .catch(() => {})
+
+    // Fetch stats
+    getSiteStats()
+      .then((res) => {
+        if (res.success && res.data) {
+          const d = res.data
+          setStats([
+            { number: `${d.completedDevelopments}+`, label: 'Completed Developments' },
+            { number: `${d.totalUnitsDelivered}+`, label: 'Units Delivered' },
+            { number: d.totalPropertyValue, label: 'Property Value Managed' },
+          ])
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  // ─── Waitlist submit ──────────────────────────────────────────────────────
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!waitlistEmail) return
+    setWaitlistState('loading')
+    try {
+      await addToWaitlist(waitlistEmail)
+      setWaitlistState('success')
+      setWaitlistEmail('')
+    } catch {
+      setWaitlistState('error')
+    }
+  }
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -1511,24 +1473,45 @@ export default function HomePage() {
             />
             <div className="mt-10"></div>
 
-            <form
-              className="flex flex-col sm:flex-row gap-3 max-w-[460px] mx-auto"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-5 py-3.5 rounded-full bg-white/[0.07] border border-white/12 text-white placeholder-white/25 text-sm focus:outline-none focus:ring-1 focus:ring-green/40 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
-                id="waitlist-email"
-              />
-              <button
-                type="submit"
-                className="bg-green text-white px-6 py-3.5 rounded-full text-[13px] font-semibold uppercase tracking-wide flex items-center justify-center gap-2 hover:bg-green-dark transition-all duration-200 shrink-0"
-                id="waitlist-submit"
+            {waitlistState === 'success' ? (
+              <motion.div
+                className="flex items-center justify-center gap-2 text-green text-sm font-medium"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
               >
-                JOIN <Mail size={14} />
-              </button>
-            </form>
+                <CheckCircle2 size={16} /> You're on the list! We'll be in touch.
+              </motion.div>
+            ) : (
+              <form
+                className="flex flex-col sm:flex-row gap-3 max-w-[460px] mx-auto"
+                onSubmit={handleWaitlistSubmit}
+              >
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={waitlistEmail}
+                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                  required
+                  className="flex-1 px-5 py-3.5 rounded-full bg-white/[0.07] border border-white/12 text-white placeholder-white/25 text-sm focus:outline-none focus:ring-1 focus:ring-green/40 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                  id="waitlist-email"
+                />
+                <button
+                  type="submit"
+                  disabled={waitlistState === 'loading'}
+                  className="bg-green text-white px-6 py-3.5 rounded-full text-[13px] font-semibold uppercase tracking-wide flex items-center justify-center gap-2 hover:bg-green-dark transition-all duration-200 shrink-0 disabled:opacity-70"
+                  id="waitlist-submit"
+                >
+                  {waitlistState === 'loading' ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <> JOIN <Mail size={14} /> </>
+                  )}
+                </button>
+              </form>
+            )}
+            {waitlistState === 'error' && (
+              <p className="text-red-400 text-xs mt-2 text-center">Something went wrong. Please try again.</p>
+            )}
 
             <p className="text-white/15 text-xs mt-5">
               By joining, you agree to receive MiddlePark updates. Unsubscribe anytime.

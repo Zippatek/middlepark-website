@@ -47,6 +47,7 @@ export const metadata: Metadata = {
 
 import { CustomCursor } from '@/components/ui/CustomCursor'
 import { ChatWidget } from '@/components/ui/ChatWidget'
+import { Providers } from '@/components/Providers'
 
 export default function RootLayout({
   children,
@@ -56,9 +57,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased bg-cream text-charcoal">
-        <CustomCursor />
-        {children}
-        <ChatWidget />
+        <Providers>
+          <CustomCursor />
+          {children}
+          <ChatWidget />
+        </Providers>
       </body>
     </html>
   )

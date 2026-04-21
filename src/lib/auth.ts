@@ -1,14 +1,15 @@
 /**
  * MIDDLEPARK PROPERTIES — NEXTAUTH CONFIGURATION
  * ================================================
- * NextAuth v5 configuration with Credentials provider.
- * This is a placeholder config — wire up your database
- * and OAuth providers in production.
+ * Credentials provider wired to the live backend API.
+ * The backend's accessToken is stored in the JWT and exposed
+ * on the session so portal pages can make authenticated calls.
  */
 
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import type { NextAuthConfig } from 'next-auth'
+import { loginUser } from './api'
 
 const authConfig: NextAuthConfig = {
   providers: [
@@ -19,28 +20,40 @@ const authConfig: NextAuthConfig = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        // TODO: Replace with actual database lookup
-        // This is a demo placeholder for development
-        if (
-          credentials?.email === 'demo@middleparkng.com' &&
-          credentials?.password === 'Demo1234'
-        ) {
+        if (!credentials?.email || !credentials?.password) return null
+
+        try {
+          const res = await loginUser({
+            email: credentials.email as string,
+            password: credentials.password as string,
+          })
+
+          if (!res.success || !res.data) return null
+
+          const { id, firstName, lastName, email, accessToken, refreshToken } = res.data
+
           return {
-            id: '1',
-            name: 'Aisha Bello',
-            email: 'demo@middleparkng.com',
-            image: '/images/avatar-default.jpg',
+            id,
+            name: `${firstName} ${lastName}`,
+            email,
+            // Store tokens in the user object so JWT callback can access them
+            accessToken,
+            refreshToken,
           }
+        } catch {
+          // Invalid credentials or network error — NextAuth shows error page
+          return null
         }
-        return null
       },
     }),
   ],
+
   pages: {
     signIn: '/login',
     newUser: '/register',
     error: '/login',
   },
+
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
@@ -48,28 +61,39 @@ const authConfig: NextAuthConfig = {
 
       if (isPortal) {
         if (isLoggedIn) return true
-        return false // Redirect to login
+        return false // Redirect unauthenticated users to /login
       }
 
       return true
     },
+
+    // Persist backend tokens in the JWT cookie
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
+        // These come from the authorize() return above
+        token.accessToken = (user as any).accessToken
+        token.refreshToken = (user as any).refreshToken
       }
       return token
     },
+
+    // Expose accessToken on the session so pages can use it for API calls
     async session({ session, token }) {
-      if (session.user && token.id) {
+      if (session.user) {
         session.user.id = token.id as string
+        ;(session as any).accessToken = token.accessToken
       }
       return session
     },
   },
+
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  secret: process.env.NEXTAUTH_SECRET || 'middlepark-dev-secret-change-in-production',
+
+  secret: process.env.NEXTAUTH_SECRET || 'middlepark-website-nextauth-secret-2026',
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)

@@ -1,171 +1,15 @@
 'use client'
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Search, SlidersHorizontal, X, MapPin } from 'lucide-react'
+import { Search, X, MapPin } from 'lucide-react'
 import { SectionHeader, DevelopmentCard } from '@/components/ui'
 import type { Development, DevelopmentStatus } from '@/types'
+import { getDevelopments } from '@/lib/api'
 
-// ─── MOCK DATA ──────────────────────────────────────────────────────────────
-const allDevelopments: Development[] = [
-  {
-    id: 'MP-ABJ-0012',
-    name: 'Dakibiyu Estate Phase 2',
-    slug: 'dakibiyu-estate-phase-2',
-    tagline: 'Where modern living meets nature',
-    description: 'A 40-unit gated community of 4 and 5-bedroom terrace duplexes in Dakibiyu.',
-    status: 'for-sale',
-    location: 'Plot 2045, Dakibiyu District, Abuja',
-    neighborhood: 'Dakibiyu',
-    city: 'Abuja',
-    priceFrom: 95000000,
-    priceTo: 120000000,
-    unitTypes: [],
-    totalUnits: 40,
-    availableUnits: 12,
-    bedrooms: [4, 5],
-    bathrooms: [4, 5],
-    sizeRange: '260–320 SQM',
-    images: ['/images/dev-dakibiyu-1.jpg'],
-    amenities: ['24/7 Security', 'Landscaped Gardens', 'Prepaid Meters', 'Covered Parking'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2025-06-01',
-    completionDate: '2027-03-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-  {
-    id: 'MP-ABJ-0015',
-    name: 'Katampe Heights',
-    slug: 'katampe-heights',
-    tagline: 'Elevated living in the heart of Abuja',
-    description: 'A collection of 24 carefully designed 5-bedroom detached duplexes.',
-    status: 'off-plan',
-    location: 'Plot 1089, Katampe Extension, Abuja',
-    neighborhood: 'Katampe Extension',
-    city: 'Abuja',
-    priceFrom: 150000000,
-    priceTo: 180000000,
-    unitTypes: [],
-    totalUnits: 24,
-    availableUnits: 24,
-    bedrooms: [5],
-    bathrooms: [6],
-    sizeRange: '380–420 SQM',
-    images: ['/images/dev-katampe-1.jpg'],
-    amenities: ['Estate Club House', 'Swimming Pool', 'Underground Parking', 'Smart Home Ready'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2025-09-15',
-    completionDate: '2028-06-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-  {
-    id: 'MP-ABJ-0018',
-    name: 'Apo Residences',
-    slug: 'apo-residences',
-    tagline: 'Accessible homes, uncompromised quality',
-    description: 'A 60-unit community of 3 and 4-bedroom terrace homes in Apo District.',
-    status: 'for-sale',
-    location: 'Plot 567, Apo District, Abuja',
-    neighborhood: 'Apo',
-    city: 'Abuja',
-    priceFrom: 65000000,
-    priceTo: 85000000,
-    unitTypes: [],
-    totalUnits: 60,
-    availableUnits: 28,
-    bedrooms: [3, 4],
-    bathrooms: [3, 4],
-    sizeRange: '200–280 SQM',
-    images: ['/images/dev-apo-1.jpg'],
-    amenities: ['Perimeter Fencing', 'Borehole Water', 'Tarred Roads', 'Green Areas'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2025-03-01',
-    completionDate: '2026-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-  {
-    id: 'MP-ABJ-0020',
-    name: 'Maitama Gardens',
-    slug: 'maitama-gardens',
-    tagline: 'The quieter side of Maitama',
-    description: 'An exclusive 12-unit enclave of 5-bedroom fully detached homes in Maitama.',
-    status: 'completed',
-    location: 'Plot 890, Maitama District, Abuja',
-    neighborhood: 'Maitama',
-    city: 'Abuja',
-    priceFrom: 250000000,
-    priceTo: 300000000,
-    unitTypes: [],
-    totalUnits: 12,
-    availableUnits: 2,
-    bedrooms: [5],
-    bathrooms: [6],
-    sizeRange: '420–500 SQM',
-    images: ['/images/dev-maitama-1.jpg'],
-    amenities: ['Private Gardens', 'Staff Quarters', 'Smart Home System', 'Underground Parking'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2024-01-15',
-    completionDate: '2025-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-  {
-    id: 'MP-ABJ-0022',
-    name: 'Gwarinpa Terraces',
-    slug: 'gwarinpa-terraces',
-    tagline: 'Quality homes, friendly neighbourhood',
-    description: 'A 32-unit terrace development in the heart of Gwarinpa.',
-    status: 'sold-out',
-    location: 'Plot 445, Gwarinpa Estate, Abuja',
-    neighborhood: 'Gwarinpa',
-    city: 'Abuja',
-    priceFrom: 75000000,
-    priceTo: 90000000,
-    unitTypes: [],
-    totalUnits: 32,
-    availableUnits: 0,
-    bedrooms: [3, 4],
-    bathrooms: [3, 4],
-    sizeRange: '220–260 SQM',
-    images: ['/images/dev-gwarinpa-1.jpg'],
-    amenities: ['Gated Community', 'Children Play Area', 'Gym', 'Tarred Roads'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2023-06-01',
-    completionDate: '2025-06-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-  {
-    id: 'MP-ABJ-0025',
-    name: 'Dakibiyu Estate Phase 3',
-    slug: 'dakibiyu-estate-phase-3',
-    tagline: 'The next chapter in Dakibiyu',
-    description: 'A 50-unit expansion of the Dakibiyu Estate with enhanced community features.',
-    status: 'off-plan',
-    location: 'Plot 2100, Dakibiyu District, Abuja',
-    neighborhood: 'Dakibiyu',
-    city: 'Abuja',
-    priceFrom: 105000000,
-    priceTo: 135000000,
-    unitTypes: [],
-    totalUnits: 50,
-    availableUnits: 50,
-    bedrooms: [4, 5],
-    bathrooms: [4, 5],
-    sizeRange: '270–340 SQM',
-    images: ['/images/dev-dakibiyu-2.jpg'],
-    amenities: ['24/7 Security', 'Community Centre', 'Jogging Track', 'Solar Backup'],
-    highlights: [],
-    certifications: ['Title Verified', 'Government Approved'],
-    createdAt: '2026-01-01',
-    completionDate: '2028-12-01',
-    developer: { name: 'MiddlePark Sales Team', email: 'info@middleparkproperties.com', phone: '08055269579' },
-  },
-]
+// The mock data has been replaced by API fetch below
+
 
 const statusFilters: { label: string; value: DevelopmentStatus | 'all' }[] = [
   { label: 'All', value: 'all' },
@@ -192,6 +36,9 @@ function DevelopmentsContent() {
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<DevelopmentStatus | 'all'>('all')
   const [areaFilter, setAreaFilter] = useState('All Areas')
+  const [developments, setDevelopments] = useState<Development[]>([])
+  const [loading, setLoading] = useState(true)
+  const [total, setTotal] = useState(0)
 
   // Pre-populate search from hero search bar
   useEffect(() => {
@@ -199,23 +46,22 @@ function DevelopmentsContent() {
     if (q) setSearch(q)
   }, [searchParams])
 
-  const filtered = useMemo(() => {
-    return allDevelopments.filter((dev) => {
-      if (statusFilter !== 'all' && dev.status !== statusFilter) return false
-      if (areaFilter !== 'All Areas' && dev.neighborhood !== areaFilter) return false
-      if (search) {
-        const q = search.toLowerCase()
-        return (
-          dev.name.toLowerCase().includes(q) ||
-          dev.neighborhood.toLowerCase().includes(q) ||
-          dev.id.toLowerCase().includes(q) ||
-          dev.location.toLowerCase().includes(q) ||
-          dev.city.toLowerCase().includes(q) ||
-          dev.description.toLowerCase().includes(q)
-        )
-      }
-      return true
+  // Fetch from API whenever filters change
+  useEffect(() => {
+    setLoading(true)
+    getDevelopments({
+      status: statusFilter !== 'all' ? statusFilter : undefined,
+      neighborhood: areaFilter !== 'All Areas' ? areaFilter : undefined,
+      search: search || undefined,
     })
+      .then((res) => {
+        if (res.success && res.data) {
+          setDevelopments(res.data.items)
+          setTotal(res.data.total)
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
   }, [search, statusFilter, areaFilter])
 
   const hasActiveFilters = statusFilter !== 'all' || areaFilter !== 'All Areas' || search !== ''
@@ -316,10 +162,14 @@ function DevelopmentsContent() {
       {/* Development Grid */}
       <section className="section-padding bg-cream" id="developments-grid">
         <div className="middlepark-container">
-          {filtered.length > 0 ? (
+          {loading ? (
+            <div className="flex items-center justify-center py-24">
+              <div className="w-8 h-8 border-2 border-green border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : developments.length > 0 ? (
             <>
               <p className="text-charcoal-light text-sm mb-8">
-                Showing {filtered.length} development{filtered.length !== 1 ? 's' : ''}
+                Showing {developments.length}{total > developments.length ? ` of ${total}` : ''} development{total !== 1 ? 's' : ''}
               </p>
               <motion.div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -328,7 +178,7 @@ function DevelopmentsContent() {
                 key={`${statusFilter}-${areaFilter}-${search}`}
                 variants={staggerContainer}
               >
-                {filtered.map((dev) => (
+                {developments.map((dev) => (
                   <motion.div key={dev.id} variants={staggerItem}>
                     <DevelopmentCard development={dev} />
                   </motion.div>
@@ -358,6 +208,7 @@ function DevelopmentsContent() {
               </button>
             </div>
           )}
+
         </div>
       </section>
     </>

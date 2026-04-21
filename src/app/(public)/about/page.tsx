@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { Button, SectionHeader } from '@/components/ui'
+import { getTeamMembers } from '@/lib/api'
 import type { TeamMember } from '@/types'
 
 // ─── ANIMATION VARIANTS ─────────────────────────────────────────────────────
@@ -77,7 +78,8 @@ const values = [
   },
 ]
 
-const teamMembers: TeamMember[] = [
+// ─── FALLBACK TEAM (used while loading / if API fails) ──────────────────────
+const FALLBACK_TEAM: TeamMember[] = [
   {
     id: '1',
     name: 'Aminu S Muhammad',
@@ -120,6 +122,18 @@ const stats = [
 ]
 
 export default function AboutPage() {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(FALLBACK_TEAM)
+
+  useEffect(() => {
+    getTeamMembers()
+      .then((res) => {
+        if (res.success && res.data && res.data.length > 0) {
+          setTeamMembers(res.data)
+        }
+      })
+      .catch(() => {}) // silently keep fallback
+  }, [])
+
   return (
     <>
       {/* ═══ HERO ═══ */}

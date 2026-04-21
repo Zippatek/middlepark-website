@@ -175,8 +175,10 @@ export interface SiteVisit {
   time: string
   confirmationNumber: string     // e.g. "CONF-MP-20260415"
   status: SiteVisitStatus
+  location: string
+  guide?: string                 // Sales team member name
   notes?: string
-  conductedBy?: string           // Sales team member name
+  conductedBy?: string           // Legacy alias
 }
 
 
