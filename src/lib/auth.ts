@@ -1,18 +1,26 @@
 /**
  * MIDDLEPARK PROPERTIES — NEXTAUTH CONFIGURATION
  * ================================================
- * Credentials provider wired to the live backend API.
+ * Credentials provider + Google OAuth wired to the live backend API.
  * The backend's accessToken is stored in the JWT and exposed
  * on the session so portal pages can make authenticated calls.
  */
 
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
+import Google from 'next-auth/providers/google'
 import type { NextAuthConfig } from 'next-auth'
 import { loginUser } from './api'
 
 const authConfig: NextAuthConfig = {
   providers: [
+    // ─── Google OAuth ──────────────────────────────────────────────────────
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+
+    // ─── Credentials (email/password via backend API) ──────────────────────
     Credentials({
       name: 'credentials',
       credentials: {
@@ -69,14 +77,21 @@ const authConfig: NextAuthConfig = {
     },
 
     // Persist backend tokens in the JWT cookie
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id
         token.role = (user as any).role
-        // These come from the authorize() return above
+        // These come from the authorize() return above (credentials flow)
         token.accessToken = (user as any).accessToken
         token.refreshToken = (user as any).refreshToken
       }
+
+      // For Google sign-in: store the Google account info
+      if (account?.provider === 'google') {
+        token.provider = 'google'
+        token.googleAccessToken = account.access_token
+      }
+
       return token
     },
 
@@ -86,6 +101,7 @@ const authConfig: NextAuthConfig = {
         session.user.id = token.id as string
         ;(session.user as any).role = token.role
         ;(session as any).accessToken = token.accessToken
+        ;(session as any).provider = token.provider
       }
       return session
     },

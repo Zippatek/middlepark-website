@@ -75,10 +75,11 @@ export default function PortalOverview() {
   }
 
   // ─── Stat cards derived from API data ────────────────────────────────────
-  const statCards = data ? [
+  const stats = data?.stats
+  const statCards = stats ? [
     {
       label: 'Property Value',
-      value: formatNaira(data.stats.propertyValue),
+      value: formatNaira(stats.propertyValue ?? 0),
       icon: Home,
       change: 'Unit purchase price',
       color: 'text-green',
@@ -86,25 +87,25 @@ export default function PortalOverview() {
     },
     {
       label: 'Total Paid',
-      value: formatNaira(data.stats.totalPaid),
+      value: formatNaira(stats.totalPaid ?? 0),
       icon: CreditCard,
-      change: `${data.stats.percentPaid.toFixed(1)}% of total`,
+      change: `${(stats.percentPaid ?? 0).toFixed(1)}% of total`,
       color: 'text-green',
       bg: 'bg-green-tint',
     },
     {
       label: 'Balance Remaining',
-      value: formatNaira(data.stats.balanceRemaining),
+      value: formatNaira(stats.balanceRemaining ?? 0),
       icon: TrendingUp,
-      change: `${data.stats.instalmentCount} instalments left`,
+      change: `${stats.instalmentCount ?? 0} instalments left`,
       color: 'text-[#D97706]',
       bg: 'bg-[#FEF3C7]',
     },
     {
       label: 'Construction Progress',
-      value: `${data.stats.constructionProgress}%`,
+      value: `${stats.constructionProgress ?? 0}%`,
       icon: CheckCircle2,
-      change: data.unit?.unitType || 'Your unit',
+      change: data?.unit?.unitType || 'Your unit',
       color: 'text-green',
       bg: 'bg-green-tint',
     },

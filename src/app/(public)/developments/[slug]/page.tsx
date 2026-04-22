@@ -147,6 +147,12 @@ export default function DevelopmentDetailPage() {
             fill
             className="object-cover"
             priority
+            onError={(e) => {
+              // Fallback for broken image paths from the database
+              const target = e.target as HTMLImageElement
+              target.style.display = 'none'
+              target.parentElement!.classList.add('bg-green-tint', 'flex', 'items-center', 'justify-center')
+            }}
           />
         ) : (
           <div className="w-full h-full bg-green-tint flex items-center justify-center">
@@ -243,17 +249,17 @@ export default function DevelopmentDetailPage() {
             {/* Gallery */}
             {gallery.length > 1 && (
               <div className="grid grid-cols-4 grid-rows-2 h-[420px] gap-3">
-                <div className="col-span-2 row-span-2 relative rounded-[16px] overflow-hidden cursor-pointer">
-                  <Image src={gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" />
+                <div className="col-span-2 row-span-2 relative rounded-[16px] overflow-hidden cursor-pointer bg-green-tint">
+                  <Image src={gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 </div>
-                <div className="col-span-1 row-span-2 relative rounded-[16px] overflow-hidden cursor-pointer">
-                  <Image src={gallery[1] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" />
+                <div className="col-span-1 row-span-2 relative rounded-[16px] overflow-hidden cursor-pointer bg-green-tint">
+                  <Image src={gallery[1] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 </div>
-                <div className="col-span-1 row-span-1 relative rounded-[16px] overflow-hidden cursor-pointer">
-                  <Image src={gallery[2] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" />
+                <div className="col-span-1 row-span-1 relative rounded-[16px] overflow-hidden cursor-pointer bg-green-tint">
+                  <Image src={gallery[2] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 </div>
-                <div className="col-span-1 row-span-1 relative rounded-[16px] overflow-hidden cursor-pointer">
-                  <Image src={gallery[3] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" />
+                <div className="col-span-1 row-span-1 relative rounded-[16px] overflow-hidden cursor-pointer bg-green-tint">
+                  <Image src={gallery[3] || gallery[0]} alt="Property" fill className="object-cover hover:scale-[1.03] transition-transform duration-700" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                   {gallery.length > 4 && (
                     <div className="absolute inset-0 bg-charcoal/30 flex items-center justify-center backdrop-blur-[2px]">
                       <span className="bg-charcoal text-white text-[12px] font-bold px-5 py-2.5 rounded-[8px] tracking-wider uppercase">
