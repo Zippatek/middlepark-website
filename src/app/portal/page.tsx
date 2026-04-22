@@ -111,7 +111,7 @@ export default function PortalOverview() {
     },
   ] : []
 
-  const firstName = data?.user.firstName || session?.user?.name?.split(' ')[0] || 'there'
+  const firstName = data?.user?.firstName || session?.user?.name?.split(' ')[0] || 'there'
   const progress = data?.stats.constructionProgress || 0
   const projectedHandover = data?.unit?.projectedHandover
     ? new Date(data.unit.projectedHandover).toLocaleDateString('en-NG', { month: 'short', year: 'numeric' })

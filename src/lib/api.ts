@@ -214,6 +214,13 @@ export async function loginUser(data: LoginPayload): Promise<ApiResponse<AuthUse
   } as RequestInit & { token?: string; next?: undefined })
 }
 
+export async function googleLogin(idToken: string): Promise<ApiResponse<AuthUser>> {
+  return apiFetch<ApiResponse<AuthUser>>('/auth/google-login', {
+    method: 'POST',
+    body: JSON.stringify({ idToken }),
+  })
+}
+
 export interface RegisterPayload {
   firstName: string
   lastName: string
@@ -458,6 +465,60 @@ export async function updateNotifications(
 ): Promise<ApiResponse<void>> {
   return apiFetch<ApiResponse<void>>('/portal/settings/notifications', {
     method: 'PUT',
+    body: JSON.stringify(data),
+    token,
+  })
+}
+
+// ─── Admin ───────────────────────────────────────────────────
+
+export async function adminGetStats(token: string): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/stats', { token })
+}
+
+export async function adminListClients(token: string, params: { page?: number; pageSize?: number } = {}): Promise<ApiResponse<PaginatedData<any>>> {
+  const qs = new URLSearchParams(params as any).toString()
+  return apiFetch<ApiResponse<PaginatedData<any>>>(`/admin/clients${qs ? `?${qs}` : ''}`, { token })
+}
+
+export async function adminGetClient(token: string, id: string): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>(`/admin/clients/${id}`, { token })
+}
+
+export async function adminListDevelopments(token: string, params: { page?: number; pageSize?: number; status?: string; search?: string } = {}): Promise<ApiResponse<PaginatedData<Development>>> {
+  const qs = new URLSearchParams(params as any).toString()
+  return apiFetch<ApiResponse<PaginatedData<Development>>>(`/admin/developments${qs ? `?${qs}` : ''}`, { token })
+}
+
+export async function adminListEnquiries(token: string, params: { page?: number; pageSize?: number; status?: string } = {}): Promise<ApiResponse<PaginatedData<any>>> {
+  const qs = new URLSearchParams(params as any).toString()
+  return apiFetch<ApiResponse<PaginatedData<any>>>(`/admin/enquiries${qs ? `?${qs}` : ''}`, { token })
+}
+
+export async function adminUpdateEnquiryStatus(token: string, id: string, status: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/enquiries/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+    token,
+  })
+}
+
+export async function adminListPayments(token: string, params: { page?: number; pageSize?: number; status?: string } = {}): Promise<ApiResponse<PaginatedData<any>>> {
+  const qs = new URLSearchParams(params as any).toString()
+  return apiFetch<ApiResponse<PaginatedData<any>>>(`/admin/payments${qs ? `?${qs}` : ''}`, { token })
+}
+
+export async function adminUpdatePaymentStatus(token: string, id: string, status: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/payments/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+    token,
+  })
+}
+
+export async function adminUploadDocument(token: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/documents', {
+    method: 'POST',
     body: JSON.stringify(data),
     token,
   })

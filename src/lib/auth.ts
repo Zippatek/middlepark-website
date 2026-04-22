@@ -10,7 +10,7 @@ import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import Google from 'next-auth/providers/google'
 import type { NextAuthConfig } from 'next-auth'
-import { loginUser } from './api'
+import { loginUser, googleLogin } from './api'
 
 const authConfig: NextAuthConfig = {
   providers: [
@@ -76,20 +76,31 @@ const authConfig: NextAuthConfig = {
       return true
     },
 
-    // Persist backend tokens in the JWT cookie
     async jwt({ token, user, account }) {
+      // For Credentials login: user object is passed on first sign-in
       if (user) {
         token.id = user.id
         token.role = (user as any).role
-        // These come from the authorize() return above (credentials flow)
         token.accessToken = (user as any).accessToken
         token.refreshToken = (user as any).refreshToken
       }
 
-      // For Google sign-in: store the Google account info
-      if (account?.provider === 'google') {
-        token.provider = 'google'
-        token.googleAccessToken = account.access_token
+      // For Google sign-in: exchange Google ID token for backend JWT
+      if (account?.provider === 'google' && account.id_token) {
+        try {
+          const res = await googleLogin(account.id_token)
+          if (res.success && res.data) {
+            token.id = res.data.id
+            token.role = res.data.role
+            token.accessToken = res.data.accessToken
+            token.refreshToken = res.data.refreshToken
+            token.provider = 'google'
+            // Ensure name is available for UI components
+            token.name = `${res.data.firstName} ${res.data.lastName}`
+          }
+        } catch (error) {
+          console.error('Backend Google OAuth exchange failed:', error)
+        }
       }
 
       return token

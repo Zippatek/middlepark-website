@@ -43,6 +43,11 @@ export const metadata: Metadata = {
     locale: 'en_NG',
     type: 'website',
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 }
 
 import { CustomCursor } from '@/components/ui/CustomCursor'
