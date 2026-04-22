@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 
 import { adminGetStats } from '@/lib/api'
@@ -115,24 +116,24 @@ export default function AdminOverview() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-cream-divider">
-                {recentEnquiries.map((enq) => (
+                {recentEnquiries.map((enq: any) => (
                   <tr key={enq.id} className="hover:bg-cream/30 transition-colors">
                     <td className="px-6 py-4">
-                      <p className="text-charcoal text-sm font-medium">{enq.name}</p>
+                      <p className="text-charcoal text-sm font-medium">{enq.fullName}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-charcoal-light text-xs">{enq.development}</p>
+                      <p className="text-charcoal-light text-xs">{enq.developmentName || 'General Enquiry'}</p>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-1.5 text-charcoal-light text-xs">
                         <Clock size={12} />
-                        {enq.date}
+                        {new Date(enq.createdAt).toLocaleDateString()}
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={cn(
                         "px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider",
-                        enq.status === 'New' ? "bg-green/10 text-green" : "bg-blue-100 text-blue-600"
+                        enq.status === 'new' ? "bg-green/10 text-green" : "bg-blue-100 text-blue-600"
                       )}>
                         {enq.status}
                       </span>
