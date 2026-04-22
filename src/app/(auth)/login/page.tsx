@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, ChevronRight, ArrowLeft, Shield, CheckCircle2 } from 'lucide-react'
-import { signIn } from 'next-auth/react'
+import { signIn, getSession } from 'next-auth/react'
 import { Button } from '@/components/ui'
 
 export default function LoginPage() {
@@ -32,7 +32,10 @@ export default function LoginPage() {
       setError('Invalid email or password. Please check your credentials and try again.')
       setLoading(false)
     } else {
-      router.push('/portal')
+      const session = await getSession()
+      const role = (session?.user as any)?.role
+      const destination = role === 'ADMIN' || role === 'SUPER_ADMIN' ? '/admin' : '/portal'
+      router.push(destination)
       router.refresh()
     }
   }

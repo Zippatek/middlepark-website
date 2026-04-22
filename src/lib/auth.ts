@@ -36,19 +36,22 @@ const authConfig: NextAuthConfig = {
             password: credentials.password as string,
           })
 
-          if (!res.success || !res.data) return null
+          if (!res.success || !res.data || !(res.data as any).user) return null
 
-          const { id, firstName, lastName, email, role, accessToken, refreshToken } = res.data
+          const { user, accessToken, refreshToken } = res.data as any
+          const { id, firstName, lastName, email, role } = user
 
           return {
             id,
             name: `${firstName} ${lastName}`,
             email,
             role,
+            firstName,
+            lastName,
             // Store tokens in the user object so JWT callback can access them
             accessToken,
             refreshToken,
-          }
+          } as any
         } catch {
           // Invalid credentials or network error — NextAuth shows error page
           return null
@@ -81,6 +84,9 @@ const authConfig: NextAuthConfig = {
       if (user) {
         token.id = user.id
         token.role = (user as any).role
+        token.name = (user as any).name
+        token.firstName = (user as any).firstName
+        token.lastName = (user as any).lastName
         token.accessToken = (user as any).accessToken
         token.refreshToken = (user as any).refreshToken
       }
@@ -89,14 +95,16 @@ const authConfig: NextAuthConfig = {
       if (account?.provider === 'google' && account.id_token) {
         try {
           const res = await googleLogin(account.id_token)
-          if (res.success && res.data) {
-            token.id = res.data.id
-            token.role = res.data.role
-            token.accessToken = res.data.accessToken
-            token.refreshToken = res.data.refreshToken
+          const u: any = (res as any)?.data?.user
+          if (res.success && u) {
+            token.id = u.id
+            token.role = u.role
+            token.firstName = u.firstName
+            token.lastName = u.lastName
+            token.name = `${u.firstName} ${u.lastName}`
+            token.accessToken = (res as any).data.accessToken
+            token.refreshToken = (res as any).data.refreshToken
             token.provider = 'google'
-            // Ensure name is available for UI components
-            token.name = `${res.data.firstName} ${res.data.lastName}`
           }
         } catch (error) {
           console.error('Backend Google OAuth exchange failed:', error)
@@ -110,7 +118,10 @@ const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
+        session.user.name = (token.name as string) || session.user.name
         ;(session.user as any).role = token.role
+        ;(session.user as any).firstName = (token as any).firstName
+        ;(session.user as any).lastName = (token as any).lastName
         ;(session as any).accessToken = token.accessToken
         ;(session as any).provider = token.provider
       }

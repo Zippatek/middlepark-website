@@ -197,11 +197,14 @@ export interface LoginPayload {
 }
 
 export interface AuthUser {
-  id: string
-  firstName: string
-  lastName: string
-  email: string
-  role: string
+  user: {
+    id: string
+    firstName: string
+    lastName: string
+    email: string
+    role: string
+    image?: string | null
+  }
   accessToken: string
   refreshToken: string
 }
