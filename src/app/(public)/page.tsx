@@ -34,7 +34,6 @@ import type { Development, Testimonial } from '@/types'
 import {
   getFeaturedDevelopments,
   getTestimonials,
-  getSiteStats,
   addToWaitlist,
 } from '@/lib/api'
 
@@ -380,7 +379,7 @@ export default function HomePage() {
   const router = useRouter()
 
   // ─── API Data State ──────────────────────────────────────────────────────
-  const [stats, setStats] = useState(FALLBACK_STATS)
+  const stats = FALLBACK_STATS
   const [featuredDevelopments, setFeaturedDevelopments] = useState<Development[]>([])
   const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK_TESTIMONIALS)
   const [waitlistEmail, setWaitlistEmail] = useState('')
@@ -414,19 +413,8 @@ export default function HomePage() {
       .then((res) => { if (res.success && res.data?.length) setTestimonials(res.data) })
       .catch(() => {})
 
-    // Fetch stats
-    getSiteStats()
-      .then((res) => {
-        if (res.success && res.data) {
-          const d = res.data
-          setStats([
-            { number: `${d.completedDevelopments}+`, label: 'Completed Developments' },
-            { number: `${d.totalUnitsDelivered}+`, label: 'Units Delivered' },
-            { number: d.totalPropertyValue, label: 'Property Value Managed' },
-          ])
-        }
-      })
-      .catch(() => {})
+    // Stats are hardcoded — no API fetch needed
+    // Values: 12+ Completed Developments, 300+ Units Delivered, ₦100B+ Property Value
   }, [])
 
   // ─── Waitlist submit ──────────────────────────────────────────────────────
