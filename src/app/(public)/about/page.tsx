@@ -182,26 +182,29 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              className="space-y-12"
             >
-              <SectionHeader
-                overline="Who We Are"
-                heading="A Developer That Delivers"
-              />
-              <div className="mt-6 space-y-4 text-charcoal-light text-base leading-relaxed">
-                <p>
-                  MiddlePark Properties Limited was established in 2018 with one clear mission — to build
-                  homes across Nigeria that families can trust. In a market where structural compromises,
-                  poor finishes, and hidden fees had become the norm, we set out to do things differently.
+              <div>
+                <SectionHeader
+                  overline="Our Mission"
+                  heading="Mission Statement"
+                />
+                <p className="mt-4 text-charcoal-light text-lg leading-relaxed italic">
+                  "To develop homes and commercial spaces across Nigeria that combine quality, 
+                  purpose, and lasting value that enhance lives, support businesses, and serve generations."
                 </p>
-                <p>
-                  Every MiddlePark development starts with rigorous material testing. Before any
-                  foundation is laid, our engineering team confirms structural integrity and
-                  material quality. This is not a feature — it is a requirement. No MiddlePark home
-                  will ever face a structural compromise.
-                </p>
-                <p>
-                  Today, we have delivered over 800 units across 12 developments in Nigeria&apos;s
-                  most established neighbourhoods. And we are just getting started.
+              </div>
+
+              <div>
+                <SectionHeader
+                  overline="Our Vision"
+                  heading="Vision Statement"
+                />
+                <p className="mt-4 text-charcoal-light text-base leading-relaxed">
+                  To become Nigeria’s most respected real estate developer, known for exceptional 
+                  homes and transformative commercial spaces. We aim to build and shape thriving 
+                  communities through developments that inspire comfort, growth, and long-term 
+                  value, while building a trusted legacy across generations.
                 </p>
               </div>
             </motion.div>

@@ -146,7 +146,7 @@ export default function AdminAnalytics() {
           </div>
           <div>
             <h3 className="font-cormorant text-charcoal text-xl font-bold">Geographic Performance</h3>
-            <p className="text-charcoal-light text-xs">Interest density across Abuja neighbourhoods</p>
+            <p className="text-charcoal-light text-xs">Interest density by neighbourhood</p>
           </div>
         </div>
 

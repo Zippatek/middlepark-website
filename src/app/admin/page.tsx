@@ -65,8 +65,8 @@ export default function AdminOverview() {
         <div className="relative z-10">
           <h2 className="font-cormorant text-charcoal text-3xl font-bold mb-2">Systems Overview</h2>
           <p className="text-charcoal-light text-sm max-w-lg">
-            Welcome to the MiddlePark Admin Control Center. Monitor leads, manage developments, 
-            and track platform performance across Abuja.
+            Welcome to the MiddlePark Admin Control Center. Monitor leads, manage developments,
+            and track platform performance.
           </p>
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-green/5 -translate-y-1/2 translate-x-1/4 rounded-full" />
@@ -181,16 +181,6 @@ export default function AdminOverview() {
             </div>
           </div>
 
-          <div className="bg-green rounded-card p-6 text-white border border-green-dark shadow-lg shadow-green/10">
-            <h3 className="font-cormorant text-lg font-bold mb-2">MiddlePark Seal</h3>
-            <p className="text-white/70 text-xs mb-4">
-              All properties are verified before listing. 
-              AGIS and FCDA titles are current.
-            </p>
-            <button className="w-full py-2 bg-white text-green rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-white/90 transition-all">
-              VERIFY PENDING
-            </button>
-          </div>
         </div>
       </div>
     </div>

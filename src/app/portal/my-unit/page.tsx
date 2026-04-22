@@ -10,7 +10,6 @@ import {
   Bed,
   Bath,
   Maximize2,
-  Award,
   CheckCircle2,
   Building2,
   Layers,
@@ -104,7 +103,6 @@ export default function MyUnitPage() {
     { label: 'Floor Area', value: unit.floorArea || '—', icon: Maximize2 },
     { label: 'Bedrooms', value: `${unit.bedrooms} (all en-suite)`, icon: Bed },
     { label: 'Bathrooms', value: `${unit.bathrooms}`, icon: Bath },
-    { label: 'Quality', value: 'MiddlePark Certified', icon: Award },
   ]
 
   const financials = [
@@ -138,23 +136,6 @@ export default function MyUnitPage() {
                 <Building2 size={48} className="text-green-muted" strokeWidth={1} />
               </div>
             )}
-            {/* MiddlePark Seal */}
-            <div
-              className="absolute bottom-3 left-3 flex items-center gap-1.5"
-              style={{
-                background: 'rgba(255,255,255,0.88)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.65)',
-                borderRadius: '20px',
-                padding: '6px 14px',
-                boxShadow: '0 2px 12px rgba(40, 107, 56, 0.16)',
-              }}
-            >
-              <Award size={14} style={{ color: '#286B38' }} strokeWidth={2} />
-              <span style={{ fontSize: '11px', fontWeight: 600, color: '#3A3A3C' }}>
-                MiddlePark Certified
-              </span>
-            </div>
           </div>
 
           <div className="p-6 lg:p-8 flex flex-col justify-center">
