@@ -12,10 +12,11 @@ import {
   AlertCircle,
   MoreVertical,
   Calendar,
-  User
+  User,
+  Plus
 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { adminListPayments, adminUpdatePaymentStatus } from '@/lib/api'
+import { adminListPayments, adminUpdatePaymentStatus, adminCreatePayment, adminListClients } from '@/lib/api'
 import { cn, formatNaira } from '@/lib/utils'
 
 export default function AdminPayments() {
@@ -23,6 +24,38 @@ export default function AdminPayments() {
   const [payments, setPayments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [filterStatus, setFilterStatus] = useState('all')
+
+  const [isNewPaymentModalOpen, setIsNewPaymentModalOpen] = useState(false)
+  const [clients, setClients] = useState<any[]>([])
+  const [paymentForm, setPaymentForm] = useState({
+    userId: '', amount: 0, dueDate: '', instalment: 1, milestoneLabel: '', reference: '', status: 'UPCOMING'
+  })
+  const [paymentLoading, setPaymentLoading] = useState(false)
+
+  useEffect(() => {
+    if (isNewPaymentModalOpen && clients.length === 0 && session?.accessToken) {
+      adminListClients(session.accessToken as string).then(res => {
+        if (res.success && res.data) setClients(res.data.items)
+      })
+    }
+  }, [isNewPaymentModalOpen, session])
+
+  const handleCreatePayment = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!session?.accessToken) return
+    setPaymentLoading(true)
+    try {
+      const res = await adminCreatePayment(session.accessToken as string, paymentForm)
+      if (res.success) {
+        setPayments([res.data, ...payments])
+        setIsNewPaymentModalOpen(false)
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setPaymentLoading(false)
+    }
+  }
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -63,8 +96,11 @@ export default function AdminPayments() {
           <p className="text-charcoal-light text-sm">Monitor revenue collection, verify bank transfers, and issue receipts.</p>
         </div>
         <div className="flex gap-2">
-          <button className="bg-white border border-cream-divider text-charcoal px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2">
-            <Download size={16} /> EXPORT RECONCILIATION
+          <button onClick={() => setIsNewPaymentModalOpen(true)} className="bg-green text-white px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 hover:bg-green-dark transition-colors">
+            <Plus size={16} /> NEW PAYMENT
+          </button>
+          <button className="bg-white border border-cream-divider text-charcoal px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 hover:bg-cream transition-colors">
+            <Download size={16} /> EXPORT
           </button>
         </div>
       </div>
@@ -174,6 +210,60 @@ export default function AdminPayments() {
           </table>
         </div>
       </div>
+      
+      {/* New Payment Modal */}
+      {isNewPaymentModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/50 backdrop-blur-sm">
+          <div className="bg-white rounded-card w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-cormorant text-charcoal text-2xl font-bold">Record Payment</h3>
+              <button onClick={() => setIsNewPaymentModalOpen(false)} className="text-charcoal-light hover:text-charcoal">✕</button>
+            </div>
+            <form onSubmit={handleCreatePayment} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-charcoal mb-1">Client</label>
+                <select required value={paymentForm.userId} onChange={e => setPaymentForm(p => ({ ...p, userId: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal bg-white">
+                  <option value="">Select Client</option>
+                  {clients.map(c => <option key={c.id} value={c.id}>{c.firstName} {c.lastName} ({c.email})</option>)}
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Amount (₦)</label>
+                  <input type="number" required value={paymentForm.amount || ''} onChange={e => setPaymentForm(p => ({ ...p, amount: parseInt(e.target.value) || 0 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Due Date</label>
+                  <input type="date" required value={paymentForm.dueDate} onChange={e => setPaymentForm(p => ({ ...p, dueDate: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Instalment #</label>
+                  <input type="number" required value={paymentForm.instalment || ''} onChange={e => setPaymentForm(p => ({ ...p, instalment: parseInt(e.target.value) || 1 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Status</label>
+                  <select required value={paymentForm.status} onChange={e => setPaymentForm(p => ({ ...p, status: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal bg-white">
+                    <option value="UPCOMING">Upcoming</option>
+                    <option value="PAID">Paid</option>
+                    <option value="OVERDUE">Overdue</option>
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-bold text-charcoal mb-1">Milestone Label</label>
+                  <input type="text" required placeholder="e.g. Foundation Stage / 20% Deposit" value={paymentForm.milestoneLabel} onChange={e => setPaymentForm(p => ({ ...p, milestoneLabel: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-bold text-charcoal mb-1">Reference Code (Optional)</label>
+                  <input type="text" placeholder="e.g. MP-TX-12345" value={paymentForm.reference} onChange={e => setPaymentForm(p => ({ ...p, reference: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+              </div>
+              <button disabled={paymentLoading} type="submit" className="w-full mt-6 bg-green text-white py-3.5 rounded-sm text-xs font-bold tracking-widest uppercase hover:bg-green-dark transition-colors">
+                {paymentLoading ? 'Saving...' : 'Save Payment'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

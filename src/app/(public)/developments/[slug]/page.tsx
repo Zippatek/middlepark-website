@@ -272,10 +272,15 @@ export default function DevelopmentDetailPage() {
             )}
 
             {/* Description */}
-            <div>
-              <p className="text-[18px] lg:text-[21px] text-charcoal leading-[1.65] font-medium tracking-tight">
-                {dev.description}
-              </p>
+            <div className="space-y-6">
+              {dev.description?.split('\n').map((paragraph: string, index: number) => paragraph.trim() ? (
+                <p key={index} className="text-[18px] lg:text-[21px] text-charcoal leading-[1.65] font-medium tracking-tight">
+                  {index === 0 ? (
+                    <span className="float-left text-green text-[54px] font-cormorant leading-[0.8] pr-3 pt-2 font-bold">{paragraph.charAt(0)}</span>
+                  ) : null}
+                  {index === 0 ? paragraph.slice(1) : paragraph}
+                </p>
+              ) : null)}
             </div>
 
             {/* Amenities */}

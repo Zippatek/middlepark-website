@@ -21,7 +21,7 @@ import {
 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useParams, useRouter } from 'next/navigation'
-import { adminGetClient } from '@/lib/api'
+import { adminGetClient, adminAssignUnit, adminListDevelopments } from '@/lib/api'
 import { cn, formatNaira } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -32,6 +32,39 @@ export default function AdminClientDetail() {
   const [client, setClient] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
+
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false)
+  const [developments, setDevelopments] = useState<any[]>([])
+  const [assignForm, setAssignForm] = useState({
+    developmentId: '', unitType: '', unitNumber: '', floorArea: '',
+    bedrooms: 0, bathrooms: 0, totalPrice: 0, amountPaid: 0, allocationDate: ''
+  })
+  const [assignLoading, setAssignLoading] = useState(false)
+
+  useEffect(() => {
+    if (isAssignModalOpen && developments.length === 0 && session?.accessToken) {
+      adminListDevelopments(session.accessToken as string).then(res => {
+        if (res.success && res.data) setDevelopments(res.data.items)
+      })
+    }
+  }, [isAssignModalOpen, session])
+
+  const handleAssignUnit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!session?.accessToken || !id) return
+    setAssignLoading(true)
+    try {
+      const res = await adminAssignUnit(session.accessToken as string, id as string, assignForm)
+      if (res.success) {
+        setClient({ ...client, clientUnit: res.data })
+        setIsAssignModalOpen(false)
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setAssignLoading(false)
+    }
+  }
 
   useEffect(() => {
     const fetchClient = async () => {
@@ -144,7 +177,7 @@ export default function AdminClientDetail() {
                 <div className="px-6 py-4 border-b border-cream-divider flex items-center justify-between">
                   <h3 className="font-cormorant text-charcoal text-lg font-bold">Property Allocation</h3>
                   {!client.clientUnit && (
-                    <button className="text-green text-xs font-bold flex items-center gap-1">
+                    <button onClick={() => setIsAssignModalOpen(true)} className="text-green text-xs font-bold flex items-center gap-1">
                       <Plus size={14} /> ASSIGN UNIT
                     </button>
                   )}
@@ -183,7 +216,7 @@ export default function AdminClientDetail() {
                   ) : (
                     <div className="text-center py-10 bg-cream/30 rounded-lg border-2 border-dashed border-cream-divider">
                       <p className="text-charcoal-light italic text-sm">No unit currently assigned to this client.</p>
-                      <button className="mt-4 px-4 py-2 bg-green text-white rounded-sm text-xs font-bold uppercase tracking-widest">
+                      <button onClick={() => setIsAssignModalOpen(true)} className="mt-4 px-4 py-2 bg-green text-white rounded-sm text-xs font-bold uppercase tracking-widest">
                         CHOOSE UNIT
                       </button>
                     </div>
@@ -335,6 +368,64 @@ export default function AdminClientDetail() {
            </div>
         </div>
       </div>
+
+      {/* Assign Unit Modal */}
+      {isAssignModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/50 backdrop-blur-sm">
+          <div className="bg-white rounded-card w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-cormorant text-charcoal text-2xl font-bold">Assign Unit</h3>
+              <button onClick={() => setIsAssignModalOpen(false)} className="text-charcoal-light hover:text-charcoal">✕</button>
+            </div>
+            <form onSubmit={handleAssignUnit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-charcoal mb-1">Development</label>
+                <select required value={assignForm.developmentId} onChange={e => setAssignForm(p => ({ ...p, developmentId: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal bg-white">
+                  <option value="">Select Development</option>
+                  {developments.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Unit Type</label>
+                  <input type="text" required placeholder="e.g. 4-Bed Villa" value={assignForm.unitType} onChange={e => setAssignForm(p => ({ ...p, unitType: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Unit Number</label>
+                  <input type="text" required placeholder="e.g. A-12" value={assignForm.unitNumber} onChange={e => setAssignForm(p => ({ ...p, unitNumber: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Bedrooms</label>
+                  <input type="number" required value={assignForm.bedrooms || ''} onChange={e => setAssignForm(p => ({ ...p, bedrooms: parseInt(e.target.value) || 0 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Bathrooms</label>
+                  <input type="number" required value={assignForm.bathrooms || ''} onChange={e => setAssignForm(p => ({ ...p, bathrooms: parseInt(e.target.value) || 0 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Floor Area (sqm)</label>
+                  <input type="text" value={assignForm.floorArea} onChange={e => setAssignForm(p => ({ ...p, floorArea: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Allocation Date</label>
+                  <input type="date" required value={assignForm.allocationDate} onChange={e => setAssignForm(p => ({ ...p, allocationDate: e.target.value }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Total Price (₦)</label>
+                  <input type="number" required value={assignForm.totalPrice || ''} onChange={e => setAssignForm(p => ({ ...p, totalPrice: parseInt(e.target.value) || 0 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal mb-1">Amount Paid (₦)</label>
+                  <input type="number" required value={assignForm.amountPaid || ''} onChange={e => setAssignForm(p => ({ ...p, amountPaid: parseInt(e.target.value) || 0 }))} className="w-full p-2.5 border border-cream-divider rounded-sm text-sm text-charcoal" />
+                </div>
+              </div>
+              <button disabled={assignLoading} type="submit" className="w-full mt-6 bg-green text-white py-3.5 rounded-sm text-xs font-bold tracking-widest uppercase hover:bg-green-dark transition-colors">
+                {assignLoading ? 'Assigning...' : 'Confirm Assignment'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
