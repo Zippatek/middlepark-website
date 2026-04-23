@@ -667,7 +667,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 1.9 }}
               >
                 <Button variant="ghost-white" size="lg" className="w-full sm:w-auto" href="/contact">
-                  ENQUIRE ABOUT A UNIT
+                  ENQUIRE ABOUT A PROJECT
                 </Button>
               </motion.div>
             </div>
@@ -858,7 +858,7 @@ export default function HomePage() {
               <SectionHeader
                 overline="Why MiddlePark"
                 heading="We Build Homes That Keep Their Promise"
-                subCopy="In a market where delays and disputes are common, MiddlePark delivers on time, on budget, and on paper."
+                subCopy="MiddlePark delivers on time, on budget, and on paper."
               />
               <div className="relative h-[320px] lg:h-[380px] rounded-[16px] overflow-hidden mt-8">
                 <Image
