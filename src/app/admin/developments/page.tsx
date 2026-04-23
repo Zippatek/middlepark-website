@@ -16,7 +16,7 @@ import {
   Star
 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { adminListDevelopments } from '@/lib/api'
+import { adminListDevelopments, adminDeleteDevelopment, adminToggleFeatured } from '@/lib/api'
 import { cn, formatNaira } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -45,7 +45,23 @@ export default function AdminDevelopments() {
     fetchDevelopments()
   }, [session])
 
-  const filtered = developments.filter(d => 
+  const handleDelete = async (id: string) => {
+    if (!session?.accessToken || !confirm('Delete this development? This cannot be undone.')) return
+    try {
+      await adminDeleteDevelopment(session.accessToken as string, id)
+      setDevelopments(prev => prev.filter(d => d.id !== id))
+    } catch (e) { console.error(e); alert('Delete failed') }
+  }
+
+  const handleToggleFeatured = async (id: string, featured: boolean) => {
+    if (!session?.accessToken) return
+    try {
+      await adminToggleFeatured(session.accessToken as string, id, !featured)
+      setDevelopments(prev => prev.map(d => d.id === id ? { ...d, isFeatured: !featured } : d))
+    } catch (e) { console.error(e) }
+  }
+
+  const filtered = developments.filter(d =>
     d.name.toLowerCase().includes(search.toLowerCase()) ||
     d.neighborhood.toLowerCase().includes(search.toLowerCase())
   )
@@ -58,9 +74,9 @@ export default function AdminDevelopments() {
           <h2 className="font-cormorant text-charcoal text-3xl font-bold">Developments</h2>
           <p className="text-charcoal-light text-sm">Manage MiddlePark properties, unit inventory, and marketing status.</p>
         </div>
-        <button className="bg-green text-white px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 w-fit">
+        <Link href="/admin/developments/new" className="bg-green text-white px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 w-fit">
           <Plus size={16} /> NEW DEVELOPMENT
-        </button>
+        </Link>
       </div>
 
       {/* Filters Bar */}
@@ -167,13 +183,16 @@ export default function AdminDevelopments() {
 
                 <div className="flex items-center justify-between pt-4 border-t border-cream-divider">
                   <div className="flex items-center gap-1">
-                    <button className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="View Public Page">
+                    <Link href={`/properties/${dev.slug}`} target="_blank" className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="View Public Page">
                       <Eye size={16} />
-                    </button>
-                    <button className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="Edit Development">
+                    </Link>
+                    <Link href={`/admin/developments/${dev.id}/edit`} className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="Edit Development">
                       <Edit2 size={16} />
+                    </Link>
+                    <button onClick={() => handleToggleFeatured(dev.id, dev.isFeatured)} className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-amber-500 transition-colors" title="Toggle Featured">
+                      <Star size={16} fill={dev.isFeatured ? 'currentColor' : 'none'} />
                     </button>
-                    <button className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-red transition-colors" title="Delete">
+                    <button onClick={() => handleDelete(dev.id)} className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-red transition-colors" title="Delete">
                       <Trash2 size={16} />
                     </button>
                   </div>

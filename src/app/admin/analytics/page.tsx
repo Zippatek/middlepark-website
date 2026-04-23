@@ -1,31 +1,26 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
-  Building2, 
-  ArrowUpRight,
-  ArrowDownRight,
-  Calendar,
-  Globe,
-  PieChart,
-  Download
+import {
+  TrendingUp, Users, Building2, ArrowUpRight, ArrowDownRight, Globe, PieChart, Download
 } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { adminGetAnalytics } from '@/lib/api'
 import { cn, formatNaira } from '@/lib/utils'
 
-const salesTrends = [
-  { month: 'Jan', value: 120000000 },
-  { month: 'Feb', value: 150000000 },
-  { month: 'Mar', value: 280000000 },
-  { month: 'Apr', value: 210000000 },
-  { month: 'May', value: 340000000 },
-  { month: 'Jun', value: 420000000 },
-]
-
 export default function AdminAnalytics() {
+  const { data: session } = useSession()
+  const [data, setData] = useState<any>(null)
+
+  useEffect(() => {
+    if (!session?.accessToken) return
+    adminGetAnalytics(session.accessToken as string).then(r => { if (r.success) setData(r.data) }).catch(console.error)
+  }, [session])
+
+  const salesTrends = data?.salesTrends || []
+  const maxValue = Math.max(...salesTrends.map((t: any) => t.value), 1)
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -42,10 +37,10 @@ export default function AdminAnalytics() {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: 'Revenue (Q2)', value: '₦1.24B', trend: '+14%', up: true, icon: TrendingUp },
-          { label: 'New Lead Velocity', value: '42 / wk', trend: '+5.2%', up: true, icon: Users },
-          { label: 'Inventory Turnover', value: '18%', trend: '-2.1%', up: false, icon: Building2 },
-          { label: 'Portal Retention', value: '92%', trend: '+0.8%', up: true, icon: Globe },
+          { label: 'Revenue (Quarter)', value: data ? formatNaira(data.revenueQuarter || 0) : '…', trend: '', up: true, icon: TrendingUp },
+          { label: 'New Leads (7d)', value: data ? `${data.newLeadsLastWeek ?? 0}` : '…', trend: '', up: true, icon: Users },
+          { label: 'Inventory Turnover', value: data ? `${data.inventoryTurnover ?? 0}%` : '…', trend: '', up: true, icon: Building2 },
+          { label: 'Portal Retention', value: '—', trend: '', up: true, icon: Globe },
         ].map((kpi, i) => (
           <motion.div
             key={kpi.label}
@@ -88,11 +83,11 @@ export default function AdminAnalytics() {
           </div>
           
           <div className="h-64 flex items-end justify-between gap-2">
-            {salesTrends.map((trend, i) => (
+            {salesTrends.map((trend: any, i: number) => (
               <div key={trend.month} className="flex-1 flex flex-col items-center gap-2 group">
-                <div 
+                <div
                   className="w-full bg-green/20 group-hover:bg-green transition-all duration-300 rounded-t-sm relative"
-                  style={{ height: `${(trend.value / 450000000) * 100}%` }}
+                  style={{ height: `${(trend.value / maxValue) * 100}%` }}
                 >
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-charcoal text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     {formatNaira(trend.value)}

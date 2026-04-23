@@ -16,15 +16,17 @@ import {
   Plus
 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { adminListClients } from '@/lib/api'
+import { adminListClients, adminCreateClient, adminActivateClient } from '@/lib/api'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { X } from 'lucide-react'
 
 export default function AdminClients() {
   const { data: session } = useSession()
   const [clients, setClients] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -44,6 +46,20 @@ export default function AdminClients() {
     fetchClients()
   }, [session])
 
+  const reload = async () => {
+    if (!session?.accessToken) return
+    const res = await adminListClients(session.accessToken as string)
+    if (res.success && res.data) setClients(res.data.items)
+  }
+
+  const toggleActive = async (id: string) => {
+    if (!session?.accessToken) return
+    try {
+      await adminActivateClient(session.accessToken as string, id)
+      reload()
+    } catch (e) { console.error(e) }
+  }
+
   const filteredClients = clients.filter(c => 
     `${c.firstName} ${c.lastName}`.toLowerCase().includes(search.toLowerCase()) ||
     c.email.toLowerCase().includes(search.toLowerCase())
@@ -57,7 +73,7 @@ export default function AdminClients() {
           <h2 className="font-cormorant text-charcoal text-3xl font-bold">Client Management</h2>
           <p className="text-charcoal-light text-sm">Manage all registered MiddlePark clients and their property allocations.</p>
         </div>
-        <button className="bg-green text-white px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 w-fit">
+        <button onClick={() => setShowForm(true)} className="bg-green text-white px-5 py-2.5 rounded-sm text-sm font-medium flex items-center gap-2 w-fit">
           <Plus size={16} /> REGISTER NEW CLIENT
         </button>
       </div>
@@ -199,6 +215,70 @@ export default function AdminClients() {
             <button disabled className="px-3 py-1 bg-white border border-cream-divider rounded text-xs text-charcoal-light disabled:opacity-50">Next</button>
           </div>
         </div>
+      </div>
+      {showForm && <ClientForm token={session?.accessToken as string} onClose={() => setShowForm(false)} onCreated={() => { setShowForm(false); reload() }} />}
+    </div>
+  )
+}
+
+function ClientForm({ token, onClose, onCreated }: { token: string; onClose: () => void; onCreated: () => void }) {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState('')
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setBusy(true); setErr('')
+    try {
+      const res = await adminCreateClient(token, { firstName, lastName, email, phone, password })
+      if (res.success) onCreated(); else setErr(res.error || 'Create failed')
+    } catch (e: any) { setErr(e.message || 'Create failed') }
+    finally { setBusy(false) }
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-card w-full max-w-lg">
+        <div className="p-6 border-b border-cream-divider flex items-center justify-between">
+          <h3 className="font-cormorant text-xl font-bold text-charcoal">Register New Client</h3>
+          <button onClick={onClose}><X size={18} /></button>
+        </div>
+        <form onSubmit={submit} className="p-6 space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1 block">First Name</label>
+              <input required value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full p-2 bg-cream rounded text-sm" />
+            </div>
+            <div>
+              <label className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1 block">Last Name</label>
+              <input required value={lastName} onChange={e => setLastName(e.target.value)} className="w-full p-2 bg-cream rounded text-sm" />
+            </div>
+          </div>
+          <div>
+            <label className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1 block">Email</label>
+            <input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full p-2 bg-cream rounded text-sm" />
+          </div>
+          <div>
+            <label className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1 block">Phone</label>
+            <input value={phone} onChange={e => setPhone(e.target.value)} className="w-full p-2 bg-cream rounded text-sm" />
+          </div>
+          <div>
+            <label className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1 block">Temporary Password</label>
+            <input required type="text" value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2 bg-cream rounded text-sm" />
+            <p className="text-[10px] text-charcoal-light mt-1">Share this with the client; they can change it after login.</p>
+          </div>
+          {err && <p className="text-red text-xs">{err}</p>}
+          <div className="flex gap-2 justify-end pt-2">
+            <button type="button" onClick={onClose} className="px-4 py-2 border border-cream-divider rounded text-xs font-bold uppercase">Cancel</button>
+            <button type="submit" disabled={busy} className="px-4 py-2 bg-green text-white rounded text-xs font-bold uppercase disabled:opacity-50">
+              {busy ? 'Saving…' : 'Create Client'}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

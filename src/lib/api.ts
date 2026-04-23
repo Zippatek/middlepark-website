@@ -519,10 +519,128 @@ export async function adminUpdatePaymentStatus(token: string, id: string, status
   })
 }
 
-export async function adminUploadDocument(token: string, data: any): Promise<ApiResponse<any>> {
-  return apiFetch<ApiResponse<any>>('/admin/documents', {
+// Multipart upload helper (FormData)
+async function apiUpload<T>(path: string, form: FormData, token: string): Promise<T> {
+  const res = await fetch(`${BASE_URL}${path}`, {
     method: 'POST',
-    body: JSON.stringify(data),
-    token,
+    headers: { Authorization: `Bearer ${token}` },
+    body: form,
   })
+  if (!res.ok) {
+    let msg = `API error ${res.status}`
+    try { const b = await res.json(); msg = b.error || b.message || msg } catch {}
+    throw new Error(msg)
+  }
+  return res.json() as Promise<T>
+}
+
+export async function adminGetAnalytics(token: string): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/analytics', { token })
+}
+
+export async function adminUploadImage(token: string, file: File): Promise<ApiResponse<{ url: string }>> {
+  const f = new FormData(); f.append('file', file)
+  return apiUpload<ApiResponse<{ url: string }>>('/admin/upload/image', f, token)
+}
+
+// Developments
+export async function adminGetDevelopment(token: string, id: string): Promise<ApiResponse<Development>> {
+  return apiFetch<ApiResponse<Development>>(`/admin/developments/${id}`, { token })
+}
+export async function adminCreateDevelopment(token: string, data: any): Promise<ApiResponse<Development>> {
+  return apiFetch<ApiResponse<Development>>('/admin/developments', { method: 'POST', body: JSON.stringify(data), token })
+}
+export async function adminUpdateDevelopment(token: string, id: string, data: any): Promise<ApiResponse<Development>> {
+  return apiFetch<ApiResponse<Development>>(`/admin/developments/${id}`, { method: 'PUT', body: JSON.stringify(data), token })
+}
+export async function adminDeleteDevelopment(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/developments/${id}`, { method: 'DELETE', token })
+}
+export async function adminUpdateDevelopmentStatus(token: string, id: string, status: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/developments/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }), token })
+}
+export async function adminToggleFeatured(token: string, id: string, featured: boolean): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/developments/${id}/feature`, { method: 'PATCH', body: JSON.stringify({ featured }), token })
+}
+export async function adminCreateUnitType(token: string, id: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>(`/admin/developments/${id}/unit-types`, { method: 'POST', body: JSON.stringify(data), token })
+}
+
+// Clients
+export async function adminCreateClient(token: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/clients', { method: 'POST', body: JSON.stringify(data), token })
+}
+export async function adminActivateClient(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/clients/${id}/activate`, { method: 'POST', token })
+}
+export async function adminAssignUnit(token: string, id: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>(`/admin/clients/${id}/assign-unit`, { method: 'POST', body: JSON.stringify(data), token })
+}
+
+// Documents
+export async function adminListDocuments(token: string): Promise<ApiResponse<any[]>> {
+  return apiFetch<ApiResponse<any[]>>('/admin/documents', { token })
+}
+export async function adminUploadDocument(
+  token: string,
+  file: File,
+  meta: { userId: string; title: string; category: string; description?: string }
+): Promise<ApiResponse<any>> {
+  const f = new FormData()
+  f.append('file', file)
+  f.append('userId', meta.userId)
+  f.append('title', meta.title)
+  f.append('category', meta.category)
+  if (meta.description) f.append('description', meta.description)
+  return apiUpload<ApiResponse<any>>('/admin/documents', f, token)
+}
+export async function adminDeleteDocument(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/documents/${id}`, { method: 'DELETE', token })
+}
+
+// Site Visits
+export async function adminListSiteVisits(token: string): Promise<ApiResponse<any[]>> {
+  return apiFetch<ApiResponse<any[]>>('/admin/site-visits', { token })
+}
+export async function adminCreateSiteVisit(token: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/site-visits', { method: 'POST', body: JSON.stringify(data), token })
+}
+export async function adminUpdateSiteVisit(token: string, id: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>(`/admin/site-visits/${id}`, { method: 'PATCH', body: JSON.stringify(data), token })
+}
+export async function adminDeleteSiteVisit(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/site-visits/${id}`, { method: 'DELETE', token })
+}
+
+// Payments
+export async function adminCreatePayment(token: string, data: any): Promise<ApiResponse<any>> {
+  return apiFetch<ApiResponse<any>>('/admin/payments', { method: 'POST', body: JSON.stringify(data), token })
+}
+
+// Testimonials
+export async function adminListTestimonials(token: string): Promise<ApiResponse<Testimonial[]>> {
+  return apiFetch<ApiResponse<Testimonial[]>>('/admin/testimonials', { token })
+}
+export async function adminCreateTestimonial(token: string, data: any): Promise<ApiResponse<Testimonial>> {
+  return apiFetch<ApiResponse<Testimonial>>('/admin/testimonials', { method: 'POST', body: JSON.stringify(data), token })
+}
+export async function adminUpdateTestimonial(token: string, id: string, data: any): Promise<ApiResponse<Testimonial>> {
+  return apiFetch<ApiResponse<Testimonial>>(`/admin/testimonials/${id}`, { method: 'PUT', body: JSON.stringify(data), token })
+}
+export async function adminDeleteTestimonial(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/testimonials/${id}`, { method: 'DELETE', token })
+}
+
+// Team
+export async function adminListTeam(token: string): Promise<ApiResponse<TeamMember[]>> {
+  return apiFetch<ApiResponse<TeamMember[]>>('/admin/team', { token })
+}
+export async function adminCreateTeamMember(token: string, data: any): Promise<ApiResponse<TeamMember>> {
+  return apiFetch<ApiResponse<TeamMember>>('/admin/team', { method: 'POST', body: JSON.stringify(data), token })
+}
+export async function adminUpdateTeamMember(token: string, id: string, data: any): Promise<ApiResponse<TeamMember>> {
+  return apiFetch<ApiResponse<TeamMember>>(`/admin/team/${id}`, { method: 'PUT', body: JSON.stringify(data), token })
+}
+export async function adminDeleteTeamMember(token: string, id: string): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/team/${id}`, { method: 'DELETE', token })
 }
