@@ -41,7 +41,8 @@ import {
 const FALLBACK_STATS = [
   { number: '12+', label: 'Completed Developments' },
   { number: '300+', label: 'Units Delivered' },
-  { number: '₦100B+', label: 'Property Value Managed' },
+  { number: '₦100B+', label: 'Value of Development' },
+  { number: '4', label: 'Cities We Build' },
 ]
 
 const FALLBACK_TESTIMONIALS: Testimonial[] = [
@@ -765,7 +766,7 @@ export default function HomePage() {
       {/* 2. STATS BAR */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#454C55] py-10 sm:py-14 px-5 sm:px-6 lg:px-8" id="stats-bar">
-        <div className="max-w-[900px] mx-auto grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 lg:divide-x divide-white/8">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}

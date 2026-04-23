@@ -117,8 +117,8 @@ const FALLBACK_TEAM: TeamMember[] = [
 const stats = [
   { number: '12+', label: 'Completed Developments' },
   { number: '300+', label: 'Units Delivered' },
-  { number: '2,500+', label: 'Happy Homeowners' },
-  { number: '8', label: 'Years in Nigeria' },
+  { number: '₦100B+', label: 'Value of Development' },
+  { number: '4', label: 'Cities We Build' },
 ]
 
 export default function AboutPage() {
