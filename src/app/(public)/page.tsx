@@ -406,12 +406,12 @@ export default function HomePage() {
     // Fetch featured developments
     getFeaturedDevelopments()
       .then((res) => { if (res.success && res.data?.length) setFeaturedDevelopments(res.data) })
-      .catch(() => {})
+      .catch(() => { })
 
     // Fetch testimonials
     getTestimonials()
       .then((res) => { if (res.success && res.data?.length) setTestimonials(res.data) })
-      .catch(() => {})
+      .catch(() => { })
 
     // Stats are hardcoded — no API fetch needed
     // Values: 12+ Completed Developments, 300+ Units Delivered, ₦100B+ Property Value
@@ -651,7 +651,7 @@ export default function HomePage() {
                   <input
                     type="text"
                     name="heroSearch"
-                    placeholder="Search by location, city, or property type..."
+                    placeholder="Search by location, project, or property type..."
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/30 text-sm px-3 py-2 font-sans"
                   />
                   <button type="submit" className="bg-green text-white text-xs font-semibold px-5 py-2.5 rounded-full shrink-0 hover:opacity-90 transition-opacity">
