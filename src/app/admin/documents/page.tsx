@@ -27,8 +27,8 @@ export default function AdminDocuments() {
         adminListDocuments(session.accessToken as string),
         adminListClients(session.accessToken as string),
       ])
-      if (d.success && d.data) setDocs(d.data.items || d.data)
-      if (c.success && c.data) setClients(c.data.items || c.data)
+      if (d.success && d.data) setDocs((d.data as any).items || d.data)
+      if (c.success && c.data) setClients((c.data as any).items || c.data)
     } catch (e) { console.error(e) }
     finally { setLoading(false) }
   }
