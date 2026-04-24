@@ -86,51 +86,51 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
           </div>
 
           {/* Specs & Price Layer */}
-          <div className="flex items-center justify-between mb-4">
-            
-            <div className="flex items-center text-charcoal-dark">
+          <div className="flex flex-col gap-2 mb-4">
+            {/* Price — full-width, never crowded by the specs pills */}
+            <p className="text-charcoal-dark text-[17px] font-bold tracking-tight whitespace-nowrap">
+              {formatNaira(development.priceFrom)}
+            </p>
+
+            {/* Specs row — truncates on overflow so long size labels don't
+                push numbers off the card */}
+            <div className="flex items-center gap-2 text-charcoal-dark min-w-0 overflow-hidden">
               {development.bedrooms.length > 0 && (
-                <>
-                  <div className="flex items-center gap-1.5">
-                    <BedDouble size={16} strokeWidth={1.5} />
-                    <span className="text-[13px] font-medium">{development.bedrooms[0]}</span>
-                  </div>
-                  <span className="mx-2 text-[10px]">•</span>
-                </>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <BedDouble size={16} strokeWidth={1.5} />
+                  <span className="text-[13px] font-medium">{development.bedrooms[0]}</span>
+                </div>
               )}
-              
+              {development.bedrooms.length > 0 && development.bathrooms.length > 0 && (
+                <span className="text-[10px] text-charcoal-light shrink-0">•</span>
+              )}
               {development.bathrooms.length > 0 && (
-                <>
-                  <div className="flex items-center gap-1.5">
-                    <Bath size={16} strokeWidth={1.5} />
-                    <span className="text-[13px] font-medium">{development.bathrooms[0]}</span>
-                  </div>
-                  <span className="mx-2 text-[10px]">•</span>
-                </>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <Bath size={16} strokeWidth={1.5} />
+                  <span className="text-[13px] font-medium">{development.bathrooms[0]}</span>
+                </div>
               )}
-              
               {development.sizeRange && (() => {
                 const raw = development.sizeRange.trim()
-                // If the sizeRange is purely numeric (e.g. "200–320" or "280"),
-                // append "SQM". Otherwise trust the value as-is ("Three-level
-                // residence", "3,380.31 SQM land", "Basement + 3 Floors", ...).
+                // Pure numeric ranges get "SQM" appended; prose values
+                // ("Three-level residence", "3,380.31 SQM land") are trusted.
                 const isNumeric = /^[\d.,\s–-]+$/.test(raw)
                 const display = isNumeric ? `${raw} SQM` : raw
                 return (
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <Maximize2 size={15} strokeWidth={1.5} className="shrink-0" />
-                    <span className="text-[13px] font-medium truncate max-w-[140px]" title={display}>
-                      {display}
-                    </span>
-                  </div>
+                  <>
+                    {(development.bedrooms.length > 0 || development.bathrooms.length > 0) && (
+                      <span className="text-[10px] text-charcoal-light shrink-0">•</span>
+                    )}
+                    <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                      <Maximize2 size={15} strokeWidth={1.5} className="shrink-0" />
+                      <span className="text-[13px] font-medium truncate" title={display}>
+                        {display}
+                      </span>
+                    </div>
+                  </>
                 )
               })()}
             </div>
-
-            {/* Price */}
-            <p className="text-charcoal-dark text-[17px] font-bold tracking-tight">
-              {formatNaira(development.priceFrom)}
-            </p>
           </div>
 
           {/* Divider */}
