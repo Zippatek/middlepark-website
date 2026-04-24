@@ -142,8 +142,12 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
             // Only prefix the bedroom count when the name doesn't already
             // start with it — otherwise we end up with "5-Bedroom Luxury
             // 5-Bedroom Semi-Detached..." duplicates.
+            // Only prefix the bedroom count when the name has no bedroom
+            // mention anywhere — otherwise listings like "Luxury 5-Bedroom
+            // Semi-Detached" end up as "5-Bedroom Luxury 5-Bedroom …".
+            const hasBedroomMention = /\d+\s*-?\s*bedroom/i.test(name)
             const prefix =
-              development.bedrooms[0] && !/^\d+-?\s?bedroom/i.test(name)
+              development.bedrooms[0] && !hasBedroomMention
                 ? `${development.bedrooms[0]}-Bedroom `
                 : ''
             // Trim long names so the card header stays two lines max.
