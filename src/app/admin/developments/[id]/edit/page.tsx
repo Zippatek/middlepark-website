@@ -45,6 +45,8 @@ export default function EditDevelopmentPage() {
           location: dev.location,
           neighborhood: dev.neighborhood,
           city: dev.city,
+          latitude: dev.latitude,
+          longitude: dev.longitude,
           priceFrom: String(dev.priceFrom ?? ''),
           priceTo: dev.priceTo ? String(dev.priceTo) : '',
           totalUnits: dev.totalUnits,

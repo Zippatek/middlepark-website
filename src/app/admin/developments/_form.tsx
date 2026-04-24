@@ -14,6 +14,8 @@ export interface DevelopmentFormData {
   location: string
   neighborhood: string
   city: string
+  latitude?: number
+  longitude?: number
   priceFrom: string
   priceTo?: string
   totalUnits: number
@@ -46,6 +48,8 @@ export default function DevelopmentForm({
     location: initial?.location || '',
     neighborhood: initial?.neighborhood || '',
     city: initial?.city || 'Abuja',
+    latitude: initial?.latitude,
+    longitude: initial?.longitude,
     priceFrom: initial?.priceFrom?.toString() || '',
     priceTo: initial?.priceTo?.toString() || '',
     totalUnits: initial?.totalUnits || 0,
@@ -86,6 +90,8 @@ export default function DevelopmentForm({
         bathrooms: f.bathrooms.map(Number),
         totalUnits: Number(f.totalUnits),
         availableUnits: Number(f.availableUnits),
+        latitude: f.latitude ? Number(f.latitude) : undefined,
+        longitude: f.longitude ? Number(f.longitude) : undefined,
       })
     } catch (e: any) { setErr(e.message || 'Save failed') }
     finally { setBusy(false) }
@@ -120,7 +126,7 @@ export default function DevelopmentForm({
       </section>
 
       <section>
-        <h3 className="font-cormorant text-lg font-bold mb-4 text-charcoal">Location & Status</h3>
+        <h3 className="font-cormorant text-lg font-bold mb-4 text-charcoal">Location & Map</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div><Label>Status</Label>
             <select value={f.status} onChange={e => upd('status', e.target.value)} className={inputCls}>
@@ -133,6 +139,8 @@ export default function DevelopmentForm({
           <div><Label>City</Label><input value={f.city} onChange={e => upd('city', e.target.value)} className={inputCls} /></div>
           <div><Label>Neighborhood</Label><input value={f.neighborhood} onChange={e => upd('neighborhood', e.target.value)} className={inputCls} /></div>
           <div><Label>Full Location</Label><input value={f.location} onChange={e => upd('location', e.target.value)} className={inputCls} /></div>
+          <div><Label>Latitude</Label><input type="number" step="any" value={f.latitude || ''} onChange={e => upd('latitude', e.target.value)} className={inputCls} placeholder="e.g. 9.0765" /></div>
+          <div><Label>Longitude</Label><input type="number" step="any" value={f.longitude || ''} onChange={e => upd('longitude', e.target.value)} className={inputCls} placeholder="e.g. 7.3986" /></div>
           <div><Label>Completion Date</Label><input type="date" value={f.completionDate} onChange={e => upd('completionDate', e.target.value)} className={inputCls} /></div>
           <div className="flex items-center gap-2 mt-6">
             <input type="checkbox" checked={f.isFeatured} onChange={e => upd('isFeatured', e.target.checked)} id="featured" />

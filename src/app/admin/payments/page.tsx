@@ -43,15 +43,30 @@ export default function AdminPayments() {
   const handleCreatePayment = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!session?.accessToken) return
+    
+    const client = clients.find(c => c.id === paymentForm.userId)
+    const developmentId = client?.clientUnit?.developmentId
+    if (!developmentId) {
+      alert('This client does not have an assigned unit yet. Please assign them a unit first.')
+      return
+    }
+
     setPaymentLoading(true)
     try {
-      const res = await adminCreatePayment(session.accessToken as string, paymentForm)
+      const payload = { ...paymentForm, developmentId }
+      const res = await adminCreatePayment(session.accessToken as string, payload)
       if (res.success) {
         setPayments([res.data, ...payments])
         setIsNewPaymentModalOpen(false)
+        setPaymentForm({
+          userId: '', amount: 0, dueDate: '', instalment: 1, milestoneLabel: '', reference: '', status: 'UPCOMING'
+        })
+      } else {
+        alert(res.error || 'Failed to create payment')
       }
     } catch (error) {
       console.error(error)
+      alert('An error occurred')
     } finally {
       setPaymentLoading(false)
     }
@@ -61,9 +76,9 @@ export default function AdminPayments() {
     const fetchPayments = async () => {
       if (!session?.accessToken) return
       try {
-        const res = await adminListPayments(session.accessToken as string, {
-          status: filterStatus !== 'all' ? filterStatus : undefined
-        })
+        const res = await adminListPayments(session.accessToken as string, 
+          filterStatus !== 'all' ? { status: filterStatus } : {}
+        )
         if (res.success && res.data) {
           setPayments(res.data.items)
         }

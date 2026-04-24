@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
 import { useParams } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -14,6 +15,17 @@ import {
 import { getDevelopmentBySlug, submitDevelopmentEnquiry } from '@/lib/api'
 import type { Development } from '@/types'
 import { formatNaira } from '@/lib/utils'
+import PropertySpecTable from '@/components/ui/PropertySpecTable'
+
+// Dynamic import for the map to avoid SSR issues with Leaflet
+const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), { 
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full bg-green-tint flex items-center justify-center">
+      <Loader2 className="text-green animate-spin" />
+    </div>
+  )
+})
 
 // ─── STATUS LABEL MAP ────────────────────────────────────────────────────────
 const statusLabel: Record<string, string> = {
@@ -125,6 +137,19 @@ export default function DevelopmentDetailPage() {
     whatsapp: '+2349012345678',
   }
 
+  // ─── Prepare Specs for Table ──────────────────────────────────────────────
+  const propertySpecs = [
+    { label: 'Development ID', value: dev.id },
+    { label: 'Status', value: statusLabel[dev.status] || dev.status, isBold: true },
+    { label: 'Base Price', value: formatNaira(dev.priceFrom), isBold: true },
+    { label: 'Bedrooms', value: Array.isArray(dev.bedrooms) ? dev.bedrooms.join(', ') : dev.bedrooms },
+    { label: 'Bathrooms', value: Array.isArray(dev.bathrooms) ? dev.bathrooms.join(', ') : dev.bathrooms },
+    { label: 'Floor Area', value: dev.sizeRange },
+    { label: 'Neighborhood', value: dev.neighborhood },
+    { label: 'Total Units', value: dev.totalUnits },
+    { label: 'Projected Completion', value: dev.completionDate ? new Date(dev.completionDate).getFullYear().toString() : 'TBC' },
+  ]
+
   return (
     <div className="w-full bg-[#f4f3ea] min-h-screen pb-20">
 
@@ -175,69 +200,9 @@ export default function DevelopmentDetailPage() {
           </div>
         </div>
 
-        {/* ─── Spec Grid ──────────────────────────────────────────────── */}
-        <div className="bg-white rounded-[24px] px-8 py-10 shadow-[0px_10px_30px_rgba(58,59,63,0.04)] mx-auto w-full max-w-[1000px]">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-cream-divider pb-8">
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <Building2 size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Status</span>
-              <span className="text-[14px] text-charcoal-light font-medium">{statusLabel[dev.status] || dev.status}</span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <span className="text-[26px] font-bold text-charcoal opacity-80 pb-1">₦</span>
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">From</span>
-              <span className="text-[14px] text-charcoal-light font-medium">{formatNaira(dev.priceFrom)}</span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <BedDouble size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Beds</span>
-              <span className="text-[14px] text-charcoal-light font-medium">
-                {Array.isArray(dev.bedrooms) ? dev.bedrooms.join('–') : dev.bedrooms}
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <Bath size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Baths</span>
-              <span className="text-[14px] text-charcoal-light font-medium">
-                {Array.isArray(dev.bathrooms) ? dev.bathrooms.join('–') : dev.bathrooms}
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <Maximize2 size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Size</span>
-              <span className="text-[14px] text-charcoal-light font-medium">{dev.sizeRange}</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 md:px-12">
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <CalendarDays size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Complete</span>
-              <span className="text-[14px] text-charcoal-light font-medium">
-                {dev.completionDate ? new Date(dev.completionDate).getFullYear() : 'TBC'}
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <Layers size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Units</span>
-              <span className="text-[14px] text-charcoal-light font-medium">{dev.totalUnits}</span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5 text-center">
-              <Car size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">Parking</span>
-              <span className="text-[13px] text-charcoal-light leading-snug font-medium">Covered Allocation</span>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1.5">
-              <Hash size={26} strokeWidth={1.2} className="text-charcoal opacity-80" />
-              <span className="text-[14px] font-bold text-charcoal mt-1 uppercase tracking-widest">ID</span>
-              <button
-                onClick={handleCopyId}
-                className="flex items-center gap-1 text-[13px] text-charcoal-light hover:text-green transition-colors font-medium"
-              >
-                {dev.id} {copied ? <CheckCircle size={14} className="text-green" /> : <Hash size={14} />}
-              </button>
-            </div>
-          </div>
+        {/* ─── Spec Table ──────────────────────────────────────────────── */}
+        <div className="mx-auto w-full max-w-[1000px]">
+           <PropertySpecTable specs={propertySpecs} />
         </div>
 
         {/* ─── Body Layout ────────────────────────────────────────────── */}
@@ -302,11 +267,11 @@ export default function DevelopmentDetailPage() {
             )}
 
             {/* Highlights */}
-            {(dev as any).highlights && (dev as any).highlights.length > 0 && (
+            {dev.highlights && dev.highlights.length > 0 && (
               <div>
                 <h2 className="font-cormorant text-charcoal text-4xl font-bold leading-tight mb-6">Quality Guarantee</h2>
                 <div className="space-y-4">
-                  {(dev as any).highlights.map((h: any) => (
+                  {dev.highlights.map((h: any) => (
                     <p key={h.label} className="flex items-start gap-4 text-[16px] font-medium text-charcoal">
                       <span className="text-green font-bold">✓</span>
                       <span><strong className="text-charcoal pr-2">{h.label}:</strong> {h.description}</span>
@@ -316,12 +281,18 @@ export default function DevelopmentDetailPage() {
               </div>
             )}
 
-            {/* Map Placeholder */}
-            <div className="relative w-full h-[320px] rounded-[24px] overflow-hidden border border-white bg-white/50 shadow-sm">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-green-tint">
-                <MapPin size={42} strokeWidth={1} className="text-green" />
-                <span className="text-[15px] font-semibold text-charcoal">{dev.location}</span>
-              </div>
+            {/* Interactive Map */}
+            <div className="relative w-full h-[400px] rounded-[24px] overflow-hidden border border-white bg-white/50 shadow-sm">
+              <InteractiveMap 
+                center={[dev.coordinates?.lat || 9.0765, dev.coordinates?.lng || 7.3986]} 
+                markers={[
+                  { 
+                    position: [dev.coordinates?.lat || 9.0765, dev.coordinates?.lng || 7.3986],
+                    title: dev.name,
+                    address: dev.location
+                  }
+                ]} 
+              />
             </div>
           </div>
 

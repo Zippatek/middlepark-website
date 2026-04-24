@@ -183,7 +183,7 @@ export default function AdminDevelopments() {
 
                 <div className="flex items-center justify-between pt-4 border-t border-cream-divider">
                   <div className="flex items-center gap-1">
-                    <Link href={`/properties/${dev.slug}`} target="_blank" className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="View Public Page">
+                    <Link href={`/developments/${dev.slug}`} target="_blank" className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="View Public Page">
                       <Eye size={16} />
                     </Link>
                     <Link href={`/admin/developments/${dev.id}/edit`} className="p-2 hover:bg-cream rounded-sm text-charcoal-light hover:text-green transition-colors" title="Edit Development">
@@ -197,7 +197,7 @@ export default function AdminDevelopments() {
                     </button>
                   </div>
                   <Link 
-                    href={`/admin/developments/${dev.id}`}
+                    href={`/admin/developments/${dev.id}/edit`}
                     className="text-green text-[10px] font-bold uppercase tracking-widest hover:underline"
                   >
                     Details →
