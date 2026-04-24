@@ -266,6 +266,41 @@ export default function DevelopmentDetailPage() {
               </div>
             )}
 
+            {/* Unit Types Breakdown */}
+            {dev.unitTypes && dev.unitTypes.length > 0 && (
+              <div>
+                <h2 className="font-cormorant text-charcoal text-4xl font-bold leading-tight mb-6">Unit Breakdown</h2>
+                <div className="w-full overflow-x-auto rounded-[16px] border border-cream-border bg-white shadow-sm">
+                  <table className="w-full text-left border-collapse min-w-[640px]">
+                    <thead>
+                      <tr className="bg-[#F0F4F1]">
+                        <th className="py-4 px-6 text-[11px] uppercase tracking-widest text-green font-bold">Unit Type</th>
+                        <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Beds</th>
+                        <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Baths</th>
+                        <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Parking</th>
+                        <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold">Floor Area</th>
+                        <th className="py-4 px-6 text-[11px] uppercase tracking-widest text-green font-bold text-right">Price</th>
+                        <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Available</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dev.unitTypes.map((u: any, i: number) => (
+                        <tr key={u.id || i} className="border-t border-cream-border hover:bg-[#FAFAF7] transition-colors">
+                          <td className="py-4 px-6 text-[15px] font-bold text-charcoal">{u.name}</td>
+                          <td className="py-4 px-4 text-center text-charcoal font-semibold">{u.bedrooms}</td>
+                          <td className="py-4 px-4 text-center text-charcoal font-semibold">{u.bathrooms}</td>
+                          <td className="py-4 px-4 text-center text-charcoal font-semibold">{u.parking ?? '—'}</td>
+                          <td className="py-4 px-4 text-[14px] text-charcoal">{u.floorArea}</td>
+                          <td className="py-4 px-6 text-right text-[15px] font-bold text-green">{Number(u.price) > 0 ? formatNaira(Number(u.price)) : '—'}</td>
+                          <td className="py-4 px-4 text-center text-charcoal font-semibold">{u.availableUnits}<span className="text-charcoal-light font-normal"> / {u.totalUnits}</span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
             {/* Highlights */}
             {dev.highlights && dev.highlights.length > 0 && (
               <div>
@@ -282,18 +317,21 @@ export default function DevelopmentDetailPage() {
             )}
 
             {/* Interactive Map */}
-            <div className="relative w-full h-[400px] rounded-[24px] overflow-hidden border border-white bg-white/50 shadow-sm">
-              <InteractiveMap 
-                center={[dev.coordinates?.lat || 9.0765, dev.coordinates?.lng || 7.3986]} 
-                markers={[
-                  { 
-                    position: [dev.coordinates?.lat || 9.0765, dev.coordinates?.lng || 7.3986],
-                    title: dev.name,
-                    address: dev.location
-                  }
-                ]} 
-              />
-            </div>
+            {(() => {
+              const lat = (dev as any).latitude ?? dev.coordinates?.lat ?? 9.0765
+              const lng = (dev as any).longitude ?? dev.coordinates?.lng ?? 7.3986
+              return (
+                <div>
+                  <h2 className="font-cormorant text-charcoal text-4xl font-bold leading-tight mb-6">Location</h2>
+                  <div className="relative w-full h-[440px] rounded-[24px] overflow-hidden border border-white bg-white/50 shadow-sm">
+                    <InteractiveMap
+                      center={[lat, lng]}
+                      markers={[{ position: [lat, lng], title: dev.name, address: dev.location }]}
+                    />
+                  </div>
+                </div>
+              )
+            })()}
           </div>
 
           {/* Right Sidebar */}
