@@ -109,12 +109,22 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
                 </>
               )}
               
-              {development.sizeRange && (
-                <div className="flex items-center gap-1.5">
-                  <Maximize2 size={15} strokeWidth={1.5} />
-                  <span className="text-[13px] font-medium">{development.sizeRange} SQM</span>
-                </div>
-              )}
+              {development.sizeRange && (() => {
+                const raw = development.sizeRange.trim()
+                // If the sizeRange is purely numeric (e.g. "200–320" or "280"),
+                // append "SQM". Otherwise trust the value as-is ("Three-level
+                // residence", "3,380.31 SQM land", "Basement + 3 Floors", ...).
+                const isNumeric = /^[\d.,\s–-]+$/.test(raw)
+                const display = isNumeric ? `${raw} SQM` : raw
+                return (
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <Maximize2 size={15} strokeWidth={1.5} className="shrink-0" />
+                    <span className="text-[13px] font-medium truncate max-w-[140px]" title={display}>
+                      {display}
+                    </span>
+                  </div>
+                )
+              })()}
             </div>
 
             {/* Price */}
@@ -127,9 +137,27 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
           <div className="w-full h-[1px] bg-cream-border mb-3" />
 
           {/* Title Layer */}
-          <h3 className="font-sans text-charcoal-dark text-[14px] leading-relaxed font-medium line-clamp-2">
-            {development.bedrooms[0] ? `${development.bedrooms[0]}-Bedroom` : ''} {development.name} — {development.neighborhood}
-          </h3>
+          {(() => {
+            const name = development.name.trim()
+            // Only prefix the bedroom count when the name doesn't already
+            // start with it — otherwise we end up with "5-Bedroom Luxury
+            // 5-Bedroom Semi-Detached..." duplicates.
+            const prefix =
+              development.bedrooms[0] && !/^\d+-?\s?bedroom/i.test(name)
+                ? `${development.bedrooms[0]}-Bedroom `
+                : ''
+            // Trim long names so the card header stays two lines max.
+            const title = `${prefix}${name}`
+            const shortTitle = title.length > 72 ? `${title.slice(0, 69).trimEnd()}…` : title
+            return (
+              <h3
+                className="font-sans text-charcoal-dark text-[14px] leading-relaxed font-medium line-clamp-2"
+                title={title}
+              >
+                {shortTitle} — {development.neighborhood}
+              </h3>
+            )
+          })()}
           
         </div>
       </Link>
