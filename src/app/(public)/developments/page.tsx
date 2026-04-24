@@ -60,7 +60,7 @@ function DevelopmentsContent() {
           setTotal(res.data.total)
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false))
   }, [search, statusFilter, areaFilter])
 
@@ -83,7 +83,7 @@ function DevelopmentsContent() {
               Our Developments
             </h1>
             <p className="text-white/75 text-base max-w-[540px] leading-relaxed font-sans">
-              Browse our portfolio of carefully crafted estates across Nigeria. Every title verified.
+              Browse our portfolio of carefully crafted estates across Nigeria.
               Every unit built to last.
             </p>
           </motion.div>
@@ -113,11 +113,10 @@ function DevelopmentsContent() {
                 <button
                   key={f.value}
                   onClick={() => setStatusFilter(f.value)}
-                  className={`px-3.5 py-2 rounded-sm text-xs font-medium uppercase tracking-wide transition-all duration-200 ${
-                    statusFilter === f.value
+                  className={`px-3.5 py-2 rounded-sm text-xs font-medium uppercase tracking-wide transition-all duration-200 ${statusFilter === f.value
                       ? 'bg-green text-white'
                       : 'bg-green-tint text-charcoal hover:bg-green-muted'
-                  }`}
+                    }`}
                   id={`filter-${f.value}`}
                 >
                   {f.label}

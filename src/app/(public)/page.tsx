@@ -1388,7 +1388,7 @@ export default function HomePage() {
       <section className="bg-cream border-y border-[#E5E5EA] py-12 px-6 lg:px-8" id="certifications">
         <div className="max-w-[1200px] mx-auto">
           <p className="text-center text-charcoal-light text-[10px] uppercase tracking-[0.2em] font-semibold mb-8">
-            Verified · Approved · Certified
+            Approved · Certified
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16">
             {certifications.map((cert, i) => (
