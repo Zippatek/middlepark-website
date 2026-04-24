@@ -18,7 +18,7 @@ import { formatNaira } from '@/lib/utils'
 import PropertySpecTable from '@/components/ui/PropertySpecTable'
 
 // Dynamic import for the map to avoid SSR issues with Leaflet
-const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), { 
+const InteractiveMap = dynamic(() => import('@/components/ui/InteractiveMap'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full bg-green-tint flex items-center justify-center">
@@ -133,8 +133,8 @@ export default function DevelopmentDetailPage() {
   const developer = (dev as any).developer || {
     name: 'MiddlePark Sales Team',
     email: 'sales@middleparkproperties.com',
-    phone: '+2349012345678',
-    whatsapp: '+2349012345678',
+    phone: '+2348055269579',
+    whatsapp: '+2348055269579',
   }
 
   // ─── Prepare Specs for Table ──────────────────────────────────────────────
@@ -202,7 +202,7 @@ export default function DevelopmentDetailPage() {
 
         {/* ─── Spec Table ──────────────────────────────────────────────── */}
         <div className="mx-auto w-full max-w-[1000px]">
-           <PropertySpecTable specs={propertySpecs} />
+          <PropertySpecTable specs={propertySpecs} />
         </div>
 
         {/* ─── Body Layout ────────────────────────────────────────────── */}
