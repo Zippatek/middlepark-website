@@ -4,9 +4,6 @@ import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react'
 
 const footerLinks = {
   developments: [
-    { label: 'Dakibiyu Estate Phase 2', href: '/developments/dakibiyu-estate-phase-2' },
-    { label: 'Katampe Heights', href: '/developments/katampe-heights' },
-    { label: 'Apo Residences', href: '/developments/apo-residences' },
     { label: 'Maitama Gardens', href: '/developments/maitama-gardens' },
     { label: 'Gwarinpa Terraces', href: '/developments/gwarinpa-terraces' },
   ],
@@ -156,15 +153,10 @@ export function PublicFooter() {
             © {new Date().getFullYear()} MiddlePark Properties Limited. All rights reserved.
           </p>
           <p className="text-white/20 text-xs">
-            Built by{' '}
-            <a
-              href="https://zippatek.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/35 hover:text-white/60 transition-colors duration-200"
-            >
-              Zippatek Digital Ltd
-            </a>
+            Powered by{' '}
+            <span className="text-white/35">
+              MiddlePark IT
+            </span>
           </p>
         </div>
       </div>

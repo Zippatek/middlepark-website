@@ -13,6 +13,7 @@ import {
   Heart,
   Eye,
   ArrowRight,
+  Linkedin,
 } from 'lucide-react'
 import { Button, SectionHeader } from '@/components/ui'
 import { getTeamMembers } from '@/lib/api'
@@ -316,9 +317,16 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-5">
-                  <h4 className="font-cormorant text-charcoal-dark text-lg font-bold">
-                    {member.name}
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-cormorant text-charcoal-dark text-lg font-bold">
+                      {member.name}
+                    </h4>
+                    {member.linkedin && (
+                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-charcoal-light hover:text-[#0A66C2] transition-colors">
+                        <Linkedin size={16} />
+                      </a>
+                    )}
+                  </div>
                   <p className="text-green text-xs font-medium uppercase tracking-wide mt-0.5 mb-3">
                     {member.title}
                   </p>
