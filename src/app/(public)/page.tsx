@@ -5,6 +5,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { RotatingHeroImage } from '@/components/ui/RotatingHeroImage'
+
+const HERO_ROTATION_IMAGES = [
+  '/images/hero-estate-aerial.jpg',
+  '/images/dev-maitama-1.jpg',
+  '/images/dev-dakibiyu-1.jpg',
+  '/images/dev-katampe-1.jpg',
+  '/images/luxury-smart-villa.png',
+]
 import {
   ChevronRight,
   Shield,
@@ -458,10 +467,9 @@ export default function HomePage() {
 
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-estate-aerial.jpg"
+          <RotatingHeroImage
+            images={HERO_ROTATION_IMAGES}
             alt="MiddlePark Estate"
-            fill
             className="object-cover opacity-30 mix-blend-luminosity"
             priority
           />

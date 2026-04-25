@@ -50,7 +50,6 @@ export const metadata: Metadata = {
   },
 }
 
-import { CustomCursor } from '@/components/ui/CustomCursor'
 import { ChatWidget } from '@/components/ui/ChatWidget'
 import { Providers } from '@/components/Providers'
 
@@ -63,7 +62,6 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased bg-cream text-charcoal">
         <Providers>
-          <CustomCursor />
           {children}
           <ChatWidget />
         </Providers>

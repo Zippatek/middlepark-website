@@ -32,7 +32,7 @@ export function PublicFooter() {
     <footer className="bg-[#1C1C1E] text-white">
       {/* Main Footer */}
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Column 1 — Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             {/* Logo */}
@@ -104,24 +104,26 @@ export function PublicFooter() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
-              <h4 className="font-cormorant text-white text-lg font-bold mb-4">Legal</h4>
-              <ul className="space-y-3">
-                {footerLinks.legal.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-white/45 text-sm hover:text-white/80 transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
-          {/* Column 4 — Social */}
+          {/* Column 4 — Legal */}
+          <div>
+            <h4 className="font-cormorant text-white text-lg font-bold mb-5">Legal</h4>
+            <ul className="space-y-3">
+              {footerLinks.legal.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-white/45 text-sm hover:text-white/80 transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5 — Social */}
           <div>
             <h4 className="font-cormorant text-white text-lg font-bold mb-5">Follow Us</h4>
             <ul className="space-y-3">
