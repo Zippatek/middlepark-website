@@ -562,6 +562,13 @@ export async function adminUpdateDevelopmentStatus(token: string, id: string, st
 export async function adminToggleFeatured(token: string, id: string, featured: boolean): Promise<ApiResponse<void>> {
   return apiFetch<ApiResponse<void>>(`/admin/developments/${id}/feature`, { method: 'PATCH', body: JSON.stringify({ featured }), token })
 }
+export async function adminReorderDevelopments(token: string, orderedIds: string[]): Promise<ApiResponse<void>> {
+  return apiFetch<ApiResponse<void>>(`/admin/developments/reorder`, {
+    method: 'PATCH',
+    body: JSON.stringify({ order: orderedIds }),
+    token,
+  })
+}
 export async function adminCreateUnitType(token: string, id: string, data: any): Promise<ApiResponse<any>> {
   return apiFetch<ApiResponse<any>>(`/admin/developments/${id}/unit-types`, { method: 'POST', body: JSON.stringify(data), token })
 }
