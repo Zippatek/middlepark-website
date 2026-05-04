@@ -485,8 +485,8 @@ export default function HomePage() {
               transform: 'rotateX(68deg)',
               transformOrigin: 'center bottom',
               backgroundImage: `
-                linear-gradient(rgba(40,107,56,0.12) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(40,107,56,0.12) 1px, transparent 1px)
+                linear-gradient(rgba(0,149,61,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,149,61,0.12) 1px, transparent 1px)
               `,
               backgroundSize: '100px 100px',
             }}
@@ -498,8 +498,8 @@ export default function HomePage() {
               transform: 'rotateX(68deg)',
               transformOrigin: 'center bottom',
               backgroundImage: `
-                linear-gradient(rgba(40,107,56,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(40,107,56,0.3) 1px, transparent 1px)
+                linear-gradient(rgba(0,149,61,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,149,61,0.3) 1px, transparent 1px)
               `,
               backgroundSize: '100px 100px',
             }}
@@ -510,7 +510,7 @@ export default function HomePage() {
           <div
             className="absolute w-full h-[30%] bottom-[28%] left-0"
             style={{
-              background: 'radial-gradient(ellipse 70% 40% at 50% 100%, rgba(40,107,56,0.08) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0,149,61,0.08) 0%, transparent 70%)',
             }}
           />
         </div>
@@ -801,7 +801,7 @@ export default function HomePage() {
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40,107,56,0.04) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,149,61,0.04) 0%, transparent 60%)',
           }}
         />
 
@@ -1081,7 +1081,7 @@ export default function HomePage() {
               className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/60 to-transparent flex items-end justify-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e0f]/60 to-transparent flex items-end justify-end p-6">
               <Link
                 href="/developments"
                 className="inline-flex items-center gap-2 text-white text-sm font-medium hover:gap-3 transition-all duration-200"
@@ -1347,7 +1347,7 @@ export default function HomePage() {
       <section className="section-padding bg-white" id="schedule-visit">
         <div className="max-w-[960px] mx-auto px-6 lg:px-8">
           <motion.div
-            className="bg-[#1C1C1E] rounded-[20px] p-8 lg:p-14 relative overflow-hidden"
+            className="bg-[#0d0e0f] rounded-[20px] p-8 lg:p-14 relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

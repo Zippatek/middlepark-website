@@ -12,20 +12,20 @@
     --font-cormorant: 'Cormorant Garamond', Georgia, serif;
     --font-dm-sans: 'DM Sans', system-ui, sans-serif;
 
-    /* Brand Colors — Forest Green Primary */
-    --green: #286B38;
-    --green-dark: #1E522A;
-    --green-light: #358A49;
-    --green-tint: #F0F4F1;
-    --green-muted: #C8D9CC;
+    /* Brand Colors — MiddlePark Green */
+    --green: #00953d;
+    --green-dark: #007a33;
+    --green-light: #00b34a;
+    --green-tint: #e6f7ed;
+    --green-muted: #a3d4b8;
 
-    /* Accent — Red (primary brand) */
+    /* Accent — Red (sold out / danger only) */
     --red: #ED1B24;
     --red-accent: #ED1B24;
 
-    /* Structural — Graphite tones */
+    /* Structural — Black + Graphite tones */
     --charcoal: #3A3A3C;
-    --charcoal-dark: #1C1C1E;
+    --charcoal-dark: #0d0e0f;
     --charcoal-light: #8E8E93;
 
     /* Surfaces */
@@ -191,7 +191,7 @@
 @layer utilities {
   /* ─── TEXT GRADIENT — GREEN ─────────────────── */
   .text-gradient-green {
-    background: linear-gradient(135deg, #286B38, #358A49);
+    background: linear-gradient(135deg, #00953d, #00b34a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

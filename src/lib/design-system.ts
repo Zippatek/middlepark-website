@@ -6,21 +6,21 @@
  * Use Tailwind CSS classes wherever possible.
  * 
  * Brand: MiddlePark Properties Limited
- * Palette: MiddlePark Red, Grey, White (Corporate)
+ * Palette: MiddlePark Green, Black, White (Corporate)
  * Version: 4.0 | Zippatek Digital Ltd | April 2026
  */
 
 export const colors = {
   // ─── PRIMARY BRAND PALETTE ────────────────────────────────────
-  // Note: Structural variable is 'green', but maps to Brand Red
+  // Primary Brand — MiddlePark Green
   green: {
-    DEFAULT: '#ED1B24',           // MiddlePark Red — primary CTAs, overlines, active states
-    dark: '#C41720',              // Deep red — hover/pressed states
-    light: '#F04950',             // Lighter red — secondary actions
-    tint: '#FDF2F2',              // Red tint — subtle hover fills
-    muted: '#F5C6C8',             // Muted red — borders, dividers
-    alpha10: 'rgba(237, 27, 36, 0.10)',
-    alpha20: 'rgba(237, 27, 36, 0.20)',
+    DEFAULT: '#00953d',           // MiddlePark Green — primary CTAs, overlines, active states
+    dark: '#007a33',              // Deep green — hover/pressed states
+    light: '#00b34a',             // Lighter green — secondary actions
+    tint: '#e6f7ed',              // Green tint — subtle hover fills
+    muted: '#a3d4b8',             // Muted green — borders, dividers
+    alpha10: 'rgba(0, 149, 61, 0.10)',
+    alpha20: 'rgba(0, 149, 61, 0.20)',
   },
 
   // ─── ACCENT — RED ─────────────────────────────────────────────
@@ -33,7 +33,7 @@ export const colors = {
   // ─── STRUCTURAL — GRAPHITE TONES ──────────────────────────────
   charcoal: {
     DEFAULT: '#3A3A3C',           // Primary body text — authoritative
-    dark: '#1C1C1E',              // Deep Slate — footer, dark sections
+    dark: '#0d0e0f',              // Deep Slate — footer, dark sections
     light: '#8E8E93',             // Cool Grey — captions, muted text
     alpha50: 'rgba(58, 58, 60, 0.5)',
   },
@@ -127,7 +127,7 @@ export const shadows = {
   sidebar: '2px 0 16px rgba(0, 0, 0, 0.04)',
   topbar: '0 2px 8px rgba(0, 0, 0, 0.04)',
   modal: '0 20px 60px rgba(0, 0, 0, 0.12)',
-  cta: '0 4px 16px rgba(40, 107, 56, 0.15)',
+  cta: '0 4px 16px rgba(0, 149, 61, 0.15)',
   heroFloat: '0 12px 48px rgba(0, 0, 0, 0.20)',
 } as const
 

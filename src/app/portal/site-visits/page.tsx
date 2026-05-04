@@ -266,7 +266,7 @@ export default function SiteVisitsPage() {
           />
           <motion.div
             className="relative bg-white rounded-card p-6 lg:p-8 w-full max-w-[440px]"
-            style={{ boxShadow: '0 20px 60px rgba(40, 107, 56, 0.15)' }}
+            style={{ boxShadow: '0 20px 60px rgba(0, 149, 61, 0.15)' }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}

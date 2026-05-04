@@ -155,17 +155,17 @@ export default function MyUnitPage() {
             )}
 
             <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                <Bed size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#e6f7ed] border border-[#a3d4b8] text-charcoal text-xs font-medium">
+                <Bed size={14} strokeWidth={1.5} style={{ color: '#00953d' }} />
                 {unit.bedrooms} Bedrooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                <Bath size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#e6f7ed] border border-[#a3d4b8] text-charcoal text-xs font-medium">
+                <Bath size={14} strokeWidth={1.5} style={{ color: '#00953d' }} />
                 {unit.bathrooms} Bathrooms
               </span>
               {unit.floorArea && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium">
-                  <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#286B38' }} />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#e6f7ed] border border-[#a3d4b8] text-charcoal text-xs font-medium">
+                  <Maximize2 size={14} strokeWidth={1.5} style={{ color: '#00953d' }} />
                   {unit.floorArea}
                 </span>
               )}

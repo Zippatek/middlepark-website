@@ -12,7 +12,7 @@ export function LoadingSpinner() {
         
         {/* Animated green segment */}
         <motion.div
-          className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#286B38] border-r-[#286B38]"
+          className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#00953d] border-r-[#00953d]"
           animate={{ rotate: 360 }}
           transition={{
             repeat: Infinity,

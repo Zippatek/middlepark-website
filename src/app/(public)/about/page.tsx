@@ -341,7 +341,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ STATS ═══ */}
-      <section className="bg-[#1C1C1E] py-16 px-6 lg:px-8" id="about-stats">
+      <section className="bg-[#0d0e0f] py-16 px-6 lg:px-8" id="about-stats">
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
           {stats.map((stat, i) => (
             <motion.div

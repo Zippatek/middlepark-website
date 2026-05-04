@@ -273,7 +273,7 @@ export default function DevelopmentDetailPage() {
                 <div className="w-full overflow-x-auto rounded-[16px] border border-cream-border bg-white shadow-sm">
                   <table className="w-full text-left border-collapse min-w-[640px]">
                     <thead>
-                      <tr className="bg-[#F0F4F1]">
+                      <tr className="bg-[#e6f7ed]">
                         <th className="py-4 px-6 text-[11px] uppercase tracking-widest text-green font-bold">Unit Type</th>
                         <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Beds</th>
                         <th className="py-4 px-4 text-[11px] uppercase tracking-widest text-green font-bold text-center">Baths</th>

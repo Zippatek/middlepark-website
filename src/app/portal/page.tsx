@@ -122,7 +122,7 @@ export default function PortalOverview() {
       {/* ═══ WELCOME BANNER ═══ */}
       <motion.div
         className="relative overflow-hidden rounded-card p-6 lg:p-8"
-        style={{ background: 'linear-gradient(135deg, #1C1C1E 0%, #3A3A3C 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #0d0e0f 0%, #3A3A3C 100%)' }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

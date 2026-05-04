@@ -16,14 +16,14 @@ export function AmenityChip({ icon, label, className }: AmenityChipProps) {
     <span
       className={cn(
         'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full',
-        'bg-[#F0F4F1] border border-[#C8D9CC] text-charcoal text-xs font-medium',
+        'bg-[#e6f7ed] border border-[#a3d4b8] text-charcoal text-xs font-medium',
         className
       )}
     >
       <IconComponent
         size={14}
         strokeWidth={1.5}
-        style={{ color: '#286B38' }}
+        style={{ color: '#00953d' }}
       />
       {label}
     </span>

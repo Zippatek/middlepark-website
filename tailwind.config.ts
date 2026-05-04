@@ -8,27 +8,26 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // ─── MIDDLEPARK COLOR SYSTEM — V3 UNDERSTATED LUXURY ──────────
+      // ─── MIDDLEPARK COLOR SYSTEM — V4 FOREST GREEN + BLACK ──────────
       colors: {
-        // Primary Brand — MiddlePark Red (CTAs, overlines, active states)
-        // Note: Variable is named 'green' structurally but maps to Brand Red.
+        // Primary Brand — MiddlePark Green
         green: {
-          DEFAULT: '#ED1B24',       // MiddlePark Red — primary CTAs, overlines, active states
-          dark: '#C41720',          // Deep red — hover/pressed states
-          light: '#F04950',         // Lighter red — secondary actions
-          tint: '#FDF2F2',          // Red tint — subtle hover fills
-          muted: '#F5C6C8',         // Muted red — borders, dividers
+          DEFAULT: '#00953d',       // MiddlePark Green — primary CTAs, overlines, active states
+          dark: '#007a33',          // Deep green — hover/pressed states
+          light: '#00b34a',         // Lighter green — secondary actions
+          tint: '#e6f7ed',          // Green tint — subtle hover fills
+          muted: '#a3d4b8',         // Muted green — borders, dividers
         },
-        // Accent — Red (alert, sold out)
+        // Accent — Red (alert, sold out only)
         red: {
           DEFAULT: '#ED1B24',
           dark: '#C41720',
           accent: '#ED1B24',
         },
-        // Structural — Graphite tones
+        // Structural — Black + Graphite tones
         charcoal: {
           DEFAULT: '#3A3A3C',       // Primary body text — authoritative
-          dark: '#1C1C1E',          // Deep Slate — footer, dark sections
+          dark: '#0d0e0f',          // MiddlePark Black — footer, dark sections
           light: '#8E8E93',         // Cool Grey — captions, muted text
         },
         // Canvas & Surfaces
@@ -99,7 +98,7 @@ const config: Config = {
         'sidebar': '2px 0 16px rgba(0, 0, 0, 0.04)',
         'topbar': '0 2px 8px rgba(0, 0, 0, 0.04)',
         'modal': '0 20px 60px rgba(0, 0, 0, 0.12)',
-        'cta': '0 4px 16px rgba(40, 107, 56, 0.15)',
+        'cta': '0 4px 16px rgba(0, 149, 61, 0.15)',
         'hero-float': '0 12px 48px rgba(0, 0, 0, 0.2)',
         'none': 'none',
       },
@@ -110,11 +109,11 @@ const config: Config = {
         'hero-overlay': 'linear-gradient(135deg, rgba(28,28,30,0.82) 0%, rgba(28,28,30,0.3) 100%)',
         'hero-overlay-heavy': 'linear-gradient(135deg, rgba(28,28,30,0.88) 0%, rgba(28,28,30,0.5) 100%)',
         // Charcoal gradient
-        'charcoal-gradient': 'linear-gradient(135deg, #3A3A3C 0%, #1C1C1E 100%)',
+        'charcoal-gradient': 'linear-gradient(135deg, #3A3A3C 0%, #0d0e0f 100%)',
         // Subtle canvas gradient
         'cream-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)',
         // Primary gradient (CTA only)
-        'green-gradient': 'linear-gradient(135deg, #ED1B24 0%, #C41720 100%)',
+        'green-gradient': 'linear-gradient(135deg, #00953d 0%, #007a33 100%)',
       },
 
       // ─── TRANSITIONS ─────────────────────────────────────────────
