@@ -14,8 +14,6 @@ const developments = [
   'Dakibiyu Estate Phase 2',
   'Katampe Heights',
   'Apo Residences',
-  'Maitama Gardens',
-  'Gwarinpa Terraces',
   'Dakibiyu Estate Phase 3',
   'Not sure yet',
 ]

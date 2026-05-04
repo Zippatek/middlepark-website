@@ -45,8 +45,8 @@ const staggerItem = {
 // ─── OFFICE DATA ────────────────────────────────────────────────────────────
 const offices = [
   {
-    name: 'Head Office — CBD Abuja',
-    address: 'No. 72 Ahmadu Bello Way, Central Business District, Abuja',
+    name: 'Head Office',
+    address: 'C3 Brothers Plaza, Maraba, Nasarawa State, Nigeria',
     phone: '0805 526 9579',
     email: 'info@middleparkproperties.com',
     hours: 'Mon – Fri: 9:00 AM – 5:00 PM',
@@ -54,7 +54,7 @@ const offices = [
   },
   {
     name: 'Sales Office',
-    address: 'No. 72 Ahmadu Bello Way, Central Business District, Abuja',
+    address: 'C3 Brothers Plaza, Maraba, Nasarawa State, Nigeria',
     phone: '0818 288 8885',
     email: 'info@middleparkproperties.com',
     hours: 'Mon – Sat: 9:00 AM – 6:00 PM',
@@ -62,7 +62,7 @@ const offices = [
   },
   {
     name: 'Enquiries Line',
-    address: 'No. 72 Ahmadu Bello Way, Central Business District, Abuja',
+    address: 'C3 Brothers Plaza, Maraba, Nasarawa State, Nigeria',
     phone: '0818 299 9997',
     email: 'info@middleparkproperties.com',
     hours: 'Mon – Fri: 9:00 AM – 5:00 PM',
@@ -75,8 +75,6 @@ const developments = [
   'Dakibiyu Estate Phase 2',
   'Katampe Heights',
   'Apo Residences',
-  'Maitama Gardens',
-  'Gwarinpa Terraces',
   'Dakibiyu Estate Phase 3',
   'Not sure yet',
 ]
@@ -362,9 +360,9 @@ export default function ContactPage() {
                     zoom={15}
                     markers={[
                       {
-                        position: [9.0578, 7.4950],
+                        position: [9.0232, 7.6045],
                         title: 'MiddlePark Head Office',
-                        address: 'No. 72 Ahmadu Bello Way, CBD, Abuja'
+                        address: 'C3 Brothers Plaza, Maraba, Nasarawa'
                       }
                     ]}
                   />

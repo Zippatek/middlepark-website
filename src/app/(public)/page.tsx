@@ -67,7 +67,7 @@ const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: '2',
     clientName: 'Emeka Okonkwo',
-    unitPurchased: '5-Bed Detached, Maitama Gardens',
+    unitPurchased: '5-Bed Detached, Katampe Extension',
     rating: 5,
     quote: "I've bought from three developers in Nigeria. MiddlePark is the only one that delivered exactly what was promised — no hidden charges, no delays, no stories.",
     avatar: '/images/avatar-default.jpg',
@@ -1150,92 +1150,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* 9. WHERE WE BUILD (MINIMALIST MOBILE) */}
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-padding bg-white" id="neighbourhoods">
-        <div className="middlepark-container">
-          <SectionHeader
-            overline="Where We Build"
-            heading="Nigeria's Most Established Neighbourhoods"
-            subCopy="We develop exclusively in locations with existing infrastructure, proven land titles, and strong property appreciation."
-            align="center"
-          />
-          <div className="mt-12 lg:mt-16"></div>
-
-          {/* Desktop — Full cards */}
-          <motion.div
-            className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            variants={staggerContainer}
-          >
-            {neighbourhoods.map((area) => (
-              <motion.div
-                key={area.name}
-                className="group rounded-[16px] overflow-hidden bg-white border border-[#E5E5EA] hover:shadow-lg transition-shadow duration-500"
-                variants={staggerItem}
-              >
-                <div className="relative h-[240px] overflow-hidden">
-                  <Image
-                    src={area.image}
-                    alt={`${area.name} — MiddlePark development area`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-cormorant text-charcoal-dark text-[22px] font-bold mb-1">
-                    {area.name}
-                  </h3>
-                  <p className="text-green text-[11px] uppercase tracking-[0.15em] font-semibold mb-3">
-                    {area.tagline}
-                  </p>
-                  <p className="text-charcoal-light text-sm leading-relaxed mb-5">
-                    {area.description}
-                  </p>
-                  <span className="inline-block px-3 py-1.5 bg-[#F2F2F7] rounded-full text-charcoal text-[11px] font-semibold">
-                    {area.developments} Active Development{area.developments > 1 ? 's' : ''}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Mobile — Compact horizontal scroll cards */}
-          <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
-            {neighbourhoods.map((area, i) => (
-              <motion.div
-                key={area.name}
-                className="shrink-0 w-[260px] rounded-[14px] overflow-hidden bg-white border border-[#E5E5EA] snap-start"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-              >
-                <div className="relative h-[140px] overflow-hidden">
-                  <Image
-                    src={area.image}
-                    alt={`${area.name}`}
-                    fill
-                    className="object-cover"
-                    sizes="260px"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-cormorant text-charcoal-dark text-lg font-bold">{area.name}</h3>
-                  <p className="text-green text-[10px] uppercase tracking-[0.12em] font-semibold mb-1.5">{area.tagline}</p>
-                  <span className="inline-block px-2.5 py-1 bg-[#F2F2F7] rounded-full text-charcoal text-[10px] font-semibold">
-                    {area.developments} Active
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 10. TESTIMONIALS (MINIMALIST MOBILE) */}

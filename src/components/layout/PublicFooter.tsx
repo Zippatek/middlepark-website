@@ -4,8 +4,8 @@ import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react'
 
 const footerLinks = {
   developments: [
-    { label: 'Maitama Gardens', href: '/developments/maitama-gardens' },
-    { label: 'Gwarinpa Terraces', href: '/developments/gwarinpa-terraces' },
+    { label: 'Dakibiyu Estate', href: '/developments/dakibiyu-estate' },
+    { label: 'Apo Residences', href: '/developments/apo-residences' },
   ],
   company: [
     { label: 'About MiddlePark', href: '/about' },
@@ -67,7 +67,7 @@ export function PublicFooter() {
               </a>
               <div className="flex items-start gap-2 text-white/50 text-sm">
                 <MapPin size={14} strokeWidth={1.5} className="shrink-0 mt-0.5" />
-                <span>No. 72 Ahmadu Bello Way,<br />Central Business District, Abuja</span>
+                <span>C3 Brothers Plaza, Maraba,<br />Nasarawa State, Nigeria</span>
               </div>
             </div>
           </div>
