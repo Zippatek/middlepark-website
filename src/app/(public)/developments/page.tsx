@@ -19,7 +19,7 @@ const statusFilters: { label: string; value: DevelopmentStatus | 'all' }[] = [
   { label: 'Sold Out', value: 'sold-out' },
 ]
 
-const neighborhoods = ['All Areas', 'Dakibiyu', 'Katampe Extension', 'Apo']
+const neighborhoods = ['All Areas', 'Asokoro', 'Katampe Extension', 'Kaura', 'Gudu']
 
 const staggerContainer = {
   hidden: {},

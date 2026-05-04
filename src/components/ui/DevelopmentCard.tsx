@@ -34,7 +34,7 @@ export function DevelopmentCard({ development, compact = false }: DevelopmentCar
             data-cursor="view"
           >
             <Image
-              src={development.images[0] || '/images/dev-dakibiyu-1.jpg'}
+              src={development.images[0] || '/images/luxury-smart-villa.png'}
               alt={development.name}
               fill
               className="object-cover"

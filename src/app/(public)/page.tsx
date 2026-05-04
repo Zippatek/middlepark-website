@@ -9,9 +9,6 @@ import { RotatingHeroImage } from '@/components/ui/RotatingHeroImage'
 
 const HERO_ROTATION_IMAGES = [
   '/images/hero-estate-aerial.jpg',
-  '/images/dev-maitama-1.jpg',
-  '/images/dev-dakibiyu-1.jpg',
-  '/images/dev-katampe-1.jpg',
   '/images/luxury-smart-villa.png',
 ]
 import {
@@ -76,7 +73,7 @@ const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: '3',
     clientName: 'Fatima Abdullahi',
-    unitPurchased: '3-Bed Terrace, Apo Phase 1',
+    unitPurchased: 'Luxury Villa, Asokoro',
     rating: 5,
     quote: 'The client portal alone sets MiddlePark apart. I could track my payment schedule, construction progress, and download my documents all in one place.',
     avatar: '/images/avatar-default.jpg',
@@ -147,32 +144,10 @@ const processSteps = [
   { number: '02', title: 'Unit Selection & Pricing', description: 'Choose your preferred unit type, review the transparent pricing breakdown, and lock in your selection.', image: '/images/process-unit-selection.png' },
   { number: '03', title: 'Payment Plan Agreement', description: 'Select a payment plan that works for you — no hidden extras, no development levies at handover.', image: '/images/process-payment-plan.png' },
   { number: '04', title: 'Construction & Updates', description: 'Track progress through your Client Portal. Real-time photo updates, milestone notifications, documented at every stage.', image: '/images/interior-kitchen.jpg' },
-  { number: '05', title: 'Handover & Move-In', description: 'Receive your keys, your completed documentation pack, and step into a home that\'s exactly what was promised.', image: '/images/dev-apo-1.jpg' },
+  { number: '05', title: 'Handover & Move-In', description: 'Receive your keys, your completed documentation pack, and step into a home that\'s exactly what was promised.', image: '/images/luxury-smart-villa.png' },
 ]
 
-const neighbourhoods = [
-  {
-    name: 'Dakibiyu, Abuja',
-    tagline: 'Growing. Connected. Promising.',
-    description: 'One of Abuja\'s fastest-developing districts with direct access to the Outer Northern Expressway. Close to schools, hospitals, and the city\'s expanding commercial corridor.',
-    image: '/images/dev-dakibiyu-1.jpg',
-    developments: 2,
-  },
-  {
-    name: 'Katampe, Abuja',
-    tagline: 'Elevated. Exclusive. Arrived.',
-    description: 'A sought-after residential enclave — minutes from Maitama and the Central Business District. Mature infrastructure, excellent security, and surrounded by nature.',
-    image: '/images/dev-katampe-1.jpg',
-    developments: 1,
-  },
-  {
-    name: 'Apo, Abuja',
-    tagline: 'Accessible. Central. Grounded.',
-    description: 'A well-established residential area with strong transport links, growing amenities, and proximity to key institutions and shopping centres.',
-    image: '/images/dev-apo-1.jpg',
-    developments: 1,
-  },
-]
+
 
 const certifications = [
   { icon: Shield, label: 'Quality Certified' },
@@ -701,7 +676,7 @@ export default function HomePage() {
                   transition={{ delay: 2.3, duration: 0.8 }}
                   style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}
                 >
-                  <Image src="/images/dev-dakibiyu-1.jpg" alt="Estate" fill className="object-cover" />
+                  <Image src="/images/luxury-smart-villa.png" alt="Estate" fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/40" />
                 </motion.div>
 
@@ -713,7 +688,7 @@ export default function HomePage() {
                   transition={{ delay: 2.5, duration: 0.8 }}
                   style={{ boxShadow: '0 15px 40px rgba(0,0,0,0.35)' }}
                 >
-                  <Image src="/images/dev-katampe-1.jpg" alt="Estate" fill className="object-cover" />
+                  <Image src="/images/hero-estate-aerial.jpg" alt="Estate" fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/30" />
                 </motion.div>
 
@@ -725,7 +700,7 @@ export default function HomePage() {
                   transition={{ delay: 2.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
                 >
-                  <Image src="/images/dev-dakibiyu-2.jpg" alt="MiddlePark Estate" fill className="object-cover" />
+                  <Image src="/images/luxury-smart-villa.png" alt="MiddlePark Estate" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                   {/* Glassmorphic badge */}
@@ -1107,7 +1082,7 @@ export default function HomePage() {
               transition={{ duration: 0.7 }}
             >
               <Image
-                src="/images/dev-dakibiyu-1.jpg"
+                src="/images/luxury-smart-villa.png"
                 alt="MiddlePark community — estate grounds"
                 fill
                 className="object-cover"

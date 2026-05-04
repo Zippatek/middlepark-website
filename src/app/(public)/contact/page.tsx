@@ -72,10 +72,9 @@ const offices = [
 
 const developments = [
   'Select a development',
-  'Dakibiyu Estate Phase 2',
-  'Katampe Heights',
-  'Apo Residences',
-  'Dakibiyu Estate Phase 3',
+  'Luxury Smart Villa, Asokoro',
+  '7-Bedroom Mansion, Katampe Extension',
+  '4-Bedroom Terrace, Kaura',
   'Not sure yet',
 ]
 
