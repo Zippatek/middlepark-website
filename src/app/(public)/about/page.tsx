@@ -282,63 +282,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ═══ TEAM ═══ */}
-      <section className="section-padding bg-white" id="team">
-        <div className="middlepark-container">
-          <div className="text-center mb-14">
-            <SectionHeader
-              overline="Our Team"
-              heading="The People Behind MiddlePark"
-              subCopy="A team of engineers, architects, and quality control professionals — all committed to delivering exceptional, refined homes."
-              align="center"
-            />
-          </div>
-
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            variants={staggerContainer}
-          >
-            {teamMembers.map((member) => (
-              <motion.div
-                key={member.id}
-                className="bg-[#F2F2F7] rounded-card overflow-hidden group border border-[#E5E5EA]"
-                variants={staggerItem}
-              >
-                <div className="relative h-[280px] overflow-hidden">
-                  <Image
-                    src={member.avatar || '/images/avatar-default.jpg'}
-                    alt={member.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-cormorant text-charcoal-dark text-lg font-bold">
-                      {member.name}
-                    </h4>
-                    {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-charcoal-light hover:text-[#0A66C2] transition-colors">
-                        <Linkedin size={16} />
-                      </a>
-                    )}
-                  </div>
-                  <p className="text-green text-xs font-medium uppercase tracking-wide mt-0.5 mb-3">
-                    {member.title}
-                  </p>
-                  <p className="text-charcoal-light text-xs leading-relaxed line-clamp-3">
-                    {member.bio}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* ═══ STATS ═══ */}
       <section className="bg-[#0d0e0f] py-16 px-6 lg:px-8" id="about-stats">

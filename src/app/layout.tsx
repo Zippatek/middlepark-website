@@ -50,7 +50,6 @@ export const metadata: Metadata = {
   },
 }
 
-import { ChatWidget } from '@/components/ui/ChatWidget'
 import { Providers } from '@/components/Providers'
 
 export default function RootLayout({
@@ -63,7 +62,6 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-cream text-charcoal">
         <Providers>
           {children}
-          <ChatWidget />
         </Providers>
       </body>
     </html>
