@@ -12,6 +12,7 @@ import { registerUser } from '@/lib/api'
 
 const developments = [
   'Select a development',
+  'MiddlePark Residences, Maitama',
   'Luxury Smart Villa, Asokoro',
   '7-Bedroom Mansion, Katampe Extension',
   '4-Bedroom Terrace, Kaura',

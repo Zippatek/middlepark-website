@@ -4,7 +4,8 @@ import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react'
 
 const footerLinks = {
   developments: [
-    { label: 'Luxury Smart Villa', href: '/developments/luxury-smart-villa' },
+    { label: 'MiddlePark Residences, Maitama', href: '/developments' },
+    { label: 'Luxury Smart Villa, Asokoro', href: '/developments' },
   ],
   company: [
     { label: 'About MiddlePark', href: '/about' },

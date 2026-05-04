@@ -55,7 +55,7 @@ const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
     clientName: 'Aisha Bello',
-    unitPurchased: '4-Bed Terrace, Dakibiyu Phase 1',
+    unitPurchased: 'Luxury Smart Villa, Asokoro',
     rating: 5,
     quote: 'From the first site visit to handover, MiddlePark kept every promise. The build quality exceeded expectations, the finishing is exceptional, and we moved in on schedule.',
     avatar: '/images/avatar-default.jpg',
@@ -73,7 +73,7 @@ const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: '3',
     clientName: 'Fatima Abdullahi',
-    unitPurchased: 'Luxury Villa, Asokoro',
+    unitPurchased: 'MiddlePark Residences, Maitama',
     rating: 5,
     quote: 'The client portal alone sets MiddlePark apart. I could track my payment schedule, construction progress, and download my documents all in one place.',
     avatar: '/images/avatar-default.jpg',
